@@ -1,0 +1,105 @@
+22:59:06 | INFO    | DRY RUN mode: N=50 simulations, output will not be written.
+22:59:06 | INFO    | ======================================================================
+22:59:06 | INFO    |   FIFA WORLD CUP 2026 — PREDICTION PIPELINE
+22:59:06 | INFO    | ======================================================================
+22:59:06 | INFO    |   Data dir:    data
+22:59:06 | INFO    |   Simulations: 50
+22:59:06 | INFO    |   Output:      submission.csv
+22:59:06 | INFO    | ======================================================================
+22:59:06 | INFO    | 
+[STEP 1/4] Loading and preprocessing data...
+22:59:06 | INFO    | Loaded 36 historical name aliases.
+22:59:06 | INFO    | Loaded Elo ratings for 243 teams.
+22:59:06 | INFO    | Loaded 49,215 historical matches (from 1872 to 2026)
+22:59:06 | INFO    | Attaching Elo ratings to match history...
+22:59:09 | INFO    | Built history chains for 333 teams.
+22:59:09 | INFO    |   Preprocessing complete in 3.0s
+22:59:09 | INFO    |   Matches loaded: 49,215
+22:59:09 | INFO    |   Teams in history: 333
+22:59:09 | INFO    | 
+[STEP 2/4] Building feature matrix...
+22:59:09 | INFO    | Building feature matrix for 49,215 matches...
+22:59:15 | INFO    |   Processed 5,000 / 49,215 matches...
+22:59:21 | INFO    |   Processed 10,000 / 49,215 matches...
+22:59:28 | INFO    |   Processed 15,000 / 49,215 matches...
+22:59:35 | INFO    |   Processed 20,000 / 49,215 matches...
+22:59:42 | INFO    |   Processed 25,000 / 49,215 matches...
+22:59:50 | INFO    |   Processed 30,000 / 49,215 matches...
+22:59:58 | INFO    |   Processed 35,000 / 49,215 matches...
+23:00:06 | INFO    |   Processed 40,000 / 49,215 matches...
+23:00:15 | INFO    |   Processed 45,000 / 49,215 matches...
+23:00:23 | INFO    | Feature matrix built: shape (49215, 24)
+23:00:23 | INFO    | [OK]  Feature matrix: no NaN values found.
+23:00:23 | INFO    | [OK]  Feature matrix shape: (49215, 24)
+23:00:23 | INFO    | [OK]  Training samples: 49,215
+23:00:23 | INFO    |   Feature engineering complete in 74.2s
+23:00:23 | INFO    | 
+[STEP 3/4] Training models...
+23:00:23 | INFO    | ============================================================
+23:00:23 | INFO    | TRAINING ALL MODELS
+23:00:23 | INFO    | ============================================================
+23:00:23 | INFO    |   Training home_goals on 49,215 samples...
+23:00:24 | INFO    |   home_goals trained ✓
+23:00:24 | INFO    |   Training away_goals on 49,215 samples...
+23:00:24 | INFO    |   away_goals trained ✓
+23:00:24 | INFO    |   Training home_yellow on 49,215 samples...
+23:00:25 | INFO    |   home_yellow trained ✓
+23:00:25 | INFO    |   Training away_yellow on 49,215 samples...
+23:00:25 | INFO    |   away_yellow trained ✓
+23:00:25 | INFO    |   Training home_red on 49,215 samples...
+23:00:25 | INFO    |   home_red trained ✓
+23:00:25 | INFO    |   Training away_red on 49,215 samples...
+23:00:25 | INFO    |   away_red trained ✓
+23:00:25 | INFO    |   Training home_corners on 49,215 samples...
+23:00:25 | INFO    |   home_corners trained ✓
+23:00:25 | INFO    |   Training away_corners on 49,215 samples...
+23:00:25 | INFO    |   away_corners trained ✓
+23:00:25 | INFO    | 
+  [home_goals] Top-10 Feature Importances:
+23:00:25 | INFO    |     home_attack                 1600.0
+23:00:25 | INFO    |     home_elo                    1527.0
+23:00:25 | INFO    |     elo_diff                    1334.0
+23:00:25 | INFO    |     away_defense                1323.0
+23:00:25 | INFO    |     away_elo                    1265.0
+23:00:25 | INFO    |     away_attack                 1216.0
+23:00:25 | INFO    |     home_defense                1142.0
+23:00:25 | INFO    |     h2h_goal_diff               1033.0
+23:00:25 | INFO    |     away_discipline              908.0
+23:00:25 | INFO    |     home_discipline              824.0
+23:00:25 | INFO    | ============================================================
+23:00:25 | INFO    | ALL MODELS TRAINED SUCCESSFULLY
+23:00:25 | INFO    | ============================================================
+23:00:25 | INFO    |   Training complete in 2.5s
+23:00:25 | INFO    | Models saved to models\model_bundle.pkl
+23:00:25 | INFO    | 
+[STEP 4/4] Running Monte Carlo simulation (N=50)...
+23:00:25 | INFO    | Starting Monte Carlo simulation: N = 50
+23:00:25 | INFO    | Pre-computing features for 2256 WC team matchups...
+23:00:36 | INFO    | Feature cache built: 2256 matchup vectors cached.
+23:01:14 | INFO    | Aggregating Monte Carlo results...
+23:01:14 | INFO    | Monte Carlo complete.
+23:01:14 | INFO    | 
+  [RESULTS] World Cup Win Probabilities (Top 16):
+23:01:14 | INFO    |    1. Spain                      26.0%  ##########
+23:01:14 | INFO    |    2. Argentina                  12.0%  ####
+23:01:14 | INFO    |    3. France                     10.0%  ####
+23:01:14 | INFO    |    4. England                    10.0%  ####
+23:01:14 | INFO    |    5. Netherlands                 8.0%  ###
+23:01:14 | INFO    |    6. Japan                       4.0%  #
+23:01:14 | INFO    |    7. Ecuador                     4.0%  #
+23:01:14 | INFO    |    8. Mexico                      4.0%  #
+23:01:14 | INFO    |    9. Brazil                      4.0%  #
+23:01:14 | INFO    |   10. Australia                   2.0%  
+23:01:14 | INFO    |   11. Portugal                    2.0%  
+23:01:14 | INFO    |   12. United States               2.0%  
+23:01:14 | INFO    |   13. Croatia                     2.0%  
+23:01:14 | INFO    |   14. Algeria                     2.0%  
+23:01:14 | INFO    |   15. Switzerland                 2.0%  
+23:01:14 | INFO    |   16. Nigeria                     2.0%  
+23:01:14 | INFO    |   Monte Carlo complete in 48.8s
+23:01:14 | INFO    | 
+[OK]  DRY RUN complete -- pipeline executed without errors.
+23:01:14 | INFO    | 
+======================================================================
+23:01:14 | INFO    |   Total runtime: 128.6s
+23:01:14 | INFO    | ======================================================================
