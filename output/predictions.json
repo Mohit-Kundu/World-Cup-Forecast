@@ -1,0 +1,1984 @@
+{
+  "match_results": {
+    "1": {
+      "home_team": "Mexico",
+      "away_team": "South Africa",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6949032258064516,
+      "draw_prob": 0.19825806451612904,
+      "away_win_prob": 0.10683870967741936
+    },
+    "2": {
+      "home_team": "Mexico",
+      "away_team": "South Korea",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5560645161290323,
+      "draw_prob": 0.25625806451612904,
+      "away_win_prob": 0.1876774193548387
+    },
+    "3": {
+      "home_team": "Mexico",
+      "away_team": "Czechia",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5475483870967742,
+      "draw_prob": 0.24941935483870967,
+      "away_win_prob": 0.20303225806451614
+    },
+    "4": {
+      "home_team": "South Africa",
+      "away_team": "South Korea",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.28903225806451616,
+      "draw_prob": 0.259741935483871,
+      "away_win_prob": 0.4512258064516129
+    },
+    "5": {
+      "home_team": "South Africa",
+      "away_team": "Czechia",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.27129032258064517,
+      "draw_prob": 0.2724516129032258,
+      "away_win_prob": 0.45625806451612905
+    },
+    "6": {
+      "home_team": "South Korea",
+      "away_team": "Czechia",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.444,
+      "draw_prob": 0.276,
+      "away_win_prob": 0.28
+    },
+    "7": {
+      "home_team": "Canada",
+      "away_team": "Switzerland",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.33941935483870966,
+      "draw_prob": 0.29451612903225804,
+      "away_win_prob": 0.36606451612903224
+    },
+    "8": {
+      "home_team": "Canada",
+      "away_team": "Qatar",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.8105161290322581,
+      "draw_prob": 0.12941935483870967,
+      "away_win_prob": 0.060064516129032255
+    },
+    "9": {
+      "home_team": "Canada",
+      "away_team": "Bosnia and Herzegovina",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5886451612903226,
+      "draw_prob": 0.24393548387096775,
+      "away_win_prob": 0.16741935483870968
+    },
+    "10": {
+      "home_team": "Switzerland",
+      "away_team": "Qatar",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.8371612903225807,
+      "draw_prob": 0.11754838709677419,
+      "away_win_prob": 0.04529032258064516
+    },
+    "11": {
+      "home_team": "Switzerland",
+      "away_team": "Bosnia and Herzegovina",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7064516129032258,
+      "draw_prob": 0.18587096774193548,
+      "away_win_prob": 0.10767741935483871
+    },
+    "12": {
+      "home_team": "Qatar",
+      "away_team": "Bosnia and Herzegovina",
+      "stage": "Group",
+      "most_common_home_goals": 0,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.23225806451612904,
+      "draw_prob": 0.25148387096774194,
+      "away_win_prob": 0.516258064516129
+    },
+    "13": {
+      "home_team": "Brazil",
+      "away_team": "Morocco",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.4904516129032258,
+      "draw_prob": 0.26464516129032256,
+      "away_win_prob": 0.2449032258064516
+    },
+    "14": {
+      "home_team": "Brazil",
+      "away_team": "Scotland",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6585161290322581,
+      "draw_prob": 0.19916129032258065,
+      "away_win_prob": 0.1423225806451613
+    },
+    "15": {
+      "home_team": "Brazil",
+      "away_team": "Haiti",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7754193548387097,
+      "draw_prob": 0.15761290322580646,
+      "away_win_prob": 0.06696774193548387
+    },
+    "16": {
+      "home_team": "Morocco",
+      "away_team": "Scotland",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5505161290322581,
+      "draw_prob": 0.24019354838709678,
+      "away_win_prob": 0.20929032258064517
+    },
+    "17": {
+      "home_team": "Morocco",
+      "away_team": "Haiti",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7254838709677419,
+      "draw_prob": 0.18367741935483872,
+      "away_win_prob": 0.09083870967741936
+    },
+    "18": {
+      "home_team": "Scotland",
+      "away_team": "Haiti",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6554193548387097,
+      "draw_prob": 0.20670967741935484,
+      "away_win_prob": 0.1378709677419355
+    },
+    "19": {
+      "home_team": "United States",
+      "away_team": "Paraguay",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.3624516129032258,
+      "draw_prob": 0.2739354838709677,
+      "away_win_prob": 0.36361290322580647
+    },
+    "20": {
+      "home_team": "United States",
+      "away_team": "Australia",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.4096774193548387,
+      "draw_prob": 0.26870967741935486,
+      "away_win_prob": 0.32161290322580643
+    },
+    "21": {
+      "home_team": "United States",
+      "away_team": "T\u00fcrkiye",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.26780645161290323,
+      "draw_prob": 0.24064516129032257,
+      "away_win_prob": 0.4915483870967742
+    },
+    "22": {
+      "home_team": "Paraguay",
+      "away_team": "Australia",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.4612903225806452,
+      "draw_prob": 0.26361290322580644,
+      "away_win_prob": 0.2750967741935484
+    },
+    "23": {
+      "home_team": "Paraguay",
+      "away_team": "T\u00fcrkiye",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.33380645161290323,
+      "draw_prob": 0.2676774193548387,
+      "away_win_prob": 0.3985161290322581
+    },
+    "24": {
+      "home_team": "Australia",
+      "away_team": "T\u00fcrkiye",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.3163870967741935,
+      "draw_prob": 0.2681290322580645,
+      "away_win_prob": 0.4154838709677419
+    },
+    "25": {
+      "home_team": "Germany",
+      "away_team": "Ecuador",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.5313548387096774,
+      "draw_prob": 0.23419354838709677,
+      "away_win_prob": 0.2344516129032258
+    },
+    "26": {
+      "home_team": "Germany",
+      "away_team": "Ivory Coast",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6818064516129032,
+      "draw_prob": 0.19729032258064516,
+      "away_win_prob": 0.12090322580645162
+    },
+    "27": {
+      "home_team": "Germany",
+      "away_team": "Cura\u00e7ao",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.8358064516129032,
+      "draw_prob": 0.1147741935483871,
+      "away_win_prob": 0.04941935483870968
+    },
+    "28": {
+      "home_team": "Ecuador",
+      "away_team": "Ivory Coast",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6984516129032258,
+      "draw_prob": 0.19380645161290322,
+      "away_win_prob": 0.10774193548387097
+    },
+    "29": {
+      "home_team": "Ecuador",
+      "away_team": "Cura\u00e7ao",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7987096774193548,
+      "draw_prob": 0.14083870967741935,
+      "away_win_prob": 0.06045161290322581
+    },
+    "30": {
+      "home_team": "Ivory Coast",
+      "away_team": "Cura\u00e7ao",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7147741935483871,
+      "draw_prob": 0.18716129032258064,
+      "away_win_prob": 0.09806451612903226
+    },
+    "31": {
+      "home_team": "Netherlands",
+      "away_team": "Sweden",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7491612903225806,
+      "draw_prob": 0.16006451612903225,
+      "away_win_prob": 0.0907741935483871
+    },
+    "32": {
+      "home_team": "Netherlands",
+      "away_team": "Japan",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.42929032258064515,
+      "draw_prob": 0.26387096774193547,
+      "away_win_prob": 0.30683870967741933
+    },
+    "33": {
+      "home_team": "Netherlands",
+      "away_team": "Tunisia",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7516774193548387,
+      "draw_prob": 0.16496774193548386,
+      "away_win_prob": 0.08335483870967741
+    },
+    "34": {
+      "home_team": "Sweden",
+      "away_team": "Japan",
+      "stage": "Group",
+      "most_common_home_goals": 0,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.234,
+      "draw_prob": 0.25625806451612904,
+      "away_win_prob": 0.5097419354838709
+    },
+    "35": {
+      "home_team": "Sweden",
+      "away_team": "Tunisia",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5089677419354839,
+      "draw_prob": 0.25864516129032256,
+      "away_win_prob": 0.23238709677419356
+    },
+    "36": {
+      "home_team": "Japan",
+      "away_team": "Tunisia",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6769677419354839,
+      "draw_prob": 0.2083225806451613,
+      "away_win_prob": 0.11470967741935484
+    },
+    "37": {
+      "home_team": "Belgium",
+      "away_team": "Egypt",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6285161290322581,
+      "draw_prob": 0.2250967741935484,
+      "away_win_prob": 0.14638709677419354
+    },
+    "38": {
+      "home_team": "Belgium",
+      "away_team": "Iran",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5610322580645162,
+      "draw_prob": 0.23974193548387096,
+      "away_win_prob": 0.1992258064516129
+    },
+    "39": {
+      "home_team": "Belgium",
+      "away_team": "New Zealand",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7039354838709677,
+      "draw_prob": 0.18754838709677418,
+      "away_win_prob": 0.10851612903225806
+    },
+    "40": {
+      "home_team": "Egypt",
+      "away_team": "Iran",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.39806451612903226,
+      "draw_prob": 0.2832258064516129,
+      "away_win_prob": 0.31870967741935485
+    },
+    "41": {
+      "home_team": "Egypt",
+      "away_team": "New Zealand",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5665806451612904,
+      "draw_prob": 0.2435483870967742,
+      "away_win_prob": 0.1898709677419355
+    },
+    "42": {
+      "home_team": "Iran",
+      "away_team": "New Zealand",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5850322580645161,
+      "draw_prob": 0.24367741935483872,
+      "away_win_prob": 0.17129032258064517
+    },
+    "43": {
+      "home_team": "Spain",
+      "away_team": "Uruguay",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6895483870967742,
+      "draw_prob": 0.19522580645161292,
+      "away_win_prob": 0.1152258064516129
+    },
+    "44": {
+      "home_team": "Spain",
+      "away_team": "Saudi Arabia",
+      "stage": "Group",
+      "most_common_home_goals": 3,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.9421935483870968,
+      "draw_prob": 0.04567741935483871,
+      "away_win_prob": 0.012129032258064516
+    },
+    "45": {
+      "home_team": "Spain",
+      "away_team": "Cape Verde",
+      "stage": "Group",
+      "most_common_home_goals": 3,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.9071612903225806,
+      "draw_prob": 0.06754838709677419,
+      "away_win_prob": 0.02529032258064516
+    },
+    "46": {
+      "home_team": "Uruguay",
+      "away_team": "Saudi Arabia",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7111612903225807,
+      "draw_prob": 0.18651612903225806,
+      "away_win_prob": 0.1023225806451613
+    },
+    "47": {
+      "home_team": "Uruguay",
+      "away_team": "Cape Verde",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6780645161290323,
+      "draw_prob": 0.19870967741935483,
+      "away_win_prob": 0.12322580645161291
+    },
+    "48": {
+      "home_team": "Saudi Arabia",
+      "away_team": "Cape Verde",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.3964516129032258,
+      "draw_prob": 0.2749032258064516,
+      "away_win_prob": 0.32864516129032256
+    },
+    "49": {
+      "home_team": "France",
+      "away_team": "Senegal",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5546774193548387,
+      "draw_prob": 0.13103225806451613,
+      "away_win_prob": 0.31429032258064515
+    },
+    "50": {
+      "home_team": "France",
+      "away_team": "Norway",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6494516129032258,
+      "draw_prob": 0.11012903225806452,
+      "away_win_prob": 0.2404193548387097
+    },
+    "51": {
+      "home_team": "France",
+      "away_team": "Iraq",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6922258064516129,
+      "draw_prob": 0.06596774193548387,
+      "away_win_prob": 0.24180645161290323
+    },
+    "52": {
+      "home_team": "Senegal",
+      "away_team": "Norway",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.4712903225806452,
+      "draw_prob": 0.13070967741935482,
+      "away_win_prob": 0.398
+    },
+    "53": {
+      "home_team": "Senegal",
+      "away_team": "Iraq",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6835483870967742,
+      "draw_prob": 0.10419354838709677,
+      "away_win_prob": 0.21225806451612902
+    },
+    "54": {
+      "home_team": "Norway",
+      "away_team": "Iraq",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6815161290322581,
+      "draw_prob": 0.08851612903225807,
+      "away_win_prob": 0.22996774193548386
+    },
+    "55": {
+      "home_team": "Argentina",
+      "away_team": "Austria",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6850645161290323,
+      "draw_prob": 0.1033225806451613,
+      "away_win_prob": 0.21161290322580645
+    },
+    "56": {
+      "home_team": "Argentina",
+      "away_team": "Algeria",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6236129032258064,
+      "draw_prob": 0.08512903225806452,
+      "away_win_prob": 0.291258064516129
+    },
+    "57": {
+      "home_team": "Argentina",
+      "away_team": "Jordan",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.709,
+      "draw_prob": 0.07729032258064517,
+      "away_win_prob": 0.21370967741935484
+    },
+    "58": {
+      "home_team": "Austria",
+      "away_team": "Algeria",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6923548387096774,
+      "draw_prob": 0.1318709677419355,
+      "away_win_prob": 0.1757741935483871
+    },
+    "59": {
+      "home_team": "Austria",
+      "away_team": "Jordan",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6372903225806451,
+      "draw_prob": 0.11570967741935484,
+      "away_win_prob": 0.247
+    },
+    "60": {
+      "home_team": "Algeria",
+      "away_team": "Jordan",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6009354838709677,
+      "draw_prob": 0.12148387096774194,
+      "away_win_prob": 0.27758064516129033
+    },
+    "61": {
+      "home_team": "Portugal",
+      "away_team": "Colombia",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.510483870967742,
+      "draw_prob": 0.11503225806451613,
+      "away_win_prob": 0.37448387096774194
+    },
+    "62": {
+      "home_team": "Portugal",
+      "away_team": "Uzbekistan",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6621935483870968,
+      "draw_prob": 0.09725806451612903,
+      "away_win_prob": 0.2405483870967742
+    },
+    "63": {
+      "home_team": "Portugal",
+      "away_team": "DR Congo",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7276774193548388,
+      "draw_prob": 0.08951612903225807,
+      "away_win_prob": 0.18280645161290324
+    },
+    "64": {
+      "home_team": "Colombia",
+      "away_team": "Uzbekistan",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6638709677419354,
+      "draw_prob": 0.10245161290322581,
+      "away_win_prob": 0.2336774193548387
+    },
+    "65": {
+      "home_team": "Colombia",
+      "away_team": "DR Congo",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5815483870967741,
+      "draw_prob": 0.103,
+      "away_win_prob": 0.3154516129032258
+    },
+    "66": {
+      "home_team": "Uzbekistan",
+      "away_team": "DR Congo",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5411290322580645,
+      "draw_prob": 0.14467741935483872,
+      "away_win_prob": 0.3141935483870968
+    },
+    "67": {
+      "home_team": "England",
+      "away_team": "Croatia",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.5664193548387096,
+      "draw_prob": 0.1167741935483871,
+      "away_win_prob": 0.3168064516129032
+    },
+    "68": {
+      "home_team": "England",
+      "away_team": "Ghana",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.6859354838709677,
+      "draw_prob": 0.06380645161290323,
+      "away_win_prob": 0.25025806451612903
+    },
+    "69": {
+      "home_team": "England",
+      "away_team": "Panama",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5726774193548387,
+      "draw_prob": 0.09367741935483871,
+      "away_win_prob": 0.33364516129032257
+    },
+    "70": {
+      "home_team": "Croatia",
+      "away_team": "Ghana",
+      "stage": "Group",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7072903225806452,
+      "draw_prob": 0.0635483870967742,
+      "away_win_prob": 0.22916129032258065
+    },
+    "71": {
+      "home_team": "Croatia",
+      "away_team": "Panama",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.5890967741935483,
+      "draw_prob": 0.1146774193548387,
+      "away_win_prob": 0.2962258064516129
+    },
+    "72": {
+      "home_team": "Ghana",
+      "away_team": "Panama",
+      "stage": "Group",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.363258064516129,
+      "draw_prob": 0.1268709677419355,
+      "away_win_prob": 0.5098709677419355
+    },
+    "73": {
+      "home_team": "Mexico",
+      "away_team": "Ecuador",
+      "stage": "Quarter-Final",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.5116129032258064,
+      "draw_prob": 0.0,
+      "away_win_prob": 0.48838709677419356
+    },
+    "74": {
+      "home_team": "Argentina",
+      "away_team": "Canada",
+      "stage": "Quarter-Final",
+      "most_common_home_goals": 2,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7110322580645161,
+      "draw_prob": 0.0,
+      "away_win_prob": 0.28896774193548386
+    },
+    "75": {
+      "home_team": "Netherlands",
+      "away_team": "Croatia",
+      "stage": "Quarter-Final",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.5621290322580645,
+      "draw_prob": 0.0,
+      "away_win_prob": 0.43787096774193546
+    },
+    "76": {
+      "home_team": "Mexico",
+      "away_team": "Netherlands",
+      "stage": "Quarter-Final",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.4838709677419355,
+      "draw_prob": 0.0,
+      "away_win_prob": 0.5161290322580645
+    },
+    "77": {
+      "home_team": "Mexico",
+      "away_team": "Argentina",
+      "stage": "Semi-Final",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.515483870967742,
+      "draw_prob": 0.0,
+      "away_win_prob": 0.48451612903225805
+    },
+    "78": {
+      "home_team": "Netherlands",
+      "away_team": "Mexico",
+      "stage": "Semi-Final",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 0,
+      "home_win_prob": 0.7228387096774194,
+      "draw_prob": 0.0,
+      "away_win_prob": 0.27716129032258063
+    },
+    "79": {
+      "home_team": "Mexico",
+      "away_team": "Netherlands",
+      "stage": "Final",
+      "most_common_home_goals": 1,
+      "most_common_away_goals": 1,
+      "home_win_prob": 0.48554838709677417,
+      "draw_prob": 0.0,
+      "away_win_prob": 0.5144516129032258
+    }
+  },
+  "champion_probs": {
+    "Mexico": 0.03632258064516129,
+    "Netherlands": 0.07483870967741936,
+    "Germany": 0.05193548387096774,
+    "Argentina": 0.11987096774193548,
+    "Spain": 0.21058064516129033,
+    "T\u00fcrkiye": 0.01167741935483871,
+    "England": 0.057225806451612904,
+    "Morocco": 0.01729032258064516,
+    "France": 0.08987096774193548,
+    "Iran": 0.0032903225806451613,
+    "Norway": 0.011806451612903225,
+    "Portugal": 0.03303225806451613,
+    "Switzerland": 0.03303225806451613,
+    "Colombia": 0.021161290322580645,
+    "Brazil": 0.07561290322580645,
+    "Austria": 0.006709677419354839,
+    "Senegal": 0.010387096774193548,
+    "Ecuador": 0.029870967741935484,
+    "Japan": 0.03148387096774193,
+    "Canada": 0.009161290322580645,
+    "Czechia": 0.002064516129032258,
+    "Paraguay": 0.00432258064516129,
+    "Belgium": 0.01832258064516129,
+    "Uruguay": 0.012258064516129033,
+    "Tunisia": 0.0001935483870967742,
+    "South Korea": 0.002903225806451613,
+    "Croatia": 0.014709677419354838,
+    "Australia": 0.001935483870967742,
+    "Scotland": 0.0023870967741935483,
+    "Algeria": 0.001161290322580645,
+    "Sweden": 0.0007096774193548388,
+    "Egypt": 0.0006451612903225806,
+    "Panama": 0.00025806451612903227,
+    "Ivory Coast": 0.0005161290322580645,
+    "United States": 0.001161290322580645,
+    "New Zealand": 0.00012903225806451613,
+    "South Africa": 0.00012903225806451613,
+    "Bosnia and Herzegovina": 0.0001935483870967742,
+    "Haiti": 0.00012903225806451613,
+    "Uzbekistan": 0.0003225806451612903,
+    "DR Congo": 0.0003225806451612903,
+    "Iraq": 6.451612903225807e-05
+  },
+  "finalist_probs": {
+    "Spain": 0.3229677419354839,
+    "Argentina": 0.18903225806451612,
+    "France": 0.16503225806451613,
+    "Netherlands": 0.15883870967741937,
+    "Brazil": 0.152,
+    "Germany": 0.11729032258064516,
+    "England": 0.10316129032258065,
+    "Mexico": 0.08864516129032259,
+    "Switzerland": 0.08219354838709678,
+    "Ecuador": 0.07161290322580645,
+    "Japan": 0.06858064516129032,
+    "Portugal": 0.06780645161290323,
+    "Belgium": 0.0467741935483871,
+    "Morocco": 0.044,
+    "Colombia": 0.043483870967741936,
+    "Uruguay": 0.03664516129032258,
+    "Croatia": 0.03264516129032258,
+    "Canada": 0.03225806451612903,
+    "T\u00fcrkiye": 0.030838709677419356,
+    "Norway": 0.026903225806451613,
+    "Senegal": 0.026064516129032256,
+    "Austria": 0.016451612903225808,
+    "Paraguay": 0.01367741935483871,
+    "South Korea": 0.009935483870967743,
+    "Iran": 0.008709677419354838,
+    "Scotland": 0.008387096774193548,
+    "Czechia": 0.0067741935483870966,
+    "Australia": 0.006709677419354839,
+    "Algeria": 0.0036774193548387095,
+    "United States": 0.0034838709677419357,
+    "Egypt": 0.0033548387096774194,
+    "Ivory Coast": 0.002774193548387097,
+    "Sweden": 0.0025806451612903226,
+    "Bosnia and Herzegovina": 0.0012903225806451613,
+    "Uzbekistan": 0.0010967741935483872,
+    "Panama": 0.001032258064516129,
+    "DR Congo": 0.0007741935483870968,
+    "Tunisia": 0.0007096774193548388,
+    "South Africa": 0.0006451612903225806,
+    "Jordan": 0.00045161290322580643,
+    "Haiti": 0.00025806451612903227,
+    "Iraq": 0.00012903225806451613,
+    "New Zealand": 0.00012903225806451613,
+    "Cape Verde": 0.00012903225806451613,
+    "Qatar": 6.451612903225807e-05
+  },
+  "qualify_probs": {
+    "Spain": 0.9891612903225806,
+    "Argentina": 0.9407096774193549,
+    "England": 0.9167741935483871,
+    "Germany": 0.8961290322580645,
+    "Switzerland": 0.8840645161290323,
+    "Netherlands": 0.8758064516129033,
+    "Portugal": 0.8730322580645161,
+    "Brazil": 0.8621290322580645,
+    "Belgium": 0.8570322580645161,
+    "France": 0.8396129032258065,
+    "Mexico": 0.8318064516129032,
+    "Canada": 0.8232258064516129,
+    "Ecuador": 0.8143870967741935,
+    "Uruguay": 0.7921290322580645,
+    "Colombia": 0.774258064516129,
+    "Croatia": 0.7720645161290323,
+    "Japan": 0.7195483870967742,
+    "Morocco": 0.7194838709677419,
+    "T\u00fcrkiye": 0.6112903225806452,
+    "Austria": 0.6070322580645161,
+    "Senegal": 0.5532258064516129,
+    "Norway": 0.546,
+    "Paraguay": 0.5391612903225806,
+    "South Korea": 0.5025161290322581,
+    "Egypt": 0.49929032258064515,
+    "Iran": 0.4912258064516129,
+    "United States": 0.4570967741935484,
+    "Czechia": 0.4092903225806452,
+    "Australia": 0.39245161290322583,
+    "Scotland": 0.35135483870967743,
+    "Algeria": 0.32348387096774195,
+    "Sweden": 0.28658064516129034,
+    "South Africa": 0.2563870967741935,
+    "Ivory Coast": 0.25290322580645164,
+    "Panama": 0.2504516129032258,
+    "Bosnia and Herzegovina": 0.23470967741935483,
+    "Uzbekistan": 0.2152258064516129,
+    "New Zealand": 0.1524516129032258,
+    "DR Congo": 0.13748387096774192,
+    "Jordan": 0.1287741935483871,
+    "Tunisia": 0.11806451612903225,
+    "Cape Verde": 0.11412903225806452,
+    "Saudi Arabia": 0.10458064516129033,
+    "Haiti": 0.06703225806451613,
+    "Iraq": 0.06116129032258064,
+    "Ghana": 0.06070967741935484,
+    "Qatar": 0.058,
+    "Cura\u00e7ao": 0.03658064516129032
+  },
+  "r32_probs": {
+    "Netherlands": 0.9670322580645161,
+    "Switzerland": 0.9500645161290323,
+    "Spain": 0.94,
+    "Germany": 0.915741935483871,
+    "Mexico": 0.8523225806451613,
+    "Brazil": 0.8104516129032258,
+    "Argentina": 0.6715483870967742,
+    "Ecuador": 0.6592258064516129,
+    "Canada": 0.6581935483870968,
+    "Uruguay": 0.6181290322580645,
+    "Morocco": 0.6101935483870968,
+    "England": 0.5969677419354839,
+    "Japan": 0.5949032258064516,
+    "France": 0.5369677419354839,
+    "Belgium": 0.529483870967742,
+    "Portugal": 0.5118064516129033,
+    "T\u00fcrkiye": 0.4087096774193548,
+    "Colombia": 0.39838709677419354,
+    "Croatia": 0.33980645161290324,
+    "Paraguay": 0.31929032258064516,
+    "South Korea": 0.2833548387096774,
+    "Norway": 0.25116129032258067,
+    "Scotland": 0.24606451612903227,
+    "Iran": 0.24180645161290323,
+    "Czechia": 0.22664516129032258,
+    "Senegal": 0.22464516129032258,
+    "Australia": 0.22303225806451613,
+    "United States": 0.20412903225806453,
+    "Austria": 0.20103225806451613,
+    "Egypt": 0.18116129032258063,
+    "Sweden": 0.11232258064516129,
+    "Ivory Coast": 0.0967741935483871,
+    "Bosnia and Herzegovina": 0.09348387096774194,
+    "Algeria": 0.08412903225806452,
+    "South Africa": 0.07858064516129032,
+    "Uzbekistan": 0.05651612903225806,
+    "Panama": 0.05632258064516129,
+    "Cape Verde": 0.039419354838709675,
+    "Tunisia": 0.03464516129032258,
+    "New Zealand": 0.03438709677419355,
+    "DR Congo": 0.03283870967741936,
+    "Saudi Arabia": 0.028967741935483873,
+    "Haiti": 0.025096774193548388,
+    "Jordan": 0.021225806451612903,
+    "Qatar": 0.010387096774193548,
+    "Iraq": 0.00929032258064516,
+    "Ghana": 0.007354838709677419,
+    "Cura\u00e7ao": 0.006
+  },
+  "r16_probs": {
+    "Spain": 0.6126451612903225,
+    "Netherlands": 0.5507741935483871,
+    "Switzerland": 0.5310967741935484,
+    "Germany": 0.5164516129032258,
+    "Brazil": 0.5095483870967742,
+    "Mexico": 0.4996129032258064,
+    "Argentina": 0.4532258064516129,
+    "France": 0.3606451612903226,
+    "Ecuador": 0.32670967741935486,
+    "Morocco": 0.31483870967741934,
+    "Canada": 0.3044516129032258,
+    "Japan": 0.29993548387096775,
+    "England": 0.2924516129032258,
+    "Uruguay": 0.23387096774193547,
+    "Belgium": 0.22741935483870968,
+    "Portugal": 0.2190967741935484,
+    "T\u00fcrkiye": 0.1984516129032258,
+    "Colombia": 0.15496774193548388,
+    "Croatia": 0.13064516129032258,
+    "Paraguay": 0.12225806451612903,
+    "Norway": 0.12116129032258065,
+    "South Korea": 0.11948387096774193,
+    "Senegal": 0.10870967741935483,
+    "Scotland": 0.10109677419354839,
+    "Czechia": 0.09980645161290323,
+    "Austria": 0.09187096774193548,
+    "Iran": 0.08916129032258065,
+    "Australia": 0.08070967741935484,
+    "United States": 0.06148387096774194,
+    "Egypt": 0.0472258064516129,
+    "Sweden": 0.036064516129032255,
+    "Ivory Coast": 0.03483870967741935,
+    "Algeria": 0.03103225806451613,
+    "Bosnia and Herzegovina": 0.028967741935483873,
+    "South Africa": 0.021419354838709676,
+    "Panama": 0.011032258064516128,
+    "Uzbekistan": 0.01,
+    "Tunisia": 0.009806451612903225,
+    "Jordan": 0.006,
+    "DR Congo": 0.006,
+    "Cape Verde": 0.005806451612903226,
+    "Haiti": 0.005806451612903226,
+    "New Zealand": 0.005032258064516129,
+    "Saudi Arabia": 0.0036774193548387095,
+    "Iraq": 0.0023870967741935483,
+    "Qatar": 0.000967741935483871,
+    "Ghana": 0.0007741935483870968,
+    "Cura\u00e7ao": 0.0005806451612903225
+  },
+  "qf_probs": {
+    "Spain": 0.41083870967741937,
+    "Netherlands": 0.3064516129032258,
+    "Brazil": 0.29529032258064514,
+    "Germany": 0.276,
+    "France": 0.2593548387096774,
+    "Argentina": 0.25690322580645164,
+    "Mexico": 0.23729032258064517,
+    "Switzerland": 0.22890322580645162,
+    "England": 0.16103225806451613,
+    "Ecuador": 0.15716129032258064,
+    "Japan": 0.14806451612903226,
+    "Portugal": 0.13883870967741935,
+    "Morocco": 0.13432258064516128,
+    "Belgium": 0.10651612903225806,
+    "Canada": 0.1047741935483871,
+    "Uruguay": 0.09561290322580646,
+    "Colombia": 0.08380645161290323,
+    "T\u00fcrkiye": 0.0827741935483871,
+    "Croatia": 0.06670967741935484,
+    "Norway": 0.05761290322580645,
+    "Senegal": 0.05606451612903226,
+    "Paraguay": 0.04387096774193548,
+    "Austria": 0.042193548387096776,
+    "South Korea": 0.03696774193548387,
+    "Scotland": 0.03490322580645161,
+    "Czechia": 0.03135483870967742,
+    "Iran": 0.02993548387096774,
+    "Australia": 0.025419354838709676,
+    "United States": 0.016516129032258065,
+    "Algeria": 0.013419354838709678,
+    "Egypt": 0.013225806451612903,
+    "Ivory Coast": 0.01,
+    "Sweden": 0.009483870967741935,
+    "Bosnia and Herzegovina": 0.005935483870967742,
+    "South Africa": 0.004580645161290323,
+    "Panama": 0.004064516129032258,
+    "Uzbekistan": 0.0036129032258064514,
+    "Jordan": 0.00232258064516129,
+    "DR Congo": 0.002064516129032258,
+    "Tunisia": 0.0018064516129032257,
+    "Haiti": 0.0013548387096774194,
+    "Iraq": 0.0007096774193548388,
+    "New Zealand": 0.0007096774193548388,
+    "Cape Verde": 0.0005161290322580645,
+    "Saudi Arabia": 0.0003225806451612903,
+    "Ghana": 0.0001935483870967742,
+    "Qatar": 0.0001935483870967742
+  },
+  "sf_probs": {
+    "Spain": 0.3229677419354839,
+    "Argentina": 0.18903225806451612,
+    "France": 0.16503225806451613,
+    "Netherlands": 0.15883870967741937,
+    "Brazil": 0.152,
+    "Germany": 0.11729032258064516,
+    "England": 0.10316129032258065,
+    "Mexico": 0.08864516129032259,
+    "Switzerland": 0.08219354838709678,
+    "Ecuador": 0.07161290322580645,
+    "Japan": 0.06858064516129032,
+    "Portugal": 0.06780645161290323,
+    "Belgium": 0.0467741935483871,
+    "Morocco": 0.044,
+    "Colombia": 0.043483870967741936,
+    "Uruguay": 0.03664516129032258,
+    "Croatia": 0.03264516129032258,
+    "Canada": 0.03225806451612903,
+    "T\u00fcrkiye": 0.030838709677419356,
+    "Norway": 0.026903225806451613,
+    "Senegal": 0.026064516129032256,
+    "Austria": 0.016451612903225808,
+    "Paraguay": 0.01367741935483871,
+    "South Korea": 0.009935483870967743,
+    "Iran": 0.008709677419354838,
+    "Scotland": 0.008387096774193548,
+    "Czechia": 0.0067741935483870966,
+    "Australia": 0.006709677419354839,
+    "Algeria": 0.0036774193548387095,
+    "United States": 0.0034838709677419357,
+    "Egypt": 0.0033548387096774194,
+    "Ivory Coast": 0.002774193548387097,
+    "Sweden": 0.0025806451612903226,
+    "Bosnia and Herzegovina": 0.0012903225806451613,
+    "Uzbekistan": 0.0010967741935483872,
+    "Panama": 0.001032258064516129,
+    "DR Congo": 0.0007741935483870968,
+    "Tunisia": 0.0007096774193548388,
+    "South Africa": 0.0006451612903225806,
+    "Jordan": 0.00045161290322580643,
+    "Haiti": 0.00025806451612903227,
+    "Iraq": 0.00012903225806451613,
+    "New Zealand": 0.00012903225806451613,
+    "Cape Verde": 0.00012903225806451613,
+    "Qatar": 6.451612903225807e-05
+  },
+  "group_standings": {
+    "A": [
+      {
+        "team": "Mexico",
+        "rank": 1,
+        "pts": 9,
+        "gd": 3,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.8318064516129032
+      },
+      {
+        "team": "South Korea",
+        "rank": 2,
+        "pts": 4,
+        "gd": 0,
+        "gf": 2,
+        "played": 3,
+        "qualify_prob": 0.5025161290322581
+      },
+      {
+        "team": "South Africa",
+        "rank": 3,
+        "pts": 2,
+        "gd": -1,
+        "gf": 2,
+        "played": 3,
+        "qualify_prob": 0.2563870967741935
+      },
+      {
+        "team": "Czechia",
+        "rank": 4,
+        "pts": 1,
+        "gd": -2,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.4092903225806452
+      }
+    ],
+    "B": [
+      {
+        "team": "Switzerland",
+        "rank": 1,
+        "pts": 7,
+        "gd": 4,
+        "gf": 5,
+        "played": 3,
+        "qualify_prob": 0.8840645161290323
+      },
+      {
+        "team": "Canada",
+        "rank": 2,
+        "pts": 7,
+        "gd": 3,
+        "gf": 4,
+        "played": 3,
+        "qualify_prob": 0.8232258064516129
+      },
+      {
+        "team": "Bosnia and Herzegovina",
+        "rank": 3,
+        "pts": 3,
+        "gd": -2,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.23470967741935483
+      },
+      {
+        "team": "Qatar",
+        "rank": 4,
+        "pts": 0,
+        "gd": -5,
+        "gf": 0,
+        "played": 3,
+        "qualify_prob": 0.058
+      }
+    ],
+    "C": [
+      {
+        "team": "Brazil",
+        "rank": 1,
+        "pts": 9,
+        "gd": 5,
+        "gf": 5,
+        "played": 3,
+        "qualify_prob": 0.8621290322580645
+      },
+      {
+        "team": "Morocco",
+        "rank": 2,
+        "pts": 6,
+        "gd": 2,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.7194838709677419
+      },
+      {
+        "team": "Scotland",
+        "rank": 3,
+        "pts": 3,
+        "gd": -2,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.35135483870967743
+      },
+      {
+        "team": "Haiti",
+        "rank": 4,
+        "pts": 0,
+        "gd": -5,
+        "gf": 0,
+        "played": 3,
+        "qualify_prob": 0.06703225806451613
+      }
+    ],
+    "D": [
+      {
+        "team": "Paraguay",
+        "rank": 1,
+        "pts": 3,
+        "gd": 0,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.5391612903225806
+      },
+      {
+        "team": "United States",
+        "rank": 2,
+        "pts": 3,
+        "gd": 0,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.4570967741935484
+      },
+      {
+        "team": "Australia",
+        "rank": 3,
+        "pts": 3,
+        "gd": 0,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.39245161290322583
+      },
+      {
+        "team": "T\u00fcrkiye",
+        "rank": 4,
+        "pts": 3,
+        "gd": 0,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.6112903225806452
+      }
+    ],
+    "E": [
+      {
+        "team": "Germany",
+        "rank": 1,
+        "pts": 7,
+        "gd": 4,
+        "gf": 5,
+        "played": 3,
+        "qualify_prob": 0.8961290322580645
+      },
+      {
+        "team": "Ecuador",
+        "rank": 2,
+        "pts": 7,
+        "gd": 4,
+        "gf": 5,
+        "played": 3,
+        "qualify_prob": 0.8143870967741935
+      },
+      {
+        "team": "Ivory Coast",
+        "rank": 3,
+        "pts": 3,
+        "gd": -2,
+        "gf": 2,
+        "played": 3,
+        "qualify_prob": 0.25290322580645164
+      },
+      {
+        "team": "Cura\u00e7ao",
+        "rank": 4,
+        "pts": 0,
+        "gd": -6,
+        "gf": 0,
+        "played": 3,
+        "qualify_prob": 0.03658064516129032
+      }
+    ],
+    "F": [
+      {
+        "team": "Netherlands",
+        "rank": 1,
+        "pts": 7,
+        "gd": 4,
+        "gf": 5,
+        "played": 3,
+        "qualify_prob": 0.8758064516129033
+      },
+      {
+        "team": "Japan",
+        "rank": 2,
+        "pts": 7,
+        "gd": 2,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.7195483870967742
+      },
+      {
+        "team": "Sweden",
+        "rank": 3,
+        "pts": 3,
+        "gd": -2,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.28658064516129034
+      },
+      {
+        "team": "Tunisia",
+        "rank": 4,
+        "pts": 0,
+        "gd": -4,
+        "gf": 0,
+        "played": 3,
+        "qualify_prob": 0.11806451612903225
+      }
+    ],
+    "G": [
+      {
+        "team": "Belgium",
+        "rank": 1,
+        "pts": 9,
+        "gd": 4,
+        "gf": 4,
+        "played": 3,
+        "qualify_prob": 0.8570322580645161
+      },
+      {
+        "team": "Iran",
+        "rank": 2,
+        "pts": 4,
+        "gd": 0,
+        "gf": 2,
+        "played": 3,
+        "qualify_prob": 0.4912258064516129
+      },
+      {
+        "team": "Egypt",
+        "rank": 3,
+        "pts": 4,
+        "gd": 0,
+        "gf": 2,
+        "played": 3,
+        "qualify_prob": 0.49929032258064515
+      },
+      {
+        "team": "New Zealand",
+        "rank": 4,
+        "pts": 0,
+        "gd": -4,
+        "gf": 0,
+        "played": 3,
+        "qualify_prob": 0.1524516129032258
+      }
+    ],
+    "H": [
+      {
+        "team": "Spain",
+        "rank": 1,
+        "pts": 9,
+        "gd": 7,
+        "gf": 7,
+        "played": 3,
+        "qualify_prob": 0.9891612903225806
+      },
+      {
+        "team": "Uruguay",
+        "rank": 2,
+        "pts": 6,
+        "gd": 2,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.7921290322580645
+      },
+      {
+        "team": "Cape Verde",
+        "rank": 3,
+        "pts": 1,
+        "gd": -4,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.11412903225806452
+      },
+      {
+        "team": "Saudi Arabia",
+        "rank": 4,
+        "pts": 1,
+        "gd": -5,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.10458064516129033
+      }
+    ],
+    "I": [
+      {
+        "team": "France",
+        "rank": 1,
+        "pts": 9,
+        "gd": 5,
+        "gf": 5,
+        "played": 3,
+        "qualify_prob": 0.8396129032258065
+      },
+      {
+        "team": "Norway",
+        "rank": 2,
+        "pts": 4,
+        "gd": 0,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.546
+      },
+      {
+        "team": "Senegal",
+        "rank": 3,
+        "pts": 4,
+        "gd": 0,
+        "gf": 2,
+        "played": 3,
+        "qualify_prob": 0.5532258064516129
+      },
+      {
+        "team": "Iraq",
+        "rank": 4,
+        "pts": 0,
+        "gd": -5,
+        "gf": 0,
+        "played": 3,
+        "qualify_prob": 0.06116129032258064
+      }
+    ],
+    "J": [
+      {
+        "team": "Argentina",
+        "rank": 1,
+        "pts": 9,
+        "gd": 4,
+        "gf": 4,
+        "played": 3,
+        "qualify_prob": 0.9407096774193549
+      },
+      {
+        "team": "Austria",
+        "rank": 2,
+        "pts": 6,
+        "gd": 1,
+        "gf": 2,
+        "played": 3,
+        "qualify_prob": 0.6070322580645161
+      },
+      {
+        "team": "Algeria",
+        "rank": 3,
+        "pts": 3,
+        "gd": -1,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.32348387096774195
+      },
+      {
+        "team": "Jordan",
+        "rank": 4,
+        "pts": 0,
+        "gd": -4,
+        "gf": 0,
+        "played": 3,
+        "qualify_prob": 0.1287741935483871
+      }
+    ],
+    "K": [
+      {
+        "team": "Portugal",
+        "rank": 1,
+        "pts": 7,
+        "gd": 3,
+        "gf": 4,
+        "played": 3,
+        "qualify_prob": 0.8730322580645161
+      },
+      {
+        "team": "Colombia",
+        "rank": 2,
+        "pts": 7,
+        "gd": 2,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.774258064516129
+      },
+      {
+        "team": "Uzbekistan",
+        "rank": 3,
+        "pts": 3,
+        "gd": -1,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.2152258064516129
+      },
+      {
+        "team": "DR Congo",
+        "rank": 4,
+        "pts": 0,
+        "gd": -4,
+        "gf": 0,
+        "played": 3,
+        "qualify_prob": 0.13748387096774192
+      }
+    ],
+    "L": [
+      {
+        "team": "Croatia",
+        "rank": 1,
+        "pts": 7,
+        "gd": 3,
+        "gf": 4,
+        "played": 3,
+        "qualify_prob": 0.7720645161290323
+      },
+      {
+        "team": "England",
+        "rank": 2,
+        "pts": 7,
+        "gd": 2,
+        "gf": 3,
+        "played": 3,
+        "qualify_prob": 0.9167741935483871
+      },
+      {
+        "team": "Panama",
+        "rank": 3,
+        "pts": 1,
+        "gd": -2,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.2504516129032258
+      },
+      {
+        "team": "Ghana",
+        "rank": 4,
+        "pts": 1,
+        "gd": -3,
+        "gf": 1,
+        "played": 3,
+        "qualify_prob": 0.06070967741935484
+      }
+    ]
+  },
+  "predicted_final": {
+    "home_team": "France",
+    "away_team": "Spain",
+    "winner": "Spain",
+    "runner_up": "France",
+    "pairing_prob": 0.04258064516129032,
+    "winner_prob": 0.6166666666666667
+  },
+  "team_stats": {
+    "Mexico": {
+      "FIFA ELO Rating": "1858",
+      "Recent Form (W5)": "70.8%",
+      "Attack Strength (Avg Goals)": "1.15",
+      "Defense Rating (Inverse)": "1.50",
+      "Expected Conceded Goals": "0.67",
+      "Discipline Index (Expected Cards)": "1.88"
+    },
+    "South Africa": {
+      "FIFA ELO Rating": "1524",
+      "Recent Form (W5)": "23.9%",
+      "Attack Strength (Avg Goals)": "1.32",
+      "Defense Rating (Inverse)": "0.77",
+      "Expected Conceded Goals": "1.31",
+      "Discipline Index (Expected Cards)": "2.12"
+    },
+    "South Korea": {
+      "FIFA ELO Rating": "1752",
+      "Recent Form (W5)": "58.7%",
+      "Attack Strength (Avg Goals)": "1.25",
+      "Defense Rating (Inverse)": "0.95",
+      "Expected Conceded Goals": "1.05",
+      "Discipline Index (Expected Cards)": "2.44"
+    },
+    "Czechia": {
+      "FIFA ELO Rating": "1726",
+      "Recent Form (W5)": "44.9%",
+      "Attack Strength (Avg Goals)": "1.92",
+      "Defense Rating (Inverse)": "1.03",
+      "Expected Conceded Goals": "0.97",
+      "Discipline Index (Expected Cards)": "2.20"
+    },
+    "Canada": {
+      "FIFA ELO Rating": "1784",
+      "Recent Form (W5)": "46.4%",
+      "Attack Strength (Avg Goals)": "0.93",
+      "Defense Rating (Inverse)": "2.34",
+      "Expected Conceded Goals": "0.43",
+      "Discipline Index (Expected Cards)": "1.64"
+    },
+    "Switzerland": {
+      "FIFA ELO Rating": "1889",
+      "Recent Form (W5)": "39.0%",
+      "Attack Strength (Avg Goals)": "2.14",
+      "Defense Rating (Inverse)": "1.08",
+      "Expected Conceded Goals": "0.92",
+      "Discipline Index (Expected Cards)": "2.28"
+    },
+    "Qatar": {
+      "FIFA ELO Rating": "1425",
+      "Recent Form (W5)": "27.1%",
+      "Attack Strength (Avg Goals)": "0.84",
+      "Defense Rating (Inverse)": "0.57",
+      "Expected Conceded Goals": "1.74",
+      "Discipline Index (Expected Cards)": "3.08"
+    },
+    "Bosnia and Herzegovina": {
+      "FIFA ELO Rating": "1594",
+      "Recent Form (W5)": "56.5%",
+      "Attack Strength (Avg Goals)": "1.84",
+      "Defense Rating (Inverse)": "1.04",
+      "Expected Conceded Goals": "0.97",
+      "Discipline Index (Expected Cards)": "2.76"
+    },
+    "Brazil": {
+      "FIFA ELO Rating": "1984",
+      "Recent Form (W5)": "46.2%",
+      "Attack Strength (Avg Goals)": "1.80",
+      "Defense Rating (Inverse)": "0.97",
+      "Expected Conceded Goals": "1.03",
+      "Discipline Index (Expected Cards)": "2.20"
+    },
+    "Morocco": {
+      "FIFA ELO Rating": "1821",
+      "Recent Form (W5)": "72.7%",
+      "Attack Strength (Avg Goals)": "1.73",
+      "Defense Rating (Inverse)": "2.35",
+      "Expected Conceded Goals": "0.42",
+      "Discipline Index (Expected Cards)": "1.48"
+    },
+    "Scotland": {
+      "FIFA ELO Rating": "1767",
+      "Recent Form (W5)": "38.8%",
+      "Attack Strength (Avg Goals)": "1.66",
+      "Defense Rating (Inverse)": "0.76",
+      "Expected Conceded Goals": "1.32",
+      "Discipline Index (Expected Cards)": "2.28"
+    },
+    "Haiti": {
+      "FIFA ELO Rating": "1532",
+      "Recent Form (W5)": "44.9%",
+      "Attack Strength (Avg Goals)": "1.00",
+      "Defense Rating (Inverse)": "0.98",
+      "Expected Conceded Goals": "1.02",
+      "Discipline Index (Expected Cards)": "2.36"
+    },
+    "United States": {
+      "FIFA ELO Rating": "1721",
+      "Recent Form (W5)": "58.9%",
+      "Attack Strength (Avg Goals)": "1.88",
+      "Defense Rating (Inverse)": "0.57",
+      "Expected Conceded Goals": "1.75",
+      "Discipline Index (Expected Cards)": "2.84"
+    },
+    "Paraguay": {
+      "FIFA ELO Rating": "1833",
+      "Recent Form (W5)": "40.5%",
+      "Attack Strength (Avg Goals)": "1.00",
+      "Defense Rating (Inverse)": "0.86",
+      "Expected Conceded Goals": "1.16",
+      "Discipline Index (Expected Cards)": "2.28"
+    },
+    "Australia": {
+      "FIFA ELO Rating": "1783",
+      "Recent Form (W5)": "36.0%",
+      "Attack Strength (Avg Goals)": "1.34",
+      "Defense Rating (Inverse)": "0.95",
+      "Expected Conceded Goals": "1.06",
+      "Discipline Index (Expected Cards)": "2.04"
+    },
+    "T\u00fcrkiye": {
+      "FIFA ELO Rating": "1902",
+      "Recent Form (W5)": "83.3%",
+      "Attack Strength (Avg Goals)": "1.98",
+      "Defense Rating (Inverse)": "1.03",
+      "Expected Conceded Goals": "0.97",
+      "Discipline Index (Expected Cards)": "2.60"
+    },
+    "Germany": {
+      "FIFA ELO Rating": "1923",
+      "Recent Form (W5)": "100.0%",
+      "Attack Strength (Avg Goals)": "2.59",
+      "Defense Rating (Inverse)": "1.11",
+      "Expected Conceded Goals": "0.90",
+      "Discipline Index (Expected Cards)": "2.28"
+    },
+    "Ecuador": {
+      "FIFA ELO Rating": "1933",
+      "Recent Form (W5)": "45.1%",
+      "Attack Strength (Avg Goals)": "0.81",
+      "Defense Rating (Inverse)": "2.15",
+      "Expected Conceded Goals": "0.47",
+      "Discipline Index (Expected Cards)": "1.40"
+    },
+    "Ivory Coast": {
+      "FIFA ELO Rating": "1676",
+      "Recent Form (W5)": "79.2%",
+      "Attack Strength (Avg Goals)": "2.21",
+      "Defense Rating (Inverse)": "1.20",
+      "Expected Conceded Goals": "0.84",
+      "Discipline Index (Expected Cards)": "1.64"
+    },
+    "Cura\u00e7ao": {
+      "FIFA ELO Rating": "1436",
+      "Recent Form (W5)": "28.9%",
+      "Attack Strength (Avg Goals)": "1.46",
+      "Defense Rating (Inverse)": "0.77",
+      "Expected Conceded Goals": "1.29",
+      "Discipline Index (Expected Cards)": "2.36"
+    },
+    "Netherlands": {
+      "FIFA ELO Rating": "1961",
+      "Recent Form (W5)": "71.0%",
+      "Attack Strength (Avg Goals)": "2.57",
+      "Defense Rating (Inverse)": "1.82",
+      "Expected Conceded Goals": "0.55",
+      "Discipline Index (Expected Cards)": "2.04"
+    },
+    "Sweden": {
+      "FIFA ELO Rating": "1719",
+      "Recent Form (W5)": "46.1%",
+      "Attack Strength (Avg Goals)": "1.59",
+      "Defense Rating (Inverse)": "0.56",
+      "Expected Conceded Goals": "1.77",
+      "Discipline Index (Expected Cards)": "2.68"
+    },
+    "Japan": {
+      "FIFA ELO Rating": "1904",
+      "Recent Form (W5)": "100.0%",
+      "Attack Strength (Avg Goals)": "1.80",
+      "Defense Rating (Inverse)": "1.88",
+      "Expected Conceded Goals": "0.53",
+      "Discipline Index (Expected Cards)": "1.72"
+    },
+    "Tunisia": {
+      "FIFA ELO Rating": "1636",
+      "Recent Form (W5)": "38.8%",
+      "Attack Strength (Avg Goals)": "1.21",
+      "Defense Rating (Inverse)": "1.02",
+      "Expected Conceded Goals": "0.98",
+      "Discipline Index (Expected Cards)": "2.04"
+    },
+    "Belgium": {
+      "FIFA ELO Rating": "1867",
+      "Recent Form (W5)": "71.2%",
+      "Attack Strength (Avg Goals)": "3.23",
+      "Defense Rating (Inverse)": "1.10",
+      "Expected Conceded Goals": "0.91",
+      "Discipline Index (Expected Cards)": "2.36"
+    },
+    "Egypt": {
+      "FIFA ELO Rating": "1689",
+      "Recent Form (W5)": "50.3%",
+      "Attack Strength (Avg Goals)": "1.21",
+      "Defense Rating (Inverse)": "1.39",
+      "Expected Conceded Goals": "0.72",
+      "Discipline Index (Expected Cards)": "2.04"
+    },
+    "Iran": {
+      "FIFA ELO Rating": "1760",
+      "Recent Form (W5)": "50.5%",
+      "Attack Strength (Avg Goals)": "1.57",
+      "Defense Rating (Inverse)": "1.89",
+      "Expected Conceded Goals": "0.53",
+      "Discipline Index (Expected Cards)": "1.96"
+    },
+    "New Zealand": {
+      "FIFA ELO Rating": "1585",
+      "Recent Form (W5)": "25.9%",
+      "Attack Strength (Avg Goals)": "1.01",
+      "Defense Rating (Inverse)": "0.65",
+      "Expected Conceded Goals": "1.54",
+      "Discipline Index (Expected Cards)": "2.28"
+    },
+    "Spain": {
+      "FIFA ELO Rating": "2165",
+      "Recent Form (W5)": "71.8%",
+      "Attack Strength (Avg Goals)": "2.89",
+      "Defense Rating (Inverse)": "1.78",
+      "Expected Conceded Goals": "0.56",
+      "Discipline Index (Expected Cards)": "2.28"
+    },
+    "Uruguay": {
+      "FIFA ELO Rating": "1892",
+      "Recent Form (W5)": "39.7%",
+      "Attack Strength (Avg Goals)": "0.91",
+      "Defense Rating (Inverse)": "0.90",
+      "Expected Conceded Goals": "1.11",
+      "Discipline Index (Expected Cards)": "2.04"
+    },
+    "Saudi Arabia": {
+      "FIFA ELO Rating": "1568",
+      "Recent Form (W5)": "17.4%",
+      "Attack Strength (Avg Goals)": "0.72",
+      "Defense Rating (Inverse)": "0.67",
+      "Expected Conceded Goals": "1.49",
+      "Discipline Index (Expected Cards)": "2.60"
+    },
+    "Cape Verde": {
+      "FIFA ELO Rating": "1549",
+      "Recent Form (W5)": "35.8%",
+      "Attack Strength (Avg Goals)": "1.48",
+      "Defense Rating (Inverse)": "1.01",
+      "Expected Conceded Goals": "0.99",
+      "Discipline Index (Expected Cards)": "2.12"
+    },
+    "France": {
+      "FIFA ELO Rating": "2081",
+      "Recent Form (W5)": "87.9%",
+      "Attack Strength (Avg Goals)": "2.75",
+      "Defense Rating (Inverse)": "0.98",
+      "Expected Conceded Goals": "1.02",
+      "Discipline Index (Expected Cards)": "2.20"
+    },
+    "Senegal": {
+      "FIFA ELO Rating": "1878",
+      "Recent Form (W5)": "77.9%",
+      "Attack Strength (Avg Goals)": "1.98",
+      "Defense Rating (Inverse)": "1.54",
+      "Expected Conceded Goals": "0.65",
+      "Discipline Index (Expected Cards)": "1.80"
+    },
+    "Norway": {
+      "FIFA ELO Rating": "1912",
+      "Recent Form (W5)": "50.4%",
+      "Attack Strength (Avg Goals)": "2.52",
+      "Defense Rating (Inverse)": "1.30",
+      "Expected Conceded Goals": "0.77",
+      "Discipline Index (Expected Cards)": "2.12"
+    },
+    "Iraq": {
+      "FIFA ELO Rating": "1607",
+      "Recent Form (W5)": "56.2%",
+      "Attack Strength (Avg Goals)": "1.09",
+      "Defense Rating (Inverse)": "1.29",
+      "Expected Conceded Goals": "0.78",
+      "Discipline Index (Expected Cards)": "2.12"
+    },
+    "Argentina": {
+      "FIFA ELO Rating": "2113",
+      "Recent Form (W5)": "100.0%",
+      "Attack Strength (Avg Goals)": "2.63",
+      "Defense Rating (Inverse)": "3.14",
+      "Expected Conceded Goals": "0.32",
+      "Discipline Index (Expected Cards)": "1.56"
+    },
+    "Austria": {
+      "FIFA ELO Rating": "1827",
+      "Recent Form (W5)": "65.4%",
+      "Attack Strength (Avg Goals)": "2.15",
+      "Defense Rating (Inverse)": "2.02",
+      "Expected Conceded Goals": "0.50",
+      "Discipline Index (Expected Cards)": "1.80"
+    },
+    "Algeria": {
+      "FIFA ELO Rating": "1743",
+      "Recent Form (W5)": "63.3%",
+      "Attack Strength (Avg Goals)": "2.10",
+      "Defense Rating (Inverse)": "1.84",
+      "Expected Conceded Goals": "0.54",
+      "Discipline Index (Expected Cards)": "1.56"
+    },
+    "Jordan": {
+      "FIFA ELO Rating": "1690",
+      "Recent Form (W5)": "51.4%",
+      "Attack Strength (Avg Goals)": "1.85",
+      "Defense Rating (Inverse)": "0.71",
+      "Expected Conceded Goals": "1.41",
+      "Discipline Index (Expected Cards)": "2.68"
+    },
+    "Portugal": {
+      "FIFA ELO Rating": "1984",
+      "Recent Form (W5)": "52.5%",
+      "Attack Strength (Avg Goals)": "2.40",
+      "Defense Rating (Inverse)": "1.00",
+      "Expected Conceded Goals": "1.00",
+      "Discipline Index (Expected Cards)": "2.20"
+    },
+    "Colombia": {
+      "FIFA ELO Rating": "1975",
+      "Recent Form (W5)": "43.2%",
+      "Attack Strength (Avg Goals)": "1.78",
+      "Defense Rating (Inverse)": "0.97",
+      "Expected Conceded Goals": "1.03",
+      "Discipline Index (Expected Cards)": "2.44"
+    },
+    "Uzbekistan": {
+      "FIFA ELO Rating": "1727",
+      "Recent Form (W5)": "59.1%",
+      "Attack Strength (Avg Goals)": "1.38",
+      "Defense Rating (Inverse)": "1.48",
+      "Expected Conceded Goals": "0.68",
+      "Discipline Index (Expected Cards)": "1.80"
+    },
+    "DR Congo": {
+      "FIFA ELO Rating": "1655",
+      "Recent Form (W5)": "60.3%",
+      "Attack Strength (Avg Goals)": "1.18",
+      "Defense Rating (Inverse)": "3.62",
+      "Expected Conceded Goals": "0.28",
+      "Discipline Index (Expected Cards)": "1.64"
+    },
+    "England": {
+      "FIFA ELO Rating": "2020",
+      "Recent Form (W5)": "62.8%",
+      "Attack Strength (Avg Goals)": "2.01",
+      "Defense Rating (Inverse)": "2.62",
+      "Expected Conceded Goals": "0.38",
+      "Discipline Index (Expected Cards)": "1.48"
+    },
+    "Croatia": {
+      "FIFA ELO Rating": "1930",
+      "Recent Form (W5)": "74.5%",
+      "Attack Strength (Avg Goals)": "2.50",
+      "Defense Rating (Inverse)": "1.12",
+      "Expected Conceded Goals": "0.89",
+      "Discipline Index (Expected Cards)": "2.20"
+    },
+    "Ghana": {
+      "FIFA ELO Rating": "1505",
+      "Recent Form (W5)": "15.5%",
+      "Attack Strength (Avg Goals)": "1.10",
+      "Defense Rating (Inverse)": "0.68",
+      "Expected Conceded Goals": "1.47",
+      "Discipline Index (Expected Cards)": "2.44"
+    },
+    "Panama": {
+      "FIFA ELO Rating": "1737",
+      "Recent Form (W5)": "49.7%",
+      "Attack Strength (Avg Goals)": "1.27",
+      "Defense Rating (Inverse)": "1.30",
+      "Expected Conceded Goals": "0.77",
+      "Discipline Index (Expected Cards)": "1.96"
+    }
+  },
+  "n_simulations": 15500
+}

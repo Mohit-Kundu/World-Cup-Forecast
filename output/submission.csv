@@ -1,0 +1,80 @@
+match_id,stage,home_team,away_team,predicted_home_goals,predicted_away_goals,home_win_prob,draw_prob,away_win_prob
+1,Group,Mexico,South Africa,1,0,0.6949,0.1983,0.1068
+2,Group,Mexico,South Korea,1,0,0.5561,0.2563,0.1877
+3,Group,Mexico,Czechia,1,0,0.5475,0.2494,0.203
+4,Group,South Africa,South Korea,1,1,0.289,0.2597,0.4512
+5,Group,South Africa,Czechia,1,1,0.2713,0.2725,0.4563
+6,Group,South Korea,Czechia,1,0,0.444,0.276,0.28
+7,Group,Canada,Switzerland,1,1,0.3394,0.2945,0.3661
+8,Group,Canada,Qatar,2,0,0.8105,0.1294,0.0601
+9,Group,Canada,Bosnia and Herzegovina,1,0,0.5886,0.2439,0.1674
+10,Group,Switzerland,Qatar,2,0,0.8372,0.1175,0.0453
+11,Group,Switzerland,Bosnia and Herzegovina,2,0,0.7065,0.1859,0.1077
+12,Group,Qatar,Bosnia and Herzegovina,0,1,0.2323,0.2515,0.5163
+13,Group,Brazil,Morocco,1,0,0.4905,0.2646,0.2449
+14,Group,Brazil,Scotland,2,0,0.6585,0.1992,0.1423
+15,Group,Brazil,Haiti,2,0,0.7754,0.1576,0.067
+16,Group,Morocco,Scotland,1,0,0.5505,0.2402,0.2093
+17,Group,Morocco,Haiti,2,0,0.7255,0.1837,0.0908
+18,Group,Scotland,Haiti,1,0,0.6554,0.2067,0.1379
+19,Group,United States,Paraguay,1,1,0.3625,0.2739,0.3636
+20,Group,United States,Australia,1,1,0.4097,0.2687,0.3216
+21,Group,United States,Türkiye,1,1,0.2678,0.2406,0.4915
+22,Group,Paraguay,Australia,1,1,0.4613,0.2636,0.2751
+23,Group,Paraguay,Türkiye,1,1,0.3338,0.2677,0.3985
+24,Group,Australia,Türkiye,1,1,0.3164,0.2681,0.4155
+25,Group,Germany,Ecuador,1,1,0.5314,0.2342,0.2345
+26,Group,Germany,Ivory Coast,2,0,0.6818,0.1973,0.1209
+27,Group,Germany,Curaçao,2,0,0.8358,0.1148,0.0494
+28,Group,Ecuador,Ivory Coast,2,0,0.6985,0.1938,0.1077
+29,Group,Ecuador,Curaçao,2,0,0.7987,0.1408,0.0605
+30,Group,Ivory Coast,Curaçao,2,0,0.7148,0.1872,0.0981
+31,Group,Netherlands,Sweden,2,0,0.7492,0.1601,0.0908
+32,Group,Netherlands,Japan,1,1,0.4293,0.2639,0.3068
+33,Group,Netherlands,Tunisia,2,0,0.7517,0.165,0.0834
+34,Group,Sweden,Japan,0,1,0.234,0.2563,0.5097
+35,Group,Sweden,Tunisia,1,0,0.509,0.2586,0.2324
+36,Group,Japan,Tunisia,1,0,0.677,0.2083,0.1147
+37,Group,Belgium,Egypt,1,0,0.6285,0.2251,0.1464
+38,Group,Belgium,Iran,1,0,0.561,0.2397,0.1992
+39,Group,Belgium,New Zealand,2,0,0.7039,0.1875,0.1085
+40,Group,Egypt,Iran,1,1,0.3981,0.2832,0.3187
+41,Group,Egypt,New Zealand,1,0,0.5666,0.2435,0.1899
+42,Group,Iran,New Zealand,1,0,0.585,0.2437,0.1713
+43,Group,Spain,Uruguay,1,0,0.6895,0.1952,0.1152
+44,Group,Spain,Saudi Arabia,3,0,0.9422,0.0457,0.0121
+45,Group,Spain,Cape Verde,3,0,0.9072,0.0675,0.0253
+46,Group,Uruguay,Saudi Arabia,2,0,0.7112,0.1865,0.1023
+47,Group,Uruguay,Cape Verde,1,0,0.6781,0.1987,0.1232
+48,Group,Saudi Arabia,Cape Verde,1,1,0.3965,0.2749,0.3286
+49,Group,France,Senegal,1,0,0.5547,0.131,0.3143
+50,Group,France,Norway,2,0,0.6495,0.1101,0.2404
+51,Group,France,Iraq,2,0,0.6922,0.066,0.2418
+52,Group,Senegal,Norway,1,1,0.4713,0.1307,0.398
+53,Group,Senegal,Iraq,1,0,0.6835,0.1042,0.2123
+54,Group,Norway,Iraq,2,0,0.6815,0.0885,0.23
+55,Group,Argentina,Austria,1,0,0.6851,0.1033,0.2116
+56,Group,Argentina,Algeria,1,0,0.6236,0.0851,0.2913
+57,Group,Argentina,Jordan,2,0,0.709,0.0773,0.2137
+58,Group,Austria,Algeria,1,0,0.6924,0.1319,0.1758
+59,Group,Austria,Jordan,1,0,0.6373,0.1157,0.247
+60,Group,Algeria,Jordan,1,0,0.6009,0.1215,0.2776
+61,Group,Portugal,Colombia,1,1,0.5105,0.115,0.3745
+62,Group,Portugal,Uzbekistan,1,0,0.6622,0.0973,0.2405
+63,Group,Portugal,DR Congo,2,0,0.7277,0.0895,0.1828
+64,Group,Colombia,Uzbekistan,1,0,0.6639,0.1025,0.2337
+65,Group,Colombia,DR Congo,1,0,0.5815,0.103,0.3155
+66,Group,Uzbekistan,DR Congo,1,0,0.5411,0.1447,0.3142
+67,Group,England,Croatia,1,1,0.5664,0.1168,0.3168
+68,Group,England,Ghana,1,0,0.6859,0.0638,0.2503
+69,Group,England,Panama,1,0,0.5727,0.0937,0.3336
+70,Group,Croatia,Ghana,2,0,0.7073,0.0635,0.2292
+71,Group,Croatia,Panama,1,0,0.5891,0.1147,0.2962
+72,Group,Ghana,Panama,1,1,0.3633,0.1269,0.5099
+73,Quarter-Final,Mexico,Ecuador,1,1,0.5116,0.0,0.4884
+74,Quarter-Final,Argentina,Canada,2,0,0.711,0.0,0.289
+75,Quarter-Final,Netherlands,Croatia,1,1,0.5621,0.0,0.4379
+76,Quarter-Final,Mexico,Netherlands,1,1,0.4839,0.0,0.5161
+77,Semi-Final,Mexico,Argentina,1,1,0.5155,0.0,0.4845
+78,Semi-Final,Netherlands,Mexico,1,0,0.7228,0.0,0.2772
+79,Final,Mexico,Netherlands,1,1,0.4855,0.0,0.5145
