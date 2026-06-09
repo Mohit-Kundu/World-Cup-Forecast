@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Base -->
+  <rect x="35" y="80" width="30" height="8" rx="2" fill="url(#goldGradient)"/>
+  <rect x="30" y="75" width="40" height="5" rx="1" fill="url(#goldGradient)"/>
+  
+  <!-- Stem -->
+  <rect x="45" y="60" width="10" height="15" fill="url(#goldGradient)"/>
+  
+  <!-- Cup Bowl -->
+  <path d="M 30 20 Q 30 15 35 15 L 65 15 Q 70 15 70 20 L 68 55 Q 68 60 63 60 L 37 60 Q 32 60 32 55 Z" 
+        fill="url(#goldGradient)" stroke="#b8860b" stroke-width="1"/>
+  
+  <!-- Handles -->
+  <path d="M 30 25 Q 20 25 20 35 Q 20 40 25 40 L 30 40" 
+        fill="none" stroke="url(#goldGradient)" stroke-width="3"/>
+  <path d="M 70 25 Q 80 25 80 35 Q 80 40 75 40 L 70 40" 
+        fill="none" stroke="url(#goldGradient)" stroke-width="3"/>
+  
+  <!-- Shine -->
+  <ellipse cx="45" cy="30" rx="8" ry="12" fill="rgba(255,255,255,0.3)"/>
+</svg>
