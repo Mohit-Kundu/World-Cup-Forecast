@@ -17,7 +17,8 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
+from collections import Counter, defaultdict
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -85,7 +86,10 @@ def get_group_fixtures() -> List[Dict]:
 # ---------------------------------------------------------------------------
 
 
-def resolve_group_standings(results: List[Dict]) -> pd.DataFrame:
+def resolve_group_standings(
+    results: List[Dict],
+    rng: Optional[np.random.Generator] = None,
+) -> pd.DataFrame:
     """
     Computes final group standings from a list of simulated match results.
 
@@ -102,6 +106,7 @@ def resolve_group_standings(results: List[Dict]) -> pd.DataFrame:
     results : list of dicts with keys:
         home_team, away_team, home_goals, away_goals,
         home_yellow, away_yellow, home_red, away_red
+    rng : optional numpy Generator for reproducible tiebreaks
 
     Returns
     -------
@@ -142,19 +147,36 @@ def resolve_group_standings(results: List[Dict]) -> pd.DataFrame:
         else:
             teams[at]["pts"] += 3
 
-    df = pd.DataFrame.from_dict(teams, orient="index")
-    df.index.name = "team"
-    df = df.reset_index()
+    team_names = list(teams.keys())
+    n_teams = len(team_names)
+    pts = np.array([teams[t]["pts"] for t in team_names], dtype=np.int32)
+    gd = np.array([teams[t]["gd"] for t in team_names], dtype=np.int32)
+    gf = np.array([teams[t]["gf"] for t in team_names], dtype=np.int32)
+    yellow = np.array([teams[t]["yellow"] for t in team_names], dtype=np.int32)
+    red = np.array([teams[t]["red"] for t in team_names], dtype=np.int32)
 
-    # Add random tiebreak column (final tiebreaker)
-    df["rand"] = [random.random() for _ in range(len(df))]
+    if rng is not None:
+        rand_vals = rng.random(n_teams)
+    else:
+        rand_vals = np.array([random.random() for _ in range(n_teams)])
 
-    df = df.sort_values(
-        by=["pts", "gd", "gf", "yellow", "red", "rand"],
-        ascending=[False, False, False, True, True, False],
-    ).reset_index(drop=True)
+    # Sort: pts/gd/gf desc; yellow/red asc; rand desc (lexsort uses last key as primary)
+    order = np.lexsort((-rand_vals, red, yellow, -gf, -gd, -pts))
 
-    df["rank"] = df.index + 1
+    df = pd.DataFrame(
+        {
+            "team": [team_names[i] for i in order],
+            "pts": pts[order],
+            "gd": gd[order],
+            "gf": gf[order],
+            "ga": np.array([teams[t]["ga"] for t in team_names], dtype=np.int32)[order],
+            "yellow": yellow[order],
+            "red": red[order],
+            "played": np.array([teams[t]["played"] for t in team_names], dtype=np.int32)[order],
+            "rand": rand_vals[order],
+        }
+    )
+    df["rank"] = np.arange(1, n_teams + 1)
     return df
 
 
@@ -253,3 +275,106 @@ def format_submission(mc_results: Dict[str, Dict]) -> pd.DataFrame:
             }
         )
     return pd.DataFrame(rows).sort_values("match_id").reset_index(drop=True)
+
+
+# ---------------------------------------------------------------------------
+# Predicted Standings & Final (for frontend display)
+# ---------------------------------------------------------------------------
+
+
+def build_predicted_group_standings(
+    mc_results: Dict[Any, Dict],
+    qualify_probs: Dict[str, float],
+) -> Dict[str, List[Dict]]:
+    """
+    Builds predicted group standings from aggregated group-stage scorelines.
+
+    Uses the most common goals per fixture (same approach as the Gradio app).
+    """
+    group_fixtures = get_group_fixtures()
+    group_sim_results: Dict[str, List[Dict]] = defaultdict(list)
+
+    for fixture in group_fixtures:
+        mid = fixture["match_id"]
+        res = mc_results.get(mid)
+        if not res:
+            continue
+        group_sim_results[fixture["group"]].append(
+            {
+                "home_team": res["home_team"],
+                "away_team": res["away_team"],
+                "home_goals": res["most_common_home_goals"],
+                "away_goals": res["most_common_away_goals"],
+                "home_yellow": 0,
+                "away_yellow": 0,
+                "home_red": 0,
+                "away_red": 0,
+            }
+        )
+
+    standings_by_group: Dict[str, List[Dict]] = {}
+    for group in sorted(WC2026_GROUPS.keys()):
+        results = group_sim_results.get(group, [])
+        if not results:
+            standings_by_group[group] = []
+            continue
+
+        standings = resolve_group_standings(results)
+        rows = []
+        for _, row in standings.iterrows():
+            team = row["team"]
+            rows.append(
+                {
+                    "team": team,
+                    "rank": int(row["rank"]),
+                    "pts": int(row["pts"]),
+                    "gd": int(row["gd"]),
+                    "gf": int(row["gf"]),
+                    "played": int(row["played"]),
+                    "qualify_prob": qualify_probs.get(team, 0.0),
+                }
+            )
+        standings_by_group[group] = rows
+
+    return standings_by_group
+
+
+def build_predicted_final(
+    pairing_counter: Counter,
+    winner_by_pairing: Dict[Tuple[str, str], Counter],
+    n_simulations: int,
+) -> Dict[str, Any]:
+    """
+    Derives the most common final pairing and predicted winner/runner-up.
+    """
+    if not pairing_counter:
+        return {
+            "home_team": "",
+            "away_team": "",
+            "winner": "",
+            "runner_up": "",
+            "pairing_prob": 0.0,
+            "winner_prob": 0.0,
+        }
+
+    (home_team, away_team), pair_count = pairing_counter.most_common(1)[0]
+    pairing_prob = pair_count / n_simulations
+
+    winners = winner_by_pairing.get((home_team, away_team), Counter())
+    if winners:
+        winner, winner_count = winners.most_common(1)[0]
+        winner_prob = winner_count / pair_count
+        runner_up = away_team if winner == home_team else home_team
+    else:
+        winner = home_team
+        runner_up = away_team
+        winner_prob = 0.0
+
+    return {
+        "home_team": home_team,
+        "away_team": away_team,
+        "winner": winner,
+        "runner_up": runner_up,
+        "pairing_prob": pairing_prob,
+        "winner_prob": winner_prob,
+    }

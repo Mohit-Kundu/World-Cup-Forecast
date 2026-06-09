@@ -22,6 +22,7 @@ from typing import Dict, List, Optional, Tuple
 import numpy as np
 import pandas as pd
 
+from src.config import MIN_MATCH_YEAR
 from src.helpers import MatchRecord
 
 logger = logging.getLogger(__name__)
@@ -43,13 +44,15 @@ TEAM_ALIASES: Dict[str, str] = {
     "IR Iran": "Iran",
     "Chinese Taipei": "Taiwan",
     "Kyrgyz Republic": "Kyrgyzstan",
-    "Bosnia and Herzegovina": "Bosnia & Herzegovina",
     "China PR": "China",
     "UAE": "United Arab Emirates",
     "North Macedonia": "North Macedonia",
     "Cote d'Ivoire": "Ivory Coast",
+    "Côte d'Ivoire": "Ivory Coast",
     "Congo DR": "DR Congo",
     "Cape Verde Islands": "Cape Verde",
+    "Cabo Verde": "Cape Verde",
+    "Turkey": "Türkiye",
     # WC 2026 playoff placeholders
     "UEFA Playoff A": "Ukraine",
     "UEFA Playoff B": "Poland",
@@ -222,6 +225,15 @@ def load_history(data_dir: Path, former_map: Dict[str, str]) -> pd.DataFrame:
     # Standardise team names
     df["home_team"] = df["home_team"].apply(lambda x: standardise_name(x, former_map))
     df["away_team"] = df["away_team"].apply(lambda x: standardise_name(x, former_map))
+
+    cutoff = pd.Timestamp(f"{MIN_MATCH_YEAR}-01-01")
+    before = len(df)
+    df = df[df["date"] >= cutoff].reset_index(drop=True)
+    if before > len(df):
+        logger.info(
+            f"Filtered to matches from {MIN_MATCH_YEAR}+ "
+            f"({before - len(df):,} older rows dropped)"
+        )
 
     df = df.sort_values("date").reset_index(drop=True)
     logger.info(f"Loaded {len(df):,} historical matches (from {df['date'].min().year} to {df['date'].max().year})")

@@ -28,18 +28,18 @@ TOURNAMENT_WEIGHTS: Dict[str, float] = {
 
 # Official FIFA WC 2026 Groups
 WC2026_GROUPS: Dict[str, List[str]] = {
-    "A": ["United States", "Panama", "Bolivia", "Morocco"],
-    "B": ["Argentina", "Chile", "Peru", "Australia"],
-    "C": ["Mexico", "Jamaica", "Venezuela", "Paraguay"],
-    "D": ["Brazil", "Ecuador", "Egypt", "Serbia"],
-    "E": ["Spain", "Uruguay", "Uzbekistan", "South Korea"],
-    "F": ["France", "Belgium", "Croatia", "South Africa"],
-    "G": ["England", "Senegal", "Colombia", "Tunisia"],
-    "H": ["Portugal", "Algeria", "Cameroon", "Honduras"],
-    "I": ["Germany", "Japan", "Iran", "Saudi Arabia"],
-    "J": ["Netherlands", "Nigeria", "New Zealand", "Ivory Coast"],
-    "K": ["Italy", "Slovenia", "Qatar", "Ukraine"],
-    "L": ["Canada", "Switzerland", "Norway", "Poland"],
+    "A": ["Mexico", "South Africa", "South Korea", "Czechia"],
+    "B": ["Canada", "Switzerland", "Qatar", "Bosnia and Herzegovina"],
+    "C": ["Brazil", "Morocco", "Scotland", "Haiti"],
+    "D": ["United States", "Paraguay", "Australia", "Türkiye"],
+    "E": ["Germany", "Ecuador", "Ivory Coast", "Curaçao"],
+    "F": ["Netherlands", "Sweden", "Japan", "Tunisia"],
+    "G": ["Belgium", "Egypt", "Iran", "New Zealand"],
+    "H": ["Spain", "Uruguay", "Saudi Arabia", "Cape Verde"],
+    "I": ["France", "Senegal", "Norway", "Iraq"],
+    "J": ["Argentina", "Austria", "Algeria", "Jordan"],
+    "K": ["Portugal", "Colombia", "Uzbekistan", "DR Congo"],
+    "L": ["England", "Croatia", "Ghana", "Panama"],
 }
 
 # Machine learning model feature columns (single source of truth)
@@ -62,10 +62,39 @@ FEATURE_COLS = [
 ]
 
 # Model training parameters
+MIN_MATCH_YEAR = 2010  # Earliest match year included in training data
 MIN_TRAIN_SAMPLES = 100
+LGBM_EARLY_STOPPING_ROUNDS = 50
+LGBM_N_JOBS_TRAINING = 2  # per-model threads when fitting models in parallel
+TRAIN_MODELS_PARALLEL = True
+
+# Feature matrix disk cache (skip rebuild when data unchanged)
+FEATURE_CACHE_DIR = "cache"
+
+# Pipeline output artifacts (CSVs, logs, UI snapshot)
+OUTPUT_DIR = "output"
+PREDICTIONS_JSON = "predictions.json"
+
+# Monte Carlo parallelism (knockout loop workers; -1 = all cores)
+MC_N_JOBS = 2
 
 # Monte Carlo match/penalty simulation parameters
 EXTRA_TIME_GOALS_EXPECTED = 0.8
 PENALTY_ELO_SCALE = 400.0
 PENALTY_PROB_MIN = 0.35
 PENALTY_PROB_MAX = 0.65
+
+# Monte Carlo iteration counts
+N_SIMULATIONS_DEFAULT = 15_500  # main.py CLI + run_monte_carlo() fallback
+N_SIMULATIONS_API = 200         # backend GET /api/predictions
+N_SIMULATIONS_DRY_RUN = 50      # main.py --dry-run smoke test
+N_SIMULATIONS_API_MIN = 10      # POST /api/simulate lower bound
+N_SIMULATIONS_API_MAX = 5_000   # POST /api/simulate upper bound
+
+# Monte Carlo convergence analysis (notebooks/mc_convergence.ipynb)
+CONVERGENCE_BATCH_SIZE = 500
+CONVERGENCE_MAX_ITERATIONS = 50_000
+CONVERGENCE_TOL = 0.001
+CONVERGENCE_MIN_N = 2_000
+CONVERGENCE_STABLE_BATCHES = 3
+CONVERGENCE_TOP_K = 8

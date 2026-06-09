@@ -11,6 +11,7 @@ Implements all features from the architecture spec plus:
 
 Public API:
   compute_recency_weights(df) -> np.ndarray
+  build_team_history_dfs(team_hist) -> Dict[str, pd.DataFrame]
   build_feature_matrix(df_matches, team_hist) -> pd.DataFrame
   build_prediction_row(home_team, away_team, team_hist, elo_df, match_date) -> pd.Series
 """
@@ -28,6 +29,50 @@ from src.config import HOST_NATIONS, TOURNAMENT_WEIGHTS, FEATURE_COLS
 
 logger = logging.getLogger(__name__)
 
+# Opponent-strength weighting for form and rolling rates (baseline = average Elo)
+ELO_BASELINE = 1500.0
+OPPONENT_WEIGHT_MIN = 0.5
+OPPONENT_WEIGHT_MAX = 2.0
+
+
+def _attack_adjustment_weights(opponent_elos: np.ndarray) -> np.ndarray:
+    """Higher opponent Elo → scoring counts more toward attack rate."""
+    raw = np.asarray(opponent_elos, dtype=float) / ELO_BASELINE
+    return np.clip(raw, OPPONENT_WEIGHT_MIN, OPPONENT_WEIGHT_MAX)
+
+
+def _defense_adjustment_weights(opponent_elos: np.ndarray) -> np.ndarray:
+    """Higher opponent Elo → conceding counts less toward defence penalty."""
+    raw = ELO_BASELINE / np.asarray(opponent_elos, dtype=float)
+    return np.clip(raw, OPPONENT_WEIGHT_MIN, OPPONENT_WEIGHT_MAX)
+
+
+def _form_adjustment_weights(opponent_elos: np.ndarray) -> np.ndarray:
+    """Higher opponent Elo → result points count more toward form index."""
+    return _attack_adjustment_weights(opponent_elos)
+
+
+def _weighted_mean(values: np.ndarray, weights: np.ndarray) -> float:
+    """Weighted average; falls back to plain mean when weights sum to zero."""
+    v = np.asarray(values, dtype=float)
+    w = np.asarray(weights, dtype=float)
+    total = float(w.sum())
+    if total <= 0:
+        return float(np.mean(v))
+    return float(np.sum(v * w) / total)
+
+
+def _quality_adjusted_form(points: np.ndarray, opponent_elos: np.ndarray) -> float:
+    """
+    Form index in [0, 1]: weighted points / weighted max points (3 per game).
+    All-neutral opponents (1500 Elo) reduces to mean(points) / 3.
+    """
+    weights = _form_adjustment_weights(opponent_elos)
+    pts = np.asarray(points, dtype=float)
+    max_weighted = float(np.sum(3.0 * weights))
+    if max_weighted <= 0:
+        return 0.5
+    return float(np.clip(np.sum(pts * weights) / max_weighted, 0.0, 1.0))
 
 
 # ---------------------------------------------------------------------------
@@ -63,8 +108,133 @@ def compute_recency_weights(
 
 
 # ---------------------------------------------------------------------------
+# Team History DataFrames (vectorized lookup backbone)
+# ---------------------------------------------------------------------------
+
+
+def build_team_history_dfs(
+    team_hist: Dict[str, List[MatchRecord]],
+) -> Dict[str, pd.DataFrame]:
+    """
+    Converts per-team MatchRecord lists into sorted DataFrames for fast slicing.
+
+    Each row stores goals/points from that team's perspective.
+    """
+    dfs: Dict[str, pd.DataFrame] = {}
+    for team, records in team_hist.items():
+        if not records:
+            continue
+        rows = []
+        for h in records:
+            is_home = h.home_team == team
+            if is_home:
+                goals_scored, goals_conceded = h.home_score, h.away_score
+            else:
+                goals_scored, goals_conceded = h.away_score, h.home_score
+            if goals_scored > goals_conceded:
+                points = 3
+            elif goals_scored == goals_conceded:
+                points = 1
+            else:
+                points = 0
+            opponent_elo = h.away_elo if is_home else h.home_elo
+            rows.append(
+                {
+                    "date": h.date,
+                    "opponent": h.away_team if is_home else h.home_team,
+                    "opponent_elo": opponent_elo,
+                    "home_team": h.home_team,
+                    "away_team": h.away_team,
+                    "home_score": h.home_score,
+                    "away_score": h.away_score,
+                    "goals_scored": goals_scored,
+                    "goals_conceded": goals_conceded,
+                    "points": points,
+                    "was_home": is_home,
+                }
+            )
+        dfs[team] = (
+            pd.DataFrame(rows).sort_values("date").reset_index(drop=True)
+        )
+    return dfs
+
+
+def _slice_team_history_df(
+    team_df: pd.DataFrame,
+    current_date: pd.Timestamp,
+    window: int,
+) -> Optional[pd.DataFrame]:
+    """Returns up to `window` rows strictly before current_date."""
+    if team_df.empty:
+        return None
+    idx = int(team_df["date"].searchsorted(current_date, side="left"))
+    if idx == 0:
+        return None
+    return team_df.iloc[max(0, idx - window) : idx]
+
+
+def _rolling_rates_from_scored_conceded(
+    scored: np.ndarray,
+    conceded: np.ndarray,
+    opponent_elos: Optional[np.ndarray] = None,
+) -> Tuple[float, float]:
+    """
+    Shared rolling-rate logic for list and DataFrame backends.
+
+    When opponent_elos is provided, goals scored are weighted by opponent Elo
+    (stronger opponent → higher attack credit). Goals conceded are weighted
+    inversely (conceding to stronger opponents is less penalizing).
+    """
+    n = len(scored)
+    if n == 0:
+        return 1.0, 1.0
+
+    if opponent_elos is not None and len(opponent_elos) == n:
+        attack_w = _attack_adjustment_weights(opponent_elos)
+        defence_w = _defense_adjustment_weights(opponent_elos)
+    else:
+        attack_w = np.ones(n)
+        defence_w = np.ones(n)
+
+    if n <= 5:
+        blend = n / 5.0
+        attack = blend * _weighted_mean(scored, attack_w) + (1 - blend) * 1.0
+        defence_conceded = (
+            blend * _weighted_mean(conceded, defence_w) + (1 - blend) * 1.0
+        )
+    else:
+        attack = (
+            0.70 * _weighted_mean(scored[-5:], attack_w[-5:])
+            + 0.30 * _weighted_mean(scored[:-5], attack_w[:-5])
+        )
+        defence_conceded = (
+            0.70 * _weighted_mean(conceded[-5:], defence_w[-5:])
+            + 0.30 * _weighted_mean(conceded[:-5], defence_w[:-5])
+        )
+
+    defense_rate = 1.0 / max(float(defence_conceded), 0.1)
+    return float(attack), float(defense_rate)
+
+
+# ---------------------------------------------------------------------------
 # Rolling Attack / Defence Rates
 # ---------------------------------------------------------------------------
+
+
+def _get_rolling_rates_from_df(
+    team_df: pd.DataFrame,
+    current_date: pd.Timestamp,
+    window: int = 10,
+) -> Tuple[float, float]:
+    """Vectorized rolling attack/defence rates using a per-team DataFrame."""
+    recent = _slice_team_history_df(team_df, current_date, window)
+    if recent is None or recent.empty:
+        return 1.0, 1.0
+    return _rolling_rates_from_scored_conceded(
+        recent["goals_scored"].to_numpy(),
+        recent["goals_conceded"].to_numpy(),
+        recent["opponent_elo"].to_numpy(),
+    )
 
 
 def _get_rolling_rates(
@@ -72,6 +242,7 @@ def _get_rolling_rates(
     team: str,
     current_date: pd.Timestamp,
     window: int = 10,
+    team_df: Optional[pd.DataFrame] = None,
 ) -> Tuple[float, float]:
     """
     Computes weighted rolling attack and defence rates for a team.
@@ -83,42 +254,30 @@ def _get_rolling_rates(
     Scheme from spec:
       - ≤5 games:  linear interpolation with neutral rate 1.0
       - 6–10 games: last 5 weighted 70%, prior 5 weighted 30%
+      - Goals scored/conceded weighted by opponent Elo strength
     """
+    if team_df is not None:
+        return _get_rolling_rates_from_df(team_df, current_date, window)
+
     past = [h for h in history if h.date < current_date]
     if not past:
         return 1.0, 1.0
 
     recent = past[-window:]
-    n = len(recent)
-
-    scored = []
-    conceded = []
-    for h in recent:
+    scored = np.empty(len(recent), dtype=float)
+    conceded = np.empty(len(recent), dtype=float)
+    opponent_elos = np.empty(len(recent), dtype=float)
+    for i, h in enumerate(recent):
         if h.home_team == team:
-            scored.append(h.home_score)
-            conceded.append(h.away_score)
+            scored[i] = h.home_score
+            conceded[i] = h.away_score
+            opponent_elos[i] = h.away_elo
         else:
-            scored.append(h.away_score)
-            conceded.append(h.home_score)
+            scored[i] = h.away_score
+            conceded[i] = h.home_score
+            opponent_elos[i] = h.home_elo
 
-    if n <= 5:
-        # Linear interpolation with neutral rate (weight = n/5)
-        blend = n / 5.0
-        attack = blend * np.mean(scored) + (1 - blend) * 1.0
-        defence_conceded = blend * np.mean(conceded) + (1 - blend) * 1.0
-    else:
-        # Last 5 games: 70%, prior games: 30%
-        recent5 = scored[-5:]
-        prior = scored[:-5] if len(scored) > 5 else scored
-        attack = 0.70 * np.mean(recent5) + 0.30 * np.mean(prior)
-
-        recent5c = conceded[-5:]
-        priorc = conceded[:-5] if len(conceded) > 5 else conceded
-        defence_conceded = 0.70 * np.mean(recent5c) + 0.30 * np.mean(priorc)
-
-    # Defense rate: invert conceded (higher is better)
-    defense_rate = 1.0 / max(defence_conceded, 0.1)
-    return float(attack), float(defense_rate)
+    return _rolling_rates_from_scored_conceded(scored, conceded, opponent_elos)
 
 
 # ---------------------------------------------------------------------------
@@ -126,59 +285,108 @@ def _get_rolling_rates(
 # ---------------------------------------------------------------------------
 
 
+def _get_team_form_from_df(
+    team_df: pd.DataFrame,
+    current_date: pd.Timestamp,
+    window: int = 5,
+) -> float:
+    """Vectorized form index from a per-team DataFrame."""
+    recent = _slice_team_history_df(team_df, current_date, window)
+    if recent is None or recent.empty:
+        return 0.5
+    return _quality_adjusted_form(
+        recent["points"].to_numpy(),
+        recent["opponent_elo"].to_numpy(),
+    )
+
+
 def get_team_form(
     team_hist: Dict[str, List[MatchRecord]],
     team: str,
     current_date: pd.Timestamp,
     window: int = 5,
+    team_dfs: Optional[Dict[str, pd.DataFrame]] = None,
 ) -> float:
     """
-    Computes a form index based on points earned in the team's last N matches.
+    Computes a form index based on points earned in the team's last N matches,
+    weighted by opponent Elo (wins vs stronger sides count more).
 
     Returns a value in [0.0, 1.0]:
-      - 1.0 = maximum form (all wins in last N games)
+      - 1.0 = maximum form (all wins in last N games vs average opposition)
       - 0.0 = rock-bottom form (all losses)
       - Neutral default: 0.5 (no history)
-
-    Parameters
-    ----------
-    team_hist    : dict of team -> list[MatchRecord]
-    team         : team to compute form for
-    current_date : only consider matches before this date
-    window       : number of recent matches to consider
     """
+    if team_dfs is not None:
+        team_df = team_dfs.get(team)
+        if team_df is None:
+            return 0.5
+        return _get_team_form_from_df(team_df, current_date, window)
+
     history = team_hist.get(team, [])
     history = [h for h in history if h.date < current_date]
 
     if not history:
-        return 0.5  # Neutral default
+        return 0.5
 
     recent = history[-window:]
-    points = []
-
-    for h in recent:
+    points = np.empty(len(recent), dtype=float)
+    opponent_elos = np.empty(len(recent), dtype=float)
+    for i, h in enumerate(recent):
         if h.home_team == team:
+            opponent_elos[i] = h.away_elo
             if h.home_score > h.away_score:
-                points.append(3)
+                points[i] = 3
             elif h.home_score == h.away_score:
-                points.append(1)
+                points[i] = 1
             else:
-                points.append(0)
+                points[i] = 0
         else:
+            opponent_elos[i] = h.home_elo
             if h.away_score > h.home_score:
-                points.append(3)
+                points[i] = 3
             elif h.away_score == h.home_score:
-                points.append(1)
+                points[i] = 1
             else:
-                points.append(0)
+                points[i] = 0
 
-    # Scale average points per match from [0, 3] → [0, 1]
-    return float(np.mean(points)) / 3.0 if points else 0.5
+    return _quality_adjusted_form(points, opponent_elos) if len(recent) else 0.5
 
 
 # ---------------------------------------------------------------------------
 # Improvement #3 — Head-to-Head (H2H) Features
 # ---------------------------------------------------------------------------
+
+
+def _get_h2h_features_from_df(
+    team_a_df: pd.DataFrame,
+    team_a: str,
+    team_b: str,
+    current_date: pd.Timestamp,
+    max_lookback_years: float = 15.0,
+) -> Tuple[float, float]:
+    """Vectorized H2H stats from team_a's perspective."""
+    current_dt = pd.Timestamp(current_date)
+    cutoff = current_dt - pd.Timedelta(days=max_lookback_years * 365.25)
+    mask = (
+        (team_a_df["date"] >= cutoff)
+        & (team_a_df["date"] < current_dt)
+        & (team_a_df["opponent"] == team_b)
+    )
+    h2h = team_a_df.loc[mask]
+    if h2h.empty:
+        return 0.5, 0.0
+
+    is_home = h2h["home_team"].to_numpy() == team_a
+    goals_a = np.where(
+        is_home, h2h["home_score"].to_numpy(), h2h["away_score"].to_numpy()
+    )
+    goals_b = np.where(
+        is_home, h2h["away_score"].to_numpy(), h2h["home_score"].to_numpy()
+    )
+    goal_diffs = goals_a - goals_b
+    wins = float(np.sum(goal_diffs > 0) + 0.5 * np.sum(goal_diffs == 0))
+    win_rate = wins / len(h2h)
+    return float(win_rate), float(np.mean(goal_diffs))
 
 
 def get_h2h_features(
@@ -187,17 +395,24 @@ def get_h2h_features(
     team_b: str,
     current_date: pd.Timestamp,
     max_lookback_years: float = 15.0,
+    team_dfs: Optional[Dict[str, pd.DataFrame]] = None,
 ) -> Tuple[float, float]:
     """
     Retrieves historical H2H stats between team_a (home) and team_b (away).
 
     Returns
     -------
-    (win_rate, avg_goal_diff) from team_a's perspective:
-      - win_rate:      fraction of matches team_a won [0.0, 1.0]
-      - avg_goal_diff: mean (team_a goals − team_b goals) in H2H matches
+    (win_rate, avg_goal_diff) from team_a's perspective.
     Neutral defaults: (0.5, 0.0)
     """
+    if team_dfs is not None:
+        team_a_df = team_dfs.get(team_a)
+        if team_a_df is None or team_a_df.empty:
+            return 0.5, 0.0
+        return _get_h2h_features_from_df(
+            team_a_df, team_a, team_b, current_date, max_lookback_years
+        )
+
     history_a = team_hist.get(team_a, [])
     current_dt = pd.Timestamp(current_date)
     h2h_matches = []
@@ -242,37 +457,47 @@ def get_h2h_features(
 # ---------------------------------------------------------------------------
 
 
+def _compute_dynamic_discipline_from_df(
+    team_df: pd.DataFrame,
+    current_date: pd.Timestamp,
+    window: int = 15,
+) -> float:
+    """Vectorized discipline proxy from a per-team DataFrame."""
+    recent = _slice_team_history_df(team_df, current_date, window)
+    if recent is None or recent.empty:
+        return 2.0
+    avg_conceded = float(np.mean(recent["goals_conceded"].to_numpy()))
+    discipline_proxy = 1.0 + (avg_conceded * 1.2)
+    return float(np.clip(discipline_proxy, 0.5, 4.5))
+
+
 def compute_dynamic_discipline(
     team_hist: Dict[str, List[MatchRecord]],
     team: str,
     current_date: pd.Timestamp,
     window: int = 15,
+    team_dfs: Optional[Dict[str, pd.DataFrame]] = None,
 ) -> float:
     """
     Computes a dynamic discipline rate proxy (expected yellow cards per game).
 
-    Replaces the hardcoded TEAM_DISCIPLINE lookup dict from the original pipeline.
-    Teams that concede more goals (defending under pressure) tend to commit more fouls.
-
     Formula: discipline_proxy = 1.0 + (avg_conceded * 1.2), clipped to [0.5, 4.5]
     Baseline default: 2.0
-
-    Parameters
-    ----------
-    team_hist    : dict of team -> list[MatchRecord]
-    team         : team to compute discipline for
-    current_date : only consider matches before this date
-    window       : number of recent matches to look back
     """
+    if team_dfs is not None:
+        team_df = team_dfs.get(team)
+        if team_df is None:
+            return 2.0
+        return _compute_dynamic_discipline_from_df(team_df, current_date, window)
+
     history = team_hist.get(team, [])
     history = [h for h in history if h.date < current_date]
 
     if not history:
-        return 2.0  # Global baseline default
+        return 2.0
 
     recent = history[-window:]
     goals_conceded = []
-
     for h in recent:
         if h.home_team == team:
             goals_conceded.append(h.away_score)
@@ -306,6 +531,7 @@ def _build_match_features(
     row: pd.Series,
     team_hist: Dict[str, List[MatchRecord]],
     match_date: Optional[pd.Timestamp] = None,
+    team_dfs: Optional[Dict[str, pd.DataFrame]] = None,
 ) -> Dict:
     """
     Computes the full feature vector for a single historical training match.
@@ -317,20 +543,25 @@ def _build_match_features(
     home_elo = float(row.get("home_elo", 1500.0))
     away_elo = float(row.get("away_elo", 1500.0))
 
+    home_df = team_dfs.get(home) if team_dfs else None
+    away_df = team_dfs.get(away) if team_dfs else None
+
     home_attack, home_defense = _get_rolling_rates(
-        team_hist.get(home, []), home, date
+        team_hist.get(home, []), home, date, team_df=home_df
     )
     away_attack, away_defense = _get_rolling_rates(
-        team_hist.get(away, []), away, date
+        team_hist.get(away, []), away, date, team_df=away_df
     )
 
-    home_form = get_team_form(team_hist, home, date)
-    away_form = get_team_form(team_hist, away, date)
+    home_form = get_team_form(team_hist, home, date, team_dfs=team_dfs)
+    away_form = get_team_form(team_hist, away, date, team_dfs=team_dfs)
 
-    h2h_win_rate, h2h_goal_diff = get_h2h_features(team_hist, home, away, date)
+    h2h_win_rate, h2h_goal_diff = get_h2h_features(
+        team_hist, home, away, date, team_dfs=team_dfs
+    )
 
-    home_disc = compute_dynamic_discipline(team_hist, home, date)
-    away_disc = compute_dynamic_discipline(team_hist, away, date)
+    home_disc = compute_dynamic_discipline(team_hist, home, date, team_dfs=team_dfs)
+    away_disc = compute_dynamic_discipline(team_hist, away, date, team_dfs=team_dfs)
 
     is_host = int(
         home in HOST_NATIONS and not bool(row.get("neutral", True))
@@ -358,6 +589,24 @@ def _build_match_features(
     }
 
 
+def _append_training_targets(feats: Dict, row: pd.Series) -> Dict:
+    """Adds target columns and synthetic card/corner proxies for training."""
+    feats["home_goals"] = row["home_score"]
+    feats["away_goals"] = row["away_score"]
+    feats["date"] = row["date"]
+    feats["home_yellow"] = feats["home_discipline"]
+    feats["away_yellow"] = feats["away_discipline"]
+    feats["home_red"] = int(feats["home_discipline"] > 3.0)
+    feats["away_red"] = int(feats["away_discipline"] > 3.0)
+
+    home_pressure = feats["home_attack"] + (1.0 - min(feats["away_defense"], 1.0))
+    away_pressure = feats["away_attack"] + (1.0 - min(feats["home_defense"], 1.0))
+    # Deterministic corner proxy (stable across retrains; avoids noisy Poisson labels)
+    feats["home_corners"] = float(max(round(home_pressure * 3.0), 1.0))
+    feats["away_corners"] = float(max(round(away_pressure * 3.0), 1.0))
+    return feats
+
+
 def build_feature_matrix(
     df_matches: pd.DataFrame,
     team_hist: Dict[str, List[MatchRecord]],
@@ -366,57 +615,68 @@ def build_feature_matrix(
     Constructs the full training feature matrix from the historical match DataFrame.
 
     Each row is a match; features capture the state of both teams at match time.
-    Returns a DataFrame with columns = FEATURE_COLS plus target columns:
-        home_goals, away_goals, home_yellow, away_yellow,
-        home_red, away_red, home_corners, away_corners
-
-    Note: yellow/red/corner targets are synthetic proxies (see spec §Feature Engineering).
+    Returns a DataFrame with columns = FEATURE_COLS plus target columns.
     """
     logger.info(f"Building feature matrix for {len(df_matches):,} matches...")
+    team_dfs = build_team_history_dfs(team_hist)
     feature_rows = []
 
-    for idx, row in df_matches.iterrows():
-        feats = _build_match_features(row, team_hist)
-
-        # Primary targets
-        feats["home_goals"] = row["home_score"]
-        feats["away_goals"] = row["away_score"]
-
-        # Carry date for recency weighting in model training
-        feats["date"] = row["date"]
-
-        # Synthetic yellow card targets (Improvement #4 replaces static lookup)
-        feats["home_yellow"] = feats["home_discipline"]
-        feats["away_yellow"] = feats["away_discipline"]
-
-        # Synthetic red card targets: binary (1 if discipline proxy > 3.0)
-        feats["home_red"] = int(feats["home_discipline"] > 3.0)
-        feats["away_red"] = int(feats["away_discipline"] > 3.0)
-
-        # Synthetic corner targets: pressure-based Poisson draw
-        home_pressure = feats["home_attack"] + (1.0 - min(feats["away_defense"], 1.0))
-        away_pressure = feats["away_attack"] + (1.0 - min(feats["home_defense"], 1.0))
-        feats["home_corners"] = float(
-            np.random.poisson(max(home_pressure * 3.0, 1.0))
-        )
-        feats["away_corners"] = float(
-            np.random.poisson(max(away_pressure * 3.0, 1.0))
-        )
-
+    for i, row in enumerate(df_matches.itertuples(index=False), start=1):
+        row_series = pd.Series(row._asdict())
+        feats = _build_match_features(row_series, team_hist, team_dfs=team_dfs)
+        feats = _append_training_targets(feats, row_series)
         feature_rows.append(feats)
 
-        if (idx + 1) % 5000 == 0:
-            logger.info(f"  Processed {idx + 1:,} / {len(df_matches):,} matches...")
+        if i % 5000 == 0:
+            logger.info(f"  Processed {i:,} / {len(df_matches):,} matches...")
 
     df_features = pd.DataFrame(feature_rows)
 
-    # Guard against NaNs before returning
     nan_cols = df_features[FEATURE_COLS].columns[df_features[FEATURE_COLS].isna().any()]
     if len(nan_cols) > 0:
-        logger.warning(f"NaN found in features {list(nan_cols)} — filling with column medians.")
-        df_features[nan_cols] = df_features[nan_cols].fillna(df_features[nan_cols].median())
+        logger.warning(
+            f"NaN found in features {list(nan_cols)} — filling with column medians."
+        )
+        df_features[nan_cols] = df_features[nan_cols].fillna(
+            df_features[nan_cols].median()
+        )
 
     logger.info(f"Feature matrix built: shape {df_features.shape}")
+    return df_features
+
+
+def load_or_build_feature_matrix(
+    df_matches: pd.DataFrame,
+    team_hist: Dict[str, List[MatchRecord]],
+    data_dir: str | Path | None = None,
+    force_rebuild: bool = False,
+) -> pd.DataFrame:
+    """
+    Build feature matrix or load from disk cache when source data unchanged.
+    """
+    from pathlib import Path as _Path
+
+    from src.cache_utils import (
+        compute_data_fingerprint,
+        feature_matrix_cache_path,
+        load_cached_feature_matrix,
+        save_feature_matrix_cache,
+    )
+
+    cache_path = None
+    if data_dir is not None and not force_rebuild:
+        data_path = _Path(data_dir)
+        fingerprint = compute_data_fingerprint(data_path)
+        cache_path = feature_matrix_cache_path(data_path, fingerprint)
+        cached = load_cached_feature_matrix(cache_path)
+        if cached is not None:
+            return cached
+
+    df_features = build_feature_matrix(df_matches, team_hist)
+
+    if cache_path is not None:
+        save_feature_matrix_cache(df_features, cache_path)
+
     return df_features
 
 
@@ -428,6 +688,7 @@ def build_prediction_row(
     match_date: pd.Timestamp,
     is_neutral: bool = True,
     tournament: str = "FIFA World Cup",
+    team_dfs: Optional[Dict[str, pd.DataFrame]] = None,
 ) -> pd.DataFrame:
     """
     Constructs a single-row feature DataFrame for a future match prediction.
@@ -449,5 +710,7 @@ def build_prediction_row(
         }
     )
 
-    feats = _build_match_features(mock_row, team_hist, match_date)
+    feats = _build_match_features(
+        mock_row, team_hist, match_date, team_dfs=team_dfs
+    )
     return pd.DataFrame([feats])[FEATURE_COLS]
