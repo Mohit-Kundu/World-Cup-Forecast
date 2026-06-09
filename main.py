@@ -11,9 +11,10 @@ Usage:
   python main.py --data-dir path/to/data  # Custom data directory
 
 Output:
-  submission.csv     — competition submission file
-  models/            — serialised model artifacts
-  champion_probs.csv — team win probabilities
+  output/submission.csv     — competition submission file
+  output/champion_probs.csv — team win probabilities
+  output/predictions.json   — full dashboard payload for the React UI
+  models/                   — serialised model artifacts
 """
 
 from __future__ import annotations
@@ -27,10 +28,17 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from src.config import RANDOM_SEED
+from src.config import (
+    RANDOM_SEED,
+    N_SIMULATIONS_DEFAULT,
+    N_SIMULATIONS_DRY_RUN,
+    OUTPUT_DIR,
+)
 
 # Set all random seeds for reproducibility
 np.random.seed(RANDOM_SEED)
+
+Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # Logging Setup (UTF-8 safe for Windows)
@@ -51,7 +59,9 @@ if hasattr(_stream_handler.stream, "reconfigure"):
         pass  # Older Python / non-reconfigurable streams
 
 # File handler: always UTF-8
-_file_handler = logging.FileHandler("pipeline.log", mode="w", encoding="utf-8")
+_file_handler = logging.FileHandler(
+    Path(OUTPUT_DIR) / "pipeline.log", mode="w", encoding="utf-8"
+)
 _file_handler.setFormatter(_fmt)
 
 logging.basicConfig(level=logging.INFO, handlers=[_stream_handler, _file_handler])
@@ -62,10 +72,15 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 from src.preprocessing import load_and_preprocess
-from src.feature_engineering import build_feature_matrix
+from src.feature_engineering import load_or_build_feature_matrix
 from src.models import train_all_models, save_models, load_models
 from src.simulations import run_monte_carlo
 from src.helpers import format_submission
+from src.predictions_io import (
+    build_team_stats,
+    format_predictions_response,
+    save_predictions_json,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -86,7 +101,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--n-simulations",
         type=int,
-        default=10_000,
+        default=N_SIMULATIONS_DEFAULT,
         help="Number of Monte Carlo simulation iterations",
     )
     parser.add_argument(
@@ -102,7 +117,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=str,
-        default="submission.csv",
+        default=str(Path(OUTPUT_DIR) / "submission.csv"),
         help="Output path for the submission CSV",
     )
     parser.add_argument(
@@ -166,7 +181,7 @@ def main() -> None:
     args = parse_args()
 
     if args.dry_run:
-        args.n_simulations = 50
+        args.n_simulations = N_SIMULATIONS_DRY_RUN
         logger.info("DRY RUN mode: N=50 simulations, output will not be written.")
 
     logger.info("=" * 70)
@@ -197,7 +212,9 @@ def main() -> None:
     logger.info("\n[STEP 2/4] Building feature matrix...")
     t0 = time.time()
 
-    df_features = build_feature_matrix(df_matches, team_hist)
+    df_features = load_or_build_feature_matrix(
+        df_matches, team_hist, data_dir=args.data_dir
+    )
     validate_features(df_features)
 
     logger.info(f"  Feature engineering complete in {time.time() - t0:.1f}s")
@@ -238,8 +255,11 @@ def main() -> None:
         validate_submission(df_submission)
 
         output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
         df_submission.to_csv(output_path, index=False)
         logger.info(f"\n[OK]  Submission saved -> {output_path.resolve()}")
+
+        output_dir = Path(OUTPUT_DIR)
 
         # Save champion probabilities
         champ_df = pd.DataFrame(
@@ -250,7 +270,7 @@ def main() -> None:
                 )
             ]
         )
-        champ_path = Path("champion_probs.csv")
+        champ_path = output_dir / "champion_probs.csv"
         champ_df.to_csv(champ_path, index=False)
         logger.info(f"[OK]  Champion probabilities saved -> {champ_path.resolve()}")
 
@@ -263,8 +283,16 @@ def main() -> None:
                 )
             ]
         )
-        finalist_df.to_csv("finalist_probs.csv", index=False)
-        logger.info(f"[OK]  Finalist probabilities saved -> finalist_probs.csv")
+        finalist_path = output_dir / "finalist_probs.csv"
+        finalist_df.to_csv(finalist_path, index=False)
+        logger.info(f"[OK]  Finalist probabilities saved -> {finalist_path.resolve()}")
+
+        team_stats = build_team_stats(team_hist, elo_dict)
+        payload = format_predictions_response(
+            mc_output, team_stats, args.n_simulations
+        )
+        json_path = save_predictions_json(payload, output_dir)
+        logger.info(f"[OK]  Predictions snapshot saved -> {json_path.resolve()}")
 
     else:
         logger.info("\n[OK]  DRY RUN complete -- pipeline executed without errors.")
