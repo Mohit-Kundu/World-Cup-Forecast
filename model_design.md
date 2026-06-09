@@ -10,7 +10,7 @@ data/ (raw CSVs)
         └─> feature_engineering.py  (build ML feature matrix per match)
               └─> models.py         (train 8 models: goals, yellows, reds, corners)
                     └─> simulations.py  (Monte Carlo tournament simulation)
-                          └─> submission.csv
+                          └─> output/submission.csv
 ```
 
 ---
@@ -140,4 +140,4 @@ python main.py
 python main.py --n-simulations 100 --dry-run
 ```
 
-Output: `submission.csv` in the project root.
+Output: `output/submission.csv`.
