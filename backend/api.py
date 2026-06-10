@@ -45,18 +45,10 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Pre-load models; skip MC warm-up when pipeline snapshot exists."""
-    logger.info("Pre-warming API resources...")
+    """Pre-load models and data only; simulations run on demand via endpoints."""
+    logger.info("Pre-loading API resources...")
     get_resources()
-
-    if predictions_json_path(OUTPUT_DIR).is_file():
-        logger.info("Found output/predictions.json — skipping MC warm-up.")
-    else:
-        logger.info("No pipeline snapshot — warming default simulation cache...")
-        run_simulation_cached(n_simulations=N_SIMULATIONS_API)
-        get_team_stats_cached()
-
-    logger.info("API warm-up complete.")
+    logger.info("API ready.")
     yield
 
 
@@ -130,6 +122,13 @@ class SimulationRequest(BaseModel):
     n_simulations: int = N_SIMULATIONS_API
 
 
+class SimulationStatus(BaseModel):
+    status: str
+    n_simulations: int
+    iterations_completed: int = 0
+    message: str = ""
+
+
 @app.get("/")
 async def root():
     """Landing page for the API — the React app runs separately on port 5173."""
@@ -152,26 +151,59 @@ async def health_check():
     return {"status": "healthy", "service": "FIFA WC 2026 Prediction API"}
 
 
+@app.get("/api/predictions/status")
+async def get_predictions_status():
+    """
+    Check if predictions.json snapshot exists and return its metadata.
+    """
+    try:
+        path = predictions_json_path(OUTPUT_DIR)
+        exists = path.is_file()
+
+        if exists:
+            cached = load_predictions_json(OUTPUT_DIR)
+            if cached:
+                return {
+                    "has_predictions": True,
+                    "source": "pipeline",
+                    "n_simulations": cached.get("n_simulations", 0),
+                    "path": str(path),
+                }
+
+        return {
+            "has_predictions": False,
+            "source": None,
+            "n_simulations": 0,
+            "path": str(path),
+        }
+    except Exception as e:
+        logger.error(f"Error checking predictions status: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get("/api/predictions")
 async def get_predictions():
     """
-    Get full prediction results including match outcomes,
-    champion probabilities, and team statistics.
+    Get full prediction results from predictions.json snapshot.
+    Does NOT run simulations - returns 404 if no snapshot exists.
+    Use POST /api/simulate to run live simulations.
     """
     try:
         cached = load_predictions_json(OUTPUT_DIR)
         if cached is not None:
             return {**cached, "source": "pipeline"}
 
-        mc_results = run_simulation_cached(n_simulations=N_SIMULATIONS_API)
-        team_stats = get_team_stats_cached(n_simulations=N_SIMULATIONS_API)
-
-        return {
-            **format_predictions_response(mc_results, team_stats, N_SIMULATIONS_API),
-            "source": "live",
-        }
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                "No predictions snapshot found. "
+                "Run pipeline (main.py) or POST to /api/simulate to generate predictions."
+            ),
+        )
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"Error generating predictions: {e}")
+        logger.error(f"Error loading predictions: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
