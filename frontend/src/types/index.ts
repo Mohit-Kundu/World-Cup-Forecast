@@ -69,3 +69,10 @@ export interface TableDataItem {
   attack: number;
   defense: number;
 }
+
+export interface PredictionsStatus {
+  has_predictions: boolean;
+  source: 'pipeline' | null;
+  n_simulations: number;
+  path: string;
+}
