@@ -92,30 +92,32 @@ def format_predictions_response(
             "away_win_prob": result["away_win_prob"],
         }
 
-    return {
-        "match_results": match_results,
-        "champion_probs": mc_output["champion_probs"],
-        "finalist_probs": mc_output["finalist_probs"],
-        "qualify_probs": mc_output.get("qualify_probs", {}),
-        "r32_probs": mc_output.get("r32_probs", {}),
-        "r16_probs": mc_output.get("r16_probs", {}),
-        "qf_probs": mc_output.get("qf_probs", {}),
-        "sf_probs": mc_output.get("sf_probs", {}),
-        "group_standings": mc_output.get("group_standings", {}),
-        "predicted_final": mc_output.get(
-            "predicted_final",
-            {
-                "home_team": "",
-                "away_team": "",
-                "winner": "",
-                "runner_up": "",
-                "pairing_prob": 0.0,
-                "winner_prob": 0.0,
-            },
-        ),
-        "team_stats": team_stats,
-        "n_simulations": n_simulations,
-    }
+    return _to_json_safe(
+        {
+            "match_results": match_results,
+            "champion_probs": mc_output["champion_probs"],
+            "finalist_probs": mc_output["finalist_probs"],
+            "qualify_probs": mc_output.get("qualify_probs", {}),
+            "r32_probs": mc_output.get("r32_probs", {}),
+            "r16_probs": mc_output.get("r16_probs", {}),
+            "qf_probs": mc_output.get("qf_probs", {}),
+            "sf_probs": mc_output.get("sf_probs", {}),
+            "group_standings": mc_output.get("group_standings", {}),
+            "predicted_final": mc_output.get(
+                "predicted_final",
+                {
+                    "home_team": "",
+                    "away_team": "",
+                    "winner": "",
+                    "runner_up": "",
+                    "pairing_prob": 0.0,
+                    "winner_prob": 0.0,
+                },
+            ),
+            "team_stats": team_stats,
+            "n_simulations": n_simulations,
+        }
+    )
 
 
 def save_predictions_json(payload: dict, output_dir: str | Path) -> Path:

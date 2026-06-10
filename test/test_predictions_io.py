@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 from src.predictions_io import (
@@ -70,6 +71,20 @@ def _minimal_team_stats() -> dict:
             "Discipline Index (Expected Cards)": "1.10",
         }
     }
+
+
+def test_format_predictions_response_converts_numpy_scalars():
+    mc = _minimal_mc_output()
+    mc["match_results"][1]["most_common_home_goals"] = np.int32(1)
+    mc["match_results"][1]["most_common_away_goals"] = np.int32(0)
+    mc["group_standings"]["A"][0]["rank"] = np.int32(1)
+
+    payload = format_predictions_response(
+        mc, _minimal_team_stats(), n_simulations=100
+    )
+
+    assert type(payload["match_results"]["1"]["most_common_home_goals"]) is int
+    assert type(payload["group_standings"]["A"][0]["rank"]) is int
 
 
 def test_format_predictions_response_stringifies_match_keys():
