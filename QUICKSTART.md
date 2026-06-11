@@ -87,7 +87,7 @@ Navigate to `http://localhost:5173` to see the app!
 
 ### Port already in use
 
-**Backend (8000)**: Change the port in `backend/api.py`:
+**Backend (8000)**: Change the port in [`backend/api.py`](backend/api.py):
 ```python
 uvicorn.run(app, host="0.0.0.0", port=8001, log_level="info")
 ```
@@ -120,10 +120,14 @@ npm install
 
 ### Change Number of Simulations
 
-Edit `backend/api.py` line 122:
+Default and bounds live in [`src/config.py`](src/config.py):
 ```python
-mc_results = run_simulation_cached(n_simulations=500)  # Change from 200 to 500
+N_SIMULATIONS_API = 200         # default for POST /api/simulate
+N_SIMULATIONS_API_MIN = 10
+N_SIMULATIONS_API_MAX = 5_000
 ```
+
+The frontend can also pass `n_simulations` in the POST `/api/simulate` request body.
 
 ### Modify Color Scheme
 
