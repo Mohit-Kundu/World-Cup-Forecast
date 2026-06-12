@@ -9,7 +9,7 @@ interface ChampionChartProps {
 const ChampionChart: React.FC<ChampionChartProps> = ({ data }) => {
   if (data.length === 0) {
     return (
-      <div className="rounded-lg border border-muted/20 bg-surface p-4">
+      <div className="rounded-lg border border-muted/20 bg-surface px-6 py-4">
         <h3 className="mb-4 text-xs font-medium uppercase tracking-widest text-muted">Champion</h3>
         <p className="py-16 text-center text-xs text-muted">No data</p>
       </div>
@@ -17,7 +17,7 @@ const ChampionChart: React.FC<ChampionChartProps> = ({ data }) => {
   }
 
   return (
-    <div className="rounded-lg border border-muted/20 bg-surface p-4">
+    <div className="rounded-lg border border-muted/20 bg-surface px-6 py-4">
       <h3 className="mb-4 text-xs font-medium uppercase tracking-widest text-muted">
         Champion
       </h3>

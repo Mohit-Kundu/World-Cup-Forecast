@@ -51,7 +51,7 @@ const BracketView: React.FC<BracketViewProps> = ({ data }) => {
             }}
           >
             <div
-              className="flex items-center justify-between p-3"
+              className="flex items-center justify-between px-5 py-3"
               style={{
                 width,
                 height,
