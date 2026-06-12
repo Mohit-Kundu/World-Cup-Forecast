@@ -1,8 +1,6 @@
 import React from 'react';
 import FlagImage from '../FlagImage';
-
-const WINNER_COLOR = '#BFA046';
-const RUNNER_COLOR = '#C8CDD3';
+import { getTeamColor } from '../../utils/flags';
 
 interface FinalOutcomeBarProps {
   leftTeam: string;
@@ -23,6 +21,8 @@ const FinalOutcomeBar: React.FC<FinalOutcomeBarProps> = ({
 }) => {
   const leftPct = (leftProb * 100).toFixed(1);
   const rightPct = (rightProb * 100).toFixed(1);
+  const leftColor = getTeamColor(leftTeam);
+  const rightColor = getTeamColor(rightTeam);
 
   return (
     <div className="space-y-3">
@@ -31,7 +31,7 @@ const FinalOutcomeBar: React.FC<FinalOutcomeBarProps> = ({
           <FlagImage team={leftTeam} className="h-5 w-7 shrink-0 rounded-sm object-cover ring-1 ring-muted/40" />
           <span
             className="truncate text-sm font-medium"
-            style={{ color: leftIsWinner ? WINNER_COLOR : RUNNER_COLOR }}
+            style={{ color: leftColor, fontWeight: leftIsWinner ? 600 : 500 }}
           >
             {leftTeam}
           </span>
@@ -40,7 +40,7 @@ const FinalOutcomeBar: React.FC<FinalOutcomeBarProps> = ({
         <div className="flex min-w-0 items-center justify-end gap-2">
           <span
             className="truncate text-sm font-medium"
-            style={{ color: rightIsWinner ? WINNER_COLOR : RUNNER_COLOR }}
+            style={{ color: rightColor, fontWeight: rightIsWinner ? 600 : 500 }}
           >
             {rightTeam}
           </span>
@@ -51,7 +51,7 @@ const FinalOutcomeBar: React.FC<FinalOutcomeBarProps> = ({
       <div className="flex items-center gap-3">
         <span
           className="w-11 shrink-0 text-right text-xs tabular-nums"
-          style={{ color: leftIsWinner ? WINNER_COLOR : RUNNER_COLOR, fontWeight: leftIsWinner ? 500 : 400 }}
+          style={{ color: leftColor, fontWeight: leftIsWinner ? 600 : 500 }}
         >
           {leftPct}%
         </span>
@@ -59,23 +59,17 @@ const FinalOutcomeBar: React.FC<FinalOutcomeBarProps> = ({
         <div className="flex h-5 flex-1 overflow-hidden rounded-md">
           <div
             className="h-full transition-all"
-            style={{
-              width: `${leftProb * 100}%`,
-              backgroundColor: leftIsWinner ? WINNER_COLOR : RUNNER_COLOR,
-            }}
+            style={{ width: `${leftProb * 100}%`, backgroundColor: leftColor }}
           />
           <div
             className="h-full transition-all"
-            style={{
-              width: `${rightProb * 100}%`,
-              backgroundColor: rightIsWinner ? WINNER_COLOR : RUNNER_COLOR,
-            }}
+            style={{ width: `${rightProb * 100}%`, backgroundColor: rightColor }}
           />
         </div>
 
         <span
           className="w-11 shrink-0 text-left text-xs tabular-nums"
-          style={{ color: rightIsWinner ? WINNER_COLOR : RUNNER_COLOR, fontWeight: rightIsWinner ? 500 : 400 }}
+          style={{ color: rightColor, fontWeight: rightIsWinner ? 600 : 500 }}
         >
           {rightPct}%
         </span>

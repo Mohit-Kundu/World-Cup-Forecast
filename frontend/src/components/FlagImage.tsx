@@ -4,11 +4,13 @@ import { getFlagUrl, getIsoCode } from '../utils/flags';
 interface FlagImageProps {
   team: string;
   className?: string;
+  srcWidth?: number;
 }
 
 const FlagImage: React.FC<FlagImageProps> = ({
   team,
   className = 'h-3.5 w-5 rounded-sm object-cover ring-1 ring-muted/40',
+  srcWidth = 80,
 }) => {
   const [error, setError] = useState(false);
 
@@ -25,7 +27,7 @@ const FlagImage: React.FC<FlagImageProps> = ({
 
   return (
     <img
-      src={getFlagUrl(team)}
+      src={getFlagUrl(team, srcWidth)}
       alt={`${team} flag`}
       title={team}
       className={className}
