@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { PredictionsData, PredictionsStatus } from '../types';
+import { PredictionsData } from '../types';
 import { normalizePredictions } from '../utils/safeData';
 
 const API_URL = import.meta.env.VITE_API_URL || '';
@@ -14,7 +14,6 @@ interface SimulationControlProps {
 }
 
 export const SimulationControl: React.FC<SimulationControlProps> = ({ onDataLoaded }) => {
-  const [status, setStatus] = useState<PredictionsStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [iterations, setIterations] = useState(DEFAULT_ITERATIONS);
   const [simulating, setSimulating] = useState(false);
@@ -28,10 +27,9 @@ export const SimulationControl: React.FC<SimulationControlProps> = ({ onDataLoad
   const checkStatus = async () => {
     try {
       setLoading(true);
-      const response = await axios.get<PredictionsStatus>(
+      const response = await axios.get<{ has_predictions: boolean }>(
         `${API_URL}/api/predictions/status`
       );
-      setStatus(response.data);
 
       if (response.data.has_predictions) {
         await loadPredictions();
@@ -102,69 +100,37 @@ export const SimulationControl: React.FC<SimulationControlProps> = ({ onDataLoad
   };
 
   return (
-    <div className="rounded-lg border border-muted/30 bg-surface p-4 md:p-6">
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h2 className="text-lg font-medium text-primary">Simulation Control</h2>
-          <p className="mt-1 text-sm text-muted">
-            {status?.has_predictions
-              ? `Using pipeline results (${status.n_simulations.toLocaleString()} simulations)`
-              : 'No predictions loaded. Run simulation or check pipeline output.'}
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <div className="flex items-center gap-2">
-            <label htmlFor="iterations" className="text-sm text-muted">
-              Iterations:
-            </label>
-            <input
-              id="iterations"
-              type="number"
-              min={MIN_ITERATIONS}
-              max={MAX_ITERATIONS}
-              value={iterations}
-              onChange={(e) => setIterations(Number(e.target.value))}
-              disabled={simulating}
-              className="w-24 rounded-md border border-muted/50 bg-background px-3 py-1.5 text-sm text-primary focus:border-gold focus:outline-none disabled:opacity-50"
-            />
-          </div>
-
+    <div className="flex w-full flex-col gap-2 sm:w-auto sm:items-end">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+        <label htmlFor="iterations" className="shrink-0 text-sm text-muted">
+          Iterations:
+        </label>
+        <div className="flex items-center gap-2">
+          <input
+            id="iterations"
+            type="number"
+            min={MIN_ITERATIONS}
+            max={MAX_ITERATIONS}
+            value={iterations}
+            onChange={(e) => setIterations(Number(e.target.value))}
+            disabled={simulating}
+            className="h-8 w-20 rounded-md border border-muted/50 bg-background px-2 py-1 text-sm text-primary focus:border-gold focus:outline-none disabled:opacity-50"
+          />
           <button
             onClick={runSimulation}
             disabled={simulating || loading}
-            className="relative rounded-md bg-gold px-4 py-2 text-sm font-medium text-black transition-opacity hover:opacity-90 disabled:opacity-50"
+            className="inline-flex h-8 min-w-[9.75rem] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-gold px-3 py-1 text-sm font-medium text-black transition-opacity hover:opacity-90 disabled:opacity-50"
           >
-            {simulating ? (
-              <span className="flex items-center gap-2">
-                <span className="h-4 w-4 animate-spin rounded-full border-2 border-black/30 border-t-black" />
-                Running...
-              </span>
-            ) : dataLoaded ? (
-              'Re-run Simulation'
-            ) : (
-              'Run Simulation'
+            {simulating && (
+              <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-black/30 border-t-black" />
             )}
+            {dataLoaded ? 'Re-run Simulation' : 'Run Simulation'}
           </button>
         </div>
       </div>
 
       {error && (
-        <div className="mt-4 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
-          {error}
-        </div>
-      )}
-
-      {simulating && (
-        <div className="mt-4">
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted/20">
-            <div className="h-full animate-pulse rounded-full bg-gold" />
-          </div>
-          <p className="mt-2 text-xs text-muted">
-            Running {iterations.toLocaleString()} Monte Carlo iterations...
-            This may take a minute.
-          </p>
-        </div>
+        <p className="text-xs text-red-400">{error}</p>
       )}
     </div>
   );
