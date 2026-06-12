@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { TableDataItem, TeamStats } from '../../types';
 import { getTeamStats } from '../../utils/safeData';
 import { CONFEDERATIONS, WC2026_GROUPS } from '../../utils/teams';
+import { TEAM_STAT_TOOLTIPS } from '../../utils/teamStatTooltips';
 import FlagTooltip from '../FlagTooltip';
 import HelpTooltip from '../HelpTooltip';
 
@@ -21,37 +22,33 @@ const SORTABLE_COLUMNS: { key: SortKey; label: string; tooltip?: string }[] = [
   { key: 'team', label: 'Team' },
   {
     key: 'qualifyProb',
-    label: 'Qualify',
-    tooltip:
-      'Monte Carlo % that team finishes top 2 in their group and advances to the Round of 32.',
+    label: TEAM_STAT_TOOLTIPS.qualify.label,
+    tooltip: TEAM_STAT_TOOLTIPS.qualify.tooltip,
   },
   {
     key: 'championProb',
-    label: 'Champ',
-    tooltip: 'Monte Carlo % that team wins the entire tournament.',
+    label: TEAM_STAT_TOOLTIPS.champ.label,
+    tooltip: TEAM_STAT_TOOLTIPS.champ.tooltip,
   },
   {
     key: 'elo',
-    label: 'Elo',
-    tooltip: 'FIFA ELO rating at tournament start. ~1500 is average; higher is stronger.',
+    label: TEAM_STAT_TOOLTIPS.elo.label,
+    tooltip: TEAM_STAT_TOOLTIPS.elo.tooltip,
   },
   {
     key: 'form',
-    label: 'Form',
-    tooltip:
-      'Recent form from the last 5 matches. Points are weighted by opponent strength. 0% = all losses, 100% = all wins.',
+    label: TEAM_STAT_TOOLTIPS.form.label,
+    tooltip: TEAM_STAT_TOOLTIPS.form.tooltip,
   },
   {
     key: 'attack',
-    label: 'Atk',
-    tooltip:
-      'Attack rating (weighted avg goals scored). Higher means a stronger attack.',
+    label: TEAM_STAT_TOOLTIPS.attack.label,
+    tooltip: TEAM_STAT_TOOLTIPS.attack.tooltip,
   },
   {
     key: 'defense',
-    label: 'Def',
-    tooltip:
-      'Defense rating (inverse of avg goals conceded). Higher means a stronger defense.',
+    label: TEAM_STAT_TOOLTIPS.defense.label,
+    tooltip: TEAM_STAT_TOOLTIPS.defense.tooltip,
   },
 ];
 

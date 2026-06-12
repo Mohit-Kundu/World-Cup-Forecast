@@ -1,6 +1,8 @@
 import React from 'react';
 import { TeamStats } from '../../types';
 import { getTeamStats } from '../../utils/safeData';
+import { TEAM_STAT_TOOLTIPS, TeamStatKey } from '../../utils/teamStatTooltips';
+import HelpTooltip from '../HelpTooltip';
 import { FINAL_RUNNER_COLOR, FINAL_WINNER_COLOR } from './finalColors';
 import FinalMatchupRow from './FinalMatchupRow';
 
@@ -40,16 +42,14 @@ function buildOverview(
   };
 }
 
-const STAT_ROWS: { key: keyof TeamOverview; label: string }[] = [
-  { key: 'qualify', label: 'Qualify' },
-  { key: 'champ', label: 'Champ' },
-  { key: 'elo', label: 'Elo' },
-  { key: 'form', label: 'Form' },
-  { key: 'attack', label: 'Atk' },
-  { key: 'defense', label: 'Def' },
+const STAT_ROWS: { key: keyof TeamOverview; statKey: TeamStatKey }[] = [
+  { key: 'qualify', statKey: 'qualify' },
+  { key: 'champ', statKey: 'champ' },
+  { key: 'elo', statKey: 'elo' },
+  { key: 'form', statKey: 'form' },
+  { key: 'attack', statKey: 'attack' },
+  { key: 'defense', statKey: 'defense' },
 ];
-
-const LABEL_WIDTH = 'w-14';
 
 const FinalTeamStats: React.FC<FinalTeamStatsProps> = ({
   leftTeam,
@@ -66,29 +66,33 @@ const FinalTeamStats: React.FC<FinalTeamStatsProps> = ({
   const rightColor = rightIsWinner ? FINAL_WINNER_COLOR : FINAL_RUNNER_COLOR;
 
   return (
-    <div className="space-y-1 border-t border-muted/20 pt-4">
-      {STAT_ROWS.map(({ key, label }) => (
-        <FinalMatchupRow
-          key={key}
-          center={
-            <div className="flex items-center text-[11px] leading-5">
-              <span
-                className="flex-1 text-right tabular-nums font-medium"
-                style={{ color: leftColor }}
-              >
+    <div className="space-y-1 border-t border-muted/20 px-3 pt-4 sm:px-4">
+      {STAT_ROWS.map(({ key, statKey }) => {
+        const { label, tooltip } = TEAM_STAT_TOOLTIPS[statKey];
+        return (
+          <FinalMatchupRow
+            key={key}
+            left={
+              <span className="font-medium" style={{ color: leftColor }}>
                 {leftOverview[key]}
               </span>
-              <span className={`${LABEL_WIDTH} shrink-0 text-center text-muted`}>{label}</span>
-              <span
-                className="flex-1 text-left tabular-nums font-medium"
-                style={{ color: rightColor }}
-              >
+            }
+            center={
+              <div className="flex justify-center">
+                <span className="inline-flex items-center gap-0.5 text-[11px] leading-5 text-muted">
+                  {label}
+                  <HelpTooltip text={tooltip} />
+                </span>
+              </div>
+            }
+            right={
+              <span className="font-medium" style={{ color: rightColor }}>
                 {rightOverview[key]}
               </span>
-            </div>
-          }
-        />
-      ))}
+            }
+          />
+        );
+      })}
     </div>
   );
 };
