@@ -8,6 +8,10 @@ import { SimulationControl } from './components/SimulationControl';
 import { useSnapPageIndex } from './hooks/useSnapPageIndex';
 import { PredictionsData } from './types';
 
+const SNAP_SECTION_CLASS =
+  'box-border flex h-full snap-start snap-always flex-col py-6';
+const SNAP_INNER_CLASS = 'flex min-h-0 w-full flex-1 flex-col';
+
 const App: React.FC = () => {
   const [data, setData] = useState<PredictionsData | null>(null);
   const mainRef = useRef<HTMLElement>(null);
@@ -38,11 +42,8 @@ const App: React.FC = () => {
               ref={mainRef}
               className="min-h-0 flex-1 snap-y snap-mandatory overflow-y-auto scrollbar-hide"
             >
-              <div
-                data-snap-section
-                className="flex min-h-full snap-start snap-always items-start pt-0"
-              >
-                <div className="w-full">
+              <div data-snap-section className={SNAP_SECTION_CLASS}>
+                <div className={SNAP_INNER_CLASS}>
                   <PredictedFinalCard
                     predictedFinal={data.predicted_final}
                     teamStats={data.team_stats ?? {}}
@@ -51,27 +52,18 @@ const App: React.FC = () => {
                   />
                 </div>
               </div>
-              <div
-                data-snap-section
-                className="flex min-h-full snap-start snap-always items-start pt-0"
-              >
-                <div className="w-full">
+              <div data-snap-section className={SNAP_SECTION_CLASS}>
+                <div className={SNAP_INNER_CLASS}>
                   <KnockoutProbabilitiesSection data={data} />
                 </div>
               </div>
-              <div
-                data-snap-section
-                className="flex min-h-full snap-start snap-always items-start pt-0"
-              >
-                <div className="w-full">
+              <div data-snap-section className={SNAP_SECTION_CLASS}>
+                <div className={SNAP_INNER_CLASS}>
                   <GroupStageSection data={data} />
                 </div>
               </div>
-              <div
-                data-snap-section
-                className="flex min-h-full snap-start snap-always items-start pt-0"
-              >
-                <div className="w-full">
+              <div data-snap-section className={SNAP_SECTION_CLASS}>
+                <div className={SNAP_INNER_CLASS}>
                   <StatsSection data={data} />
                 </div>
               </div>

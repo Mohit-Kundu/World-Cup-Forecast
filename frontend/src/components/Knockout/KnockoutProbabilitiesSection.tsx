@@ -49,15 +49,15 @@ const KnockoutProbabilitiesSection: React.FC<KnockoutProbabilitiesSectionProps> 
   const selected = rounds[activeRound];
 
   return (
-    <section>
-      <div className="mb-4">
+    <section className="flex min-h-0 flex-1 flex-col">
+      <div className="mb-4 shrink-0">
         <h2 className="text-sm font-medium text-primary">Knockout Probabilities</h2>
         <p className="mt-1 text-xs text-muted">
           Chance each team advances past each knockout round across all simulations.
         </p>
       </div>
 
-      <div className="mb-4 flex flex-wrap gap-2">
+      <div className="mb-4 flex shrink-0 flex-wrap gap-2">
         {rounds.map((round, index) => (
           <button
             key={round.tab}

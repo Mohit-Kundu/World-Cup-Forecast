@@ -10,6 +10,7 @@ import {
   LabelList,
 } from 'recharts';
 import FlagImage from '../FlagImage';
+import { useElementSize } from '../../hooks/useElementSize';
 import { ChartDataItem, TeamStats } from '../../types';
 import { getFlagUrl } from '../../utils/flags';
 import { getTeamStats } from '../../utils/safeData';
@@ -31,7 +32,11 @@ interface TeamOverviewTooltipProps {
   championProbs: Record<string, number>;
 }
 
-function StatCell({ label, value, valueClassName = 'text-primary' }: {
+function StatCell({
+  label,
+  value,
+  valueClassName = 'text-primary',
+}: {
   label: string;
   value: string | number;
   valueClassName?: string;
@@ -70,7 +75,11 @@ function TeamOverviewTooltip({
       </p>
       <div className="grid grid-cols-2 gap-x-4 gap-y-2">
         <StatCell label="Qualify" value={`${(qualifyProb * 100).toFixed(2)}%`} />
-        <StatCell label="Champ" value={`${(championProb * 100).toFixed(2)}%`} valueClassName="text-gold" />
+        <StatCell
+          label="Champ"
+          value={`${(championProb * 100).toFixed(2)}%`}
+          valueClassName="text-gold"
+        />
         <StatCell label="Elo" value={elo} />
         <StatCell label="Form" value={form} />
         <StatCell label="Atk" value={attack.toFixed(2)} />
@@ -86,20 +95,29 @@ interface YAxisTickProps {
   payload?: { value: string };
 }
 
+const Y_AXIS_TICK_HEIGHT = 22;
+const Y_AXIS_WIDTH = 148;
+
 function YAxisTick({ x = 0, y = 0, payload }: YAxisTickProps): React.ReactElement {
   const team = payload?.value ?? '';
+  const halfTick = Y_AXIS_TICK_HEIGHT / 2;
 
   return (
     <g transform={`translate(${x},${y})`}>
-      <foreignObject x={-124} y={-9} width={124} height={18}>
+      <foreignObject
+        x={-Y_AXIS_WIDTH}
+        y={-halfTick}
+        width={Y_AXIS_WIDTH}
+        height={Y_AXIS_TICK_HEIGHT}
+      >
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-end',
-            gap: '6px',
-            height: '18px',
-            fontSize: '11px',
+            gap: '8px',
+            height: `${Y_AXIS_TICK_HEIGHT}px`,
+            fontSize: '13px',
             color: '#D4D8DD',
           }}
         >
@@ -110,8 +128,8 @@ function YAxisTick({ x = 0, y = 0, payload }: YAxisTickProps): React.ReactElemen
             src={getFlagUrl(team, 40)}
             alt=""
             style={{
-              width: '16px',
-              height: '12px',
+              width: '20px',
+              height: '15px',
               borderRadius: '2px',
               objectFit: 'cover',
               flexShrink: 0,
@@ -131,63 +149,69 @@ const RoundProbChart: React.FC<RoundProbChartProps> = ({
   qualifyProbs,
   championProbs,
 }) => {
+  const { ref: chartAreaRef, height: chartAreaHeight } = useElementSize<HTMLDivElement>();
+
   if (data.length === 0) {
     return (
-      <div className="rounded-lg border border-muted/20 bg-surface px-6 py-4">
+      <div className="flex min-h-0 flex-1 flex-col rounded-lg border border-muted/20 bg-surface px-6 py-4">
         <h3 className="text-xs font-medium uppercase tracking-widest text-muted">{title}</h3>
         {subtitle && <p className="mt-1 text-[10px] text-muted">{subtitle}</p>}
-        <p className="py-12 text-center text-xs text-muted">No data</p>
+        <p className="flex flex-1 items-center justify-center text-xs text-muted">No data</p>
       </div>
     );
   }
 
-  const chartHeight = Math.max(280, data.length * 22);
-
   return (
-    <div className="rounded-lg border border-muted/20 bg-surface px-6 py-4">
-      <h3 className="text-xs font-medium uppercase tracking-widest text-muted">{title}</h3>
-      {subtitle && <p className="mt-1 text-[10px] text-muted">{subtitle}</p>}
-      <ResponsiveContainer width="100%" height={chartHeight}>
-        <BarChart
-          data={data}
-          layout="vertical"
-          margin={{ left: 4, right: 48, top: 8, bottom: 0 }}
-          barCategoryGap="20%"
-        >
-          <CartesianGrid strokeDasharray="3 3" stroke="#3A4A5A" strokeOpacity={0.25} horizontal={false} />
-          <XAxis type="number" stroke="#3A4A5A" tick={{ fill: '#3A4A5A', fontSize: 11 }} />
-          <YAxis
-            type="category"
-            dataKey="team"
-            stroke="#3A4A5A"
-            tick={(props) => <YAxisTick {...props} />}
-            width={128}
-            interval={0}
-          />
-          <Tooltip
-            cursor={{ fill: 'rgba(191, 160, 70, 0.08)' }}
-            content={({ active, payload }) => (
-              <TeamOverviewTooltip
-                active={active}
-                payload={payload as TeamOverviewTooltipProps['payload']}
-                teamStats={teamStats}
-                qualifyProbs={qualifyProbs}
-                championProbs={championProbs}
-              />
-            )}
-          />
-          <Bar dataKey="probability" fill="#BFA046" radius={[0, 2, 2, 0]}>
-            <LabelList
-              dataKey="probability"
-              position="right"
-              formatter={(value: number) => `${(value * 100).toFixed(1)}%`}
-              fill="#D4D8DD"
-              fontSize={11}
-              fontWeight={400}
+    <div className="flex min-h-0 flex-1 flex-col rounded-lg border border-muted/20 bg-surface px-6 py-4">
+      <div className="shrink-0">
+        <h3 className="text-xs font-medium uppercase tracking-widest text-muted">{title}</h3>
+        {subtitle && <p className="mt-1 text-[10px] text-muted">{subtitle}</p>}
+      </div>
+      <div ref={chartAreaRef} className="mt-3 min-h-0 flex-1">
+        {chartAreaHeight > 0 && (
+          <ResponsiveContainer width="100%" height={chartAreaHeight}>
+          <BarChart
+            data={data}
+            layout="vertical"
+            margin={{ left: 4, right: 56, top: 8, bottom: 12 }}
+            barCategoryGap="18%"
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#3A4A5A" strokeOpacity={0.25} horizontal={false} />
+            <XAxis type="number" stroke="#3A4A5A" tick={{ fill: '#3A4A5A', fontSize: 12 }} />
+            <YAxis
+              type="category"
+              dataKey="team"
+              stroke="#3A4A5A"
+              tick={(props) => <YAxisTick {...props} />}
+              width={Y_AXIS_WIDTH}
+              interval={0}
             />
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+            <Tooltip
+              cursor={{ fill: 'rgba(191, 160, 70, 0.08)' }}
+              content={({ active, payload }) => (
+                <TeamOverviewTooltip
+                  active={active}
+                  payload={payload as TeamOverviewTooltipProps['payload']}
+                  teamStats={teamStats}
+                  qualifyProbs={qualifyProbs}
+                  championProbs={championProbs}
+                />
+              )}
+            />
+            <Bar dataKey="probability" fill="#BFA046" radius={[0, 2, 2, 0]}>
+              <LabelList
+                dataKey="probability"
+                position="right"
+                formatter={(value: number) => `${(value * 100).toFixed(1)}%`}
+                fill="#D4D8DD"
+                fontSize={13}
+                fontWeight={500}
+              />
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+        )}
+      </div>
     </div>
   );
 };
