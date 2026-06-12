@@ -3,6 +3,7 @@ import { TableDataItem, TeamStats } from '../../types';
 import { getTeamStats } from '../../utils/safeData';
 import { CONFEDERATIONS, WC2026_GROUPS } from '../../utils/teams';
 import FlagTooltip from '../FlagTooltip';
+import HelpTooltip from '../HelpTooltip';
 
 interface ProbabilityTableProps {
   data: TableDataItem[];
@@ -15,15 +16,43 @@ type SortOrder = 'asc' | 'desc';
 const PAGE_SIZE = 10;
 const GROUP_OPTIONS = ['', ...Object.keys(WC2026_GROUPS)];
 
-const SORTABLE_COLUMNS: { key: SortKey; label: string }[] = [
+const SORTABLE_COLUMNS: { key: SortKey; label: string; tooltip?: string }[] = [
   { key: 'rank', label: '#' },
   { key: 'team', label: 'Team' },
-  { key: 'qualifyProb', label: 'Qualify' },
-  { key: 'championProb', label: 'Champ' },
-  { key: 'elo', label: 'Elo' },
-  { key: 'form', label: 'Form' },
-  { key: 'attack', label: 'Atk' },
-  { key: 'defense', label: 'Def' },
+  {
+    key: 'qualifyProb',
+    label: 'Qualify',
+    tooltip:
+      'Monte Carlo % that team finishes top 2 in their group and advances to the Round of 32.',
+  },
+  {
+    key: 'championProb',
+    label: 'Champ',
+    tooltip: 'Monte Carlo % that team wins the entire tournament.',
+  },
+  {
+    key: 'elo',
+    label: 'Elo',
+    tooltip: 'FIFA ELO rating at tournament start. ~1500 is average; higher is stronger.',
+  },
+  {
+    key: 'form',
+    label: 'Form',
+    tooltip:
+      'Recent form from the last 5 matches. Points are weighted by opponent strength. 0% = all losses, 100% = all wins.',
+  },
+  {
+    key: 'attack',
+    label: 'Atk',
+    tooltip:
+      'Attack rating (weighted avg goals scored). Higher means a stronger attack.',
+  },
+  {
+    key: 'defense',
+    label: 'Def',
+    tooltip:
+      'Defense rating (inverse of avg goals conceded). Higher means a stronger defense.',
+  },
 ];
 
 const inputClass =
@@ -189,8 +218,16 @@ const ProbabilityTable: React.FC<ProbabilityTableProps> = ({ data, teamStats }) 
                     </th>
                   )}
                   <th className={thClass(col.key)} onClick={() => handleSort(col.key)}>
-                    {col.label}
-                    {sortIndicator(col.key)}
+                    <span className="inline-flex items-center gap-1">
+                      {col.label}
+                      {sortIndicator(col.key)}
+                      {col.tooltip ? (
+                        <HelpTooltip
+                          text={col.tooltip}
+                          alignRight={col.key === 'attack' || col.key === 'defense'}
+                        />
+                      ) : null}
+                    </span>
                   </th>
                 </React.Fragment>
               ))}
