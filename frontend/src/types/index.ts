@@ -62,6 +62,8 @@ export interface TableDataItem {
   rank: number;
   flag: string;
   team: string;
+  group: string;
+  confederation: string;
   qualifyProb: number;
   championProb: number;
   elo: number;
