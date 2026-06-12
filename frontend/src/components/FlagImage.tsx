@@ -5,12 +5,14 @@ interface FlagImageProps {
   team: string;
   className?: string;
   srcWidth?: number;
+  loading?: 'lazy' | 'eager';
 }
 
 const FlagImage: React.FC<FlagImageProps> = ({
   team,
   className = 'h-3.5 w-5 rounded-sm object-cover ring-1 ring-muted/40',
   srcWidth = 80,
+  loading = 'lazy',
 }) => {
   const [error, setError] = useState(false);
 
@@ -31,7 +33,8 @@ const FlagImage: React.FC<FlagImageProps> = ({
       alt={`${team} flag`}
       title={team}
       className={className}
-      loading="lazy"
+      loading={loading}
+      decoding="async"
       onError={() => setError(true)}
     />
   );

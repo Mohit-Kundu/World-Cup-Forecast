@@ -29,7 +29,12 @@ const App: React.FC = () => {
 
         {data && (
           <main className="space-y-16">
-            <PredictedFinalCard predictedFinal={data.predicted_final} />
+            <PredictedFinalCard
+              predictedFinal={data.predicted_final}
+              teamStats={data.team_stats ?? {}}
+              qualifyProbs={data.qualify_probs ?? {}}
+              championProbs={data.champion_probs ?? {}}
+            />
             <KnockoutProbabilitiesSection data={data} />
             <GroupStageSection data={data} />
             <StatsSection data={data} />
