@@ -3,12 +3,10 @@ import GroupStageSection from './components/Groups/GroupStageSection';
 import KnockoutProbabilitiesSection from './components/Knockout/KnockoutProbabilitiesSection';
 import PredictedFinalCard from './components/Final/PredictedFinalCard';
 import StatsSection from './components/Stats/StatsSection';
-import SnapPageIndicator from './components/SnapPageIndicator';
+import SectionNavbar from './components/SectionNavbar';
 import { SimulationControl } from './components/SimulationControl';
 import { useSnapPageIndex } from './hooks/useSnapPageIndex';
 import { PredictionsData } from './types';
-
-const SNAP_SECTION_COUNT = 4;
 
 const App: React.FC = () => {
   const [data, setData] = useState<PredictionsData | null>(null);
@@ -35,13 +33,11 @@ const App: React.FC = () => {
 
         {data && (
           <>
+            <SectionNavbar containerRef={mainRef} activeIndex={pageIndex} />
             <main
               ref={mainRef}
               className="min-h-0 flex-1 snap-y snap-mandatory overflow-y-auto scrollbar-hide"
             >
-              <div className="pointer-events-none sticky top-0 z-10 -mb-5 flex justify-end">
-                <SnapPageIndicator current={pageIndex} total={SNAP_SECTION_COUNT} />
-              </div>
               <div
                 data-snap-section
                 className="flex min-h-full snap-start snap-always items-start pt-0"
