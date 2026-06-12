@@ -25,7 +25,7 @@ const GroupStageSection: React.FC<GroupStageSectionProps> = ({ data }) => {
 
   return (
     <section>
-      <div className="mb-4 grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto]">
+      <div className="mb-4 space-y-3">
         <div>
           <h2 className="text-sm font-medium text-primary">Group Stage</h2>
           <p className="mt-1 text-xs text-muted">

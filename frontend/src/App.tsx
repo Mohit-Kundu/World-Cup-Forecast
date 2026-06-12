@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import GroupStageSection from './components/Groups/GroupStageSection';
 import KnockoutProbabilitiesSection from './components/Knockout/KnockoutProbabilitiesSection';
 import PredictedFinalCard from './components/Final/PredictedFinalCard';
 import StatsSection from './components/Stats/StatsSection';
+import SnapPageIndicator from './components/SnapPageIndicator';
 import { SimulationControl } from './components/SimulationControl';
+import { useSnapPageIndex } from './hooks/useSnapPageIndex';
 import { PredictionsData } from './types';
+
+const SNAP_SECTION_COUNT = 4;
 
 const App: React.FC = () => {
   const [data, setData] = useState<PredictionsData | null>(null);
+  const mainRef = useRef<HTMLElement>(null);
+  const pageIndex = useSnapPageIndex(mainRef, !!data);
 
   return (
-    <div className="min-h-screen bg-background text-primary">
-      <div className="mx-auto w-full max-w-7xl px-6 py-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
-        <header className="mb-6 border-b border-muted/20 pb-6">
+    <div className="flex h-screen flex-col bg-background text-primary">
+      <div className="mx-auto flex w-full max-w-7xl min-h-0 flex-1 flex-col px-6 pt-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
+        <header className="mb-6 shrink-0 border-b border-muted/20 pb-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h1 className="flex items-center gap-2 text-xl font-medium tracking-tight text-primary md:text-2xl">
@@ -28,17 +34,53 @@ const App: React.FC = () => {
         </header>
 
         {data && (
-          <main className="space-y-16">
-            <PredictedFinalCard
-              predictedFinal={data.predicted_final}
-              teamStats={data.team_stats ?? {}}
-              qualifyProbs={data.qualify_probs ?? {}}
-              championProbs={data.champion_probs ?? {}}
-            />
-            <KnockoutProbabilitiesSection data={data} />
-            <GroupStageSection data={data} />
-            <StatsSection data={data} />
-          </main>
+          <>
+            <main
+              ref={mainRef}
+              className="min-h-0 flex-1 snap-y snap-mandatory overflow-y-auto scrollbar-hide"
+            >
+              <div className="pointer-events-none sticky top-0 z-10 -mb-5 flex justify-end">
+                <SnapPageIndicator current={pageIndex} total={SNAP_SECTION_COUNT} />
+              </div>
+              <div
+                data-snap-section
+                className="flex min-h-full snap-start snap-always items-start pt-0"
+              >
+                <div className="w-full">
+                  <PredictedFinalCard
+                    predictedFinal={data.predicted_final}
+                    teamStats={data.team_stats ?? {}}
+                    qualifyProbs={data.qualify_probs ?? {}}
+                    championProbs={data.champion_probs ?? {}}
+                  />
+                </div>
+              </div>
+              <div
+                data-snap-section
+                className="flex min-h-full snap-start snap-always items-start pt-0"
+              >
+                <div className="w-full">
+                  <KnockoutProbabilitiesSection data={data} />
+                </div>
+              </div>
+              <div
+                data-snap-section
+                className="flex min-h-full snap-start snap-always items-start pt-0"
+              >
+                <div className="w-full">
+                  <GroupStageSection data={data} />
+                </div>
+              </div>
+              <div
+                data-snap-section
+                className="flex min-h-full snap-start snap-always items-start pt-0"
+              >
+                <div className="w-full">
+                  <StatsSection data={data} />
+                </div>
+              </div>
+            </main>
+          </>
         )}
 
         {!data && (
