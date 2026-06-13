@@ -20,8 +20,8 @@ const App: React.FC = () => {
   return (
     <div className="flex h-screen flex-col bg-background text-primary">
       <div className="mx-auto flex w-full max-w-[92rem] min-h-0 flex-1 flex-col px-4 pt-4 sm:px-6 sm:pt-5 md:px-8 lg:px-10 xl:px-12 2xl:px-16">
-        <header className="mb-4 shrink-0 border-b border-muted/20 pb-4 md:mb-6 md:pb-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <header className="mb-2 shrink-0 border-b border-muted/20 pb-2 2xl:mb-6 2xl:pb-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between 2xl:gap-4">
             <div>
               <h1 className="flex items-center gap-2 text-xl font-medium tracking-tight text-primary md:text-2xl">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-gold" aria-hidden />

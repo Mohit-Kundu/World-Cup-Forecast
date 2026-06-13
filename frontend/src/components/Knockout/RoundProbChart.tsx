@@ -174,7 +174,7 @@ const RoundProbChart: React.FC<RoundProbChartProps> = ({
             data={data}
             layout="vertical"
             margin={{ left: 4, right: 56, top: 8, bottom: 12 }}
-            barCategoryGap="18%"
+            barCategoryGap={4}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#3A4A5A" strokeOpacity={0.25} horizontal={false} />
             <XAxis type="number" stroke="#3A4A5A" tick={{ fill: '#3A4A5A', fontSize: 12 }} />
