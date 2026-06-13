@@ -101,7 +101,7 @@ export const SimulationControl: React.FC<SimulationControlProps> = ({ onDataLoad
 
   return (
     <div className="flex w-full flex-col gap-2 sm:w-auto sm:items-end">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center">
         <label htmlFor="iterations" className="shrink-0 text-sm text-muted">
           Iterations:
         </label>
@@ -119,7 +119,7 @@ export const SimulationControl: React.FC<SimulationControlProps> = ({ onDataLoad
           <button
             onClick={runSimulation}
             disabled={simulating || loading}
-            className="inline-flex h-8 min-w-[9.75rem] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-gold px-3 py-1 text-sm font-medium text-black transition-opacity hover:opacity-90 disabled:opacity-50"
+            className="inline-flex h-8 min-w-[8.75rem] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-gold px-3 py-1 text-sm font-medium text-black transition-opacity hover:opacity-90 disabled:opacity-50 md:min-w-[9.75rem]"
           >
             {simulating && (
               <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-black/30 border-t-black" />

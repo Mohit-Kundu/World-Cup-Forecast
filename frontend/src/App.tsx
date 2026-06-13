@@ -9,7 +9,7 @@ import { useSnapPageIndex } from './hooks/useSnapPageIndex';
 import { PredictionsData } from './types';
 
 const SNAP_SECTION_CLASS =
-  'box-border flex h-full snap-start snap-always flex-col py-6';
+  'box-border flex min-h-full snap-start snap-always flex-col pb-4 pt-1 2xl:py-6';
 const SNAP_INNER_CLASS = 'flex min-h-0 w-full flex-1 flex-col';
 
 const App: React.FC = () => {
@@ -19,8 +19,8 @@ const App: React.FC = () => {
 
   return (
     <div className="flex h-screen flex-col bg-background text-primary">
-      <div className="mx-auto flex w-full max-w-7xl min-h-0 flex-1 flex-col px-6 pt-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
-        <header className="mb-6 shrink-0 border-b border-muted/20 pb-6">
+      <div className="mx-auto flex w-full max-w-[92rem] min-h-0 flex-1 flex-col px-4 pt-4 sm:px-6 sm:pt-5 md:px-8 lg:px-10 xl:px-12 2xl:px-16">
+        <header className="mb-4 shrink-0 border-b border-muted/20 pb-4 md:mb-6 md:pb-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h1 className="flex items-center gap-2 text-xl font-medium tracking-tight text-primary md:text-2xl">

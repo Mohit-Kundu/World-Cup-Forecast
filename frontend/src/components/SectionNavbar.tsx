@@ -27,7 +27,7 @@ const SectionNavbar: React.FC<SectionNavbarProps> = ({ containerRef, activeIndex
 
   return (
     <nav
-      className="mb-4 flex shrink-0 items-center justify-between gap-4 border-b border-muted/20 pb-4"
+      className="mb-1.5 flex shrink-0 items-center justify-between gap-2 border-b border-muted/20 pb-2 2xl:mb-4 2xl:gap-4 2xl:pb-4"
       aria-label="Page sections"
     >
       <div className="flex min-w-0 flex-nowrap gap-1 overflow-x-auto scrollbar-hide">
@@ -40,7 +40,7 @@ const SectionNavbar: React.FC<SectionNavbarProps> = ({ containerRef, activeIndex
               type="button"
               onClick={() => scrollToSection(index)}
               aria-current={isActive ? 'page' : undefined}
-              className={`shrink-0 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
+              className={`shrink-0 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors md:px-3 ${
                 isActive
                   ? 'bg-gold/15 text-gold'
                   : 'text-muted hover:bg-surface hover:text-primary'

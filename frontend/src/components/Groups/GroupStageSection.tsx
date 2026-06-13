@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import GroupTable from './GroupTable';
 import { PredictionsData } from '../../types';
 
@@ -7,21 +7,74 @@ interface GroupStageSectionProps {
 }
 
 const GROUP_ORDER = 'ABCDEFGHIJKL'.split('');
-const GROUPS_PER_PAGE = 6;
+
+function useGridColumnCount(gridRef: React.RefObject<HTMLDivElement | null>) {
+  const [columnCount, setColumnCount] = useState(() =>
+    window.matchMedia('(min-width: 640px)').matches ? 3 : 1
+  );
+
+  useLayoutEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const readColumns = () => {
+      const template = window.getComputedStyle(grid).gridTemplateColumns;
+      const count = template
+        .split(' ')
+        .filter((part) => part && part !== '/')
+        .length;
+      setColumnCount(Math.max(1, count));
+    };
+
+    readColumns();
+    const observer = new ResizeObserver(readColumns);
+    observer.observe(grid);
+    window.addEventListener('resize', readColumns);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', readColumns);
+    };
+  }, []);
+
+  return columnCount;
+}
+
+function useIsMonitorLayout() {
+  const [isMonitor, setIsMonitor] = useState(
+    () => window.matchMedia('(min-width: 1536px)').matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1536px)');
+    const onChange = (event: MediaQueryListEvent) => setIsMonitor(event.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  return isMonitor;
+}
 
 const btnClass =
   'inline-flex h-8 items-center justify-center rounded-md border border-muted/40 px-2 text-xs text-primary transition-colors hover:border-muted/60 disabled:cursor-not-allowed disabled:opacity-40';
 
 const GroupStageSection: React.FC<GroupStageSectionProps> = ({ data }) => {
   const groupStandings = data.group_standings ?? {};
+  const gridRef = useRef<HTMLDivElement>(null);
+  const columnCount = useGridColumnCount(gridRef);
+  const isMonitor = useIsMonitorLayout();
+  const groupsPerPage = isMonitor ? columnCount * 2 : columnCount;
   const [page, setPage] = useState(1);
 
-  const totalPages = Math.max(1, Math.ceil(GROUP_ORDER.length / GROUPS_PER_PAGE));
+  useEffect(() => {
+    setPage(1);
+  }, [groupsPerPage]);
+
+  const totalPages = Math.max(1, Math.ceil(GROUP_ORDER.length / groupsPerPage));
   const safePage = Math.min(page, totalPages);
-  const pageStart = (safePage - 1) * GROUPS_PER_PAGE;
-  const pageGroups = GROUP_ORDER.slice(pageStart, pageStart + GROUPS_PER_PAGE);
+  const pageStart = (safePage - 1) * groupsPerPage;
+  const pageGroups = GROUP_ORDER.slice(pageStart, pageStart + groupsPerPage);
   const rangeStart = pageStart + 1;
-  const rangeEnd = Math.min(pageStart + GROUPS_PER_PAGE, GROUP_ORDER.length);
+  const rangeEnd = Math.min(pageStart + groupsPerPage, GROUP_ORDER.length);
 
   return (
     <section>
@@ -61,7 +114,7 @@ const GroupStageSection: React.FC<GroupStageSectionProps> = ({ data }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div ref={gridRef} className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {pageGroups.map((group) => (
           <GroupTable
             key={group}

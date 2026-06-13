@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import RoundProbChart from './RoundProbChart';
 import { PredictionsData } from '../../types';
 import { probsToChartData } from '../../utils/safeData';
@@ -7,8 +7,28 @@ interface KnockoutProbabilitiesSectionProps {
   data: PredictionsData;
 }
 
+const LAPTOP_TOP_TEAMS = 5;
+const MONITOR_TOP_TEAMS = 10;
+
+function useChartTopLimit() {
+  const [limit, setLimit] = useState(() =>
+    window.matchMedia('(min-width: 1536px)').matches ? MONITOR_TOP_TEAMS : LAPTOP_TOP_TEAMS
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1536px)');
+    const onChange = (event: MediaQueryListEvent) =>
+      setLimit(event.matches ? MONITOR_TOP_TEAMS : LAPTOP_TOP_TEAMS);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  return limit;
+}
+
 const KnockoutProbabilitiesSection: React.FC<KnockoutProbabilitiesSectionProps> = ({ data }) => {
   const [activeRound, setActiveRound] = useState(0);
+  const topLimit = useChartTopLimit();
 
   const rounds = useMemo(
     () => [
@@ -16,34 +36,34 @@ const KnockoutProbabilitiesSection: React.FC<KnockoutProbabilitiesSectionProps> 
         tab: 'Final',
         title: 'Final',
         subtitle: 'P(win World Cup)',
-        data: probsToChartData(data.champion_probs ?? {}),
+        data: probsToChartData(data.champion_probs ?? {}, topLimit),
       },
       {
         tab: 'SF',
         title: 'Semi-Finals',
         subtitle: 'P(win SF match and reach final)',
-        data: probsToChartData(data.sf_probs ?? {}),
+        data: probsToChartData(data.sf_probs ?? {}, topLimit),
       },
       {
         tab: 'QF',
         title: 'Quarter-Finals',
         subtitle: 'P(win QF match and advance)',
-        data: probsToChartData(data.qf_probs ?? {}),
+        data: probsToChartData(data.qf_probs ?? {}, topLimit),
       },
       {
         tab: 'R16',
         title: 'Round of 16',
         subtitle: 'P(win R16 match and advance)',
-        data: probsToChartData(data.r16_probs ?? {}),
+        data: probsToChartData(data.r16_probs ?? {}, topLimit),
       },
       {
         tab: 'R32',
         title: 'Round of 32',
         subtitle: 'P(win R32 match and advance)',
-        data: probsToChartData(data.r32_probs ?? {}),
+        data: probsToChartData(data.r32_probs ?? {}, topLimit),
       },
     ],
-    [data]
+    [data, topLimit]
   );
 
   const selected = rounds[activeRound];

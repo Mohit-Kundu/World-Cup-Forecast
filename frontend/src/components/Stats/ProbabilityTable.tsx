@@ -14,8 +14,25 @@ interface ProbabilityTableProps {
 type SortKey = keyof TableDataItem;
 type SortOrder = 'asc' | 'desc';
 
-const PAGE_SIZE = 10;
+const LAPTOP_PAGE_SIZE = 5;
+const MONITOR_PAGE_SIZE = 10;
 const GROUP_OPTIONS = ['', ...Object.keys(WC2026_GROUPS)];
+
+function usePageSize() {
+  const [pageSize, setPageSize] = useState(() =>
+    window.matchMedia('(min-width: 1536px)').matches ? MONITOR_PAGE_SIZE : LAPTOP_PAGE_SIZE
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1536px)');
+    const onChange = (event: MediaQueryListEvent) =>
+      setPageSize(event.matches ? MONITOR_PAGE_SIZE : LAPTOP_PAGE_SIZE);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  return pageSize;
+}
 
 const SORTABLE_COLUMNS: { key: SortKey; label: string; tooltip?: string }[] = [
   { key: 'rank', label: '#' },
@@ -64,10 +81,11 @@ const ProbabilityTable: React.FC<ProbabilityTableProps> = ({ data, teamStats }) 
   const [confederationFilter, setConfederationFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
+  const pageSize = usePageSize();
 
   useEffect(() => {
     setPage(1);
-  }, [groupFilter, confederationFilter, searchQuery, sortKey, sortOrder]);
+  }, [groupFilter, confederationFilter, searchQuery, sortKey, sortOrder, pageSize]);
 
   const filteredData = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -99,10 +117,10 @@ const ProbabilityTable: React.FC<ProbabilityTableProps> = ({ data, teamStats }) 
     [sortedData]
   );
 
-  const totalPages = Math.max(1, Math.ceil(rankedData.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(rankedData.length / pageSize));
   const safePage = Math.min(page, totalPages);
-  const pageStart = (safePage - 1) * PAGE_SIZE;
-  const pageData = rankedData.slice(pageStart, pageStart + PAGE_SIZE);
+  const pageStart = (safePage - 1) * pageSize;
+  const pageData = rankedData.slice(pageStart, pageStart + pageSize);
 
   const handleSort = (key: SortKey) => {
     if (sortKey === key) {
@@ -124,14 +142,14 @@ const ProbabilityTable: React.FC<ProbabilityTableProps> = ({ data, teamStats }) 
     }`;
 
   return (
-    <div className="rounded-lg border border-muted/20 bg-surface px-6 py-4">
+    <div className="rounded-lg border border-muted/20 bg-surface px-3 py-4 sm:px-4 lg:px-5">
       <div className="mb-4 grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto]">
         <div className="min-w-0">
           <h3 className="text-xs font-medium uppercase tracking-widest text-muted">All teams</h3>
           <p className="mt-1 text-[10px] text-muted/70">
             {rankedData.length === 0
               ? 'No teams match filters'
-              : `Showing ${pageStart + 1}–${Math.min(pageStart + PAGE_SIZE, rankedData.length)} of ${rankedData.length}`}
+              : `Showing ${pageStart + 1}–${Math.min(pageStart + pageSize, rankedData.length)} of ${rankedData.length}`}
           </p>
         </div>
 
@@ -204,7 +222,7 @@ const ProbabilityTable: React.FC<ProbabilityTableProps> = ({ data, teamStats }) 
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-xs">
+        <table className="min-w-[860px] w-full text-xs">
           <thead>
             <tr className="border-b border-muted/20">
               {SORTABLE_COLUMNS.map((col, index) => (

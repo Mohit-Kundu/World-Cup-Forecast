@@ -14,7 +14,7 @@ interface GroupTableProps {
 const GroupTable: React.FC<GroupTableProps> = ({ group, standings, teamStats }) => {
   if (standings.length === 0) {
     return (
-      <div className="rounded-lg border border-muted/20 bg-surface px-5 py-3">
+      <div className="min-w-0 rounded-lg border border-muted/20 bg-surface px-3 py-3 sm:px-4">
         <h3 className="mb-2 text-xs font-medium text-primary">Group {group}</h3>
         <p className="text-[10px] text-muted">No data</p>
       </div>
@@ -52,7 +52,9 @@ const GroupTable: React.FC<GroupTableProps> = ({ group, standings, teamStats }) 
               <td className="py-1.5">
                 <FlagTooltip team={row.team} stats={getTeamStats(teamStats, row.team)} />
               </td>
-              <td className="py-1.5 font-medium text-primary">{row.team}</td>
+              <td className="max-w-[5.5rem] truncate py-1.5 font-medium text-primary sm:max-w-none">
+                {row.team}
+              </td>
               <td className="py-1.5 text-right font-normal tabular-nums text-primary">{row.pts}</td>
               <td className="py-1.5 text-right font-normal tabular-nums text-primary">{row.gd > 0 ? `+${row.gd}` : row.gd}</td>
               <td className="py-1.5 text-right font-normal tabular-nums text-primary">{row.gf}</td>

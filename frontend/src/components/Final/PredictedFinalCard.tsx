@@ -39,10 +39,10 @@ const PredictedFinalCard: React.FC<PredictedFinalCardProps> = ({
         </p>
       </div>
 
-      <div className="rounded-lg border border-muted/20 bg-surface px-8 py-6">
+      <div className="rounded-lg border border-muted/20 bg-surface px-4 py-5 sm:px-6 md:px-8 md:py-6">
         <div className="space-y-6">
           <div className="text-center">
-            <div className="flex items-center justify-center gap-3 text-2xl leading-none md:text-3xl">
+            <div className="flex items-center justify-center gap-2 text-xl leading-none sm:gap-3 sm:text-2xl md:text-3xl">
               <p
                 className="font-black uppercase tracking-[0.25em]"
                 style={{ color: FINAL_WINNER_COLOR }}
@@ -53,7 +53,7 @@ const PredictedFinalCard: React.FC<PredictedFinalCardProps> = ({
                 team={winner}
                 srcWidth={320}
                 loading="eager"
-                className="h-7 w-10 shrink-0 rounded-sm object-cover ring-1 ring-[#FAC775]/40"
+                className="h-6 w-9 shrink-0 rounded-sm object-cover ring-1 ring-[#FAC775]/40 sm:h-7 sm:w-10"
               />
             </div>
           </div>
