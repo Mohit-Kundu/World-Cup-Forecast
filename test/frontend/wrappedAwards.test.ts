@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { FALLBACK_AWARD_CARDS } from '@/components/Wrapped/awardCards';
+import { AWARD_CARD_LABELS, AWARD_CARD_TOOLTIPS } from '@/components/Wrapped/awardCardStyles';
 import { resolveAwardCards } from '@/utils/wrappedAwards';
 import { PredictionsData } from '@/types';
 
@@ -27,6 +28,12 @@ const baseData: PredictionsData = {
 };
 
 describe('resolveAwardCards', () => {
+  it('has tooltip copy for every award card', () => {
+    for (const id of Object.keys(AWARD_CARD_LABELS)) {
+      expect(AWARD_CARD_TOOLTIPS[id]?.length).toBeGreaterThan(0);
+    }
+  });
+
   it('returns fallback cards when wrapped_awards is missing', () => {
     expect(resolveAwardCards(undefined)).toEqual(FALLBACK_AWARD_CARDS);
     expect(resolveAwardCards(baseData)).toEqual(FALLBACK_AWARD_CARDS);

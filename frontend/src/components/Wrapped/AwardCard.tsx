@@ -1,6 +1,8 @@
 import FlagImage from '../FlagImage';
+import HelpTooltip from '../HelpTooltip';
 import { getAwardCardIcon } from './awardCardIcons';
 import { AwardCard as AwardCardType } from './awardCards';
+import { AWARD_CARD_TOOLTIPS } from './awardCardStyles';
 
 interface AwardCardProps {
   card: AwardCardType;
@@ -12,6 +14,7 @@ function AwardCard({ card, className, variant = 'default' }: AwardCardProps) {
   const isGroupCard = card.teams.length > 1;
   const Icon = getAwardCardIcon(card.id);
   const isLaptop = variant === 'laptop';
+  const tooltip = AWARD_CARD_TOOLTIPS[card.id];
 
   const statsBlock = (
     <div>
@@ -75,12 +78,21 @@ function AwardCard({ card, className, variant = 'default' }: AwardCardProps) {
       >
       <div className={`flex flex-col ${isLaptop ? 'min-h-0 flex-1 gap-2' : 'gap-2'}`}>
         <div className="flex items-end justify-between gap-2">
-          <p
-            className={`m-0 font-medium uppercase tracking-widest ${isLaptop ? 'text-xs' : 'text-[10px]'}`}
-            style={{ color: card.accentColor }}
-          >
-            {card.label}
-          </p>
+          <div className="flex min-w-0 items-center gap-1">
+            <p
+              className={`m-0 font-medium uppercase tracking-widest ${isLaptop ? 'text-xs' : 'text-[10px]'}`}
+              style={{ color: card.accentColor }}
+            >
+              {card.label}
+            </p>
+            {tooltip && (
+              <HelpTooltip
+                text={tooltip}
+                triggerClassName="border-white/20 text-white/45 hover:border-white/35 hover:text-white/75"
+                ariaLabel={`About ${card.label}`}
+              />
+            )}
+          </div>
           <Icon
             className={`shrink-0 ${isLaptop ? 'h-9 w-9' : 'h-6 w-6'}`}
             style={{ color: card.accentColor }}

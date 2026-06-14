@@ -7,9 +7,16 @@ const TOOLTIP_WIDTH = 208;
 interface HelpTooltipProps {
   text: string;
   alignRight?: boolean;
+  triggerClassName?: string;
+  ariaLabel?: string;
 }
 
-const HelpTooltip: React.FC<HelpTooltipProps> = ({ text, alignRight = false }) => {
+const HelpTooltip: React.FC<HelpTooltipProps> = ({
+  text,
+  alignRight = false,
+  triggerClassName,
+  ariaLabel = 'Help',
+}) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const anchorRef = useRef<HTMLSpanElement>(null);
   const position = useFloatingTooltipPosition(anchorRef, showTooltip, {
@@ -27,8 +34,11 @@ const HelpTooltip: React.FC<HelpTooltipProps> = ({ text, alignRight = false }) =
       onClick={(e) => e.stopPropagation()}
     >
       <span
-        className="inline-flex h-3.5 w-3.5 cursor-help items-center justify-center rounded-full border border-muted/40 text-[8px] font-medium normal-case tracking-normal text-muted/70 transition-colors hover:border-muted/60 hover:text-primary"
-        aria-label="Column help"
+        className={`inline-flex h-3.5 w-3.5 cursor-help items-center justify-center rounded-full border text-[8px] font-medium normal-case tracking-normal transition-colors ${
+          triggerClassName ??
+          'border-muted/40 text-muted/70 hover:border-muted/60 hover:text-primary'
+        }`}
+        aria-label={ariaLabel}
       >
         ?
       </span>
