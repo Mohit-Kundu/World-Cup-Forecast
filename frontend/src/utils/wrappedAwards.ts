@@ -9,6 +9,21 @@ import {
 } from '../components/Wrapped/awardCardStyles';
 import { PredictionsData } from '../types';
 
+const AWARD_CARD_DISPLAY_ORDER = [
+  'group-of-death',
+  'group-of-chaos',
+  'dark-horse',
+  'lethal-attack',
+  'fortress',
+  'giant-killer',
+] as const;
+
+const AWARD_CARD_DISPLAY_ORDER_INDEX: Record<string, number> = AWARD_CARD_DISPLAY_ORDER
+  .reduce<Record<string, number>>((acc, id, index) => {
+    acc[id] = index;
+    return acc;
+  }, {});
+
 function mergeAwardPayload(payload: WrappedAwardPayload): AwardCard | null {
   const style = AWARD_CARD_STYLES[payload.id];
   const label = AWARD_CARD_LABELS[payload.id];
@@ -32,6 +47,12 @@ function mergeAwardPayload(payload: WrappedAwardPayload): AwardCard | null {
   };
 }
 
+function byDisplayOrder(a: AwardCard, b: AwardCard): number {
+  const aOrder = AWARD_CARD_DISPLAY_ORDER_INDEX[a.id] ?? Number.MAX_SAFE_INTEGER;
+  const bOrder = AWARD_CARD_DISPLAY_ORDER_INDEX[b.id] ?? Number.MAX_SAFE_INTEGER;
+  return aOrder - bOrder;
+}
+
 export function resolveAwardCards(data?: PredictionsData): AwardCard[] {
   const apiCards = data?.wrapped_awards ?? [];
   if (apiCards.length === 0) {
@@ -42,5 +63,5 @@ export function resolveAwardCards(data?: PredictionsData): AwardCard[] {
     .map((card) => mergeAwardPayload(card))
     .filter((card): card is AwardCard => card !== null);
 
-  return merged.length > 0 ? merged : FALLBACK_AWARD_CARDS;
+  return merged.length > 0 ? merged.sort(byDisplayOrder) : FALLBACK_AWARD_CARDS;
 }

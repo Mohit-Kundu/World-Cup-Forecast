@@ -54,6 +54,29 @@ describe('resolveAwardCards', () => {
     expect(cards[0].teams).toEqual(['Japan']);
   });
 
+  it('applies frontend display order regardless of backend order', () => {
+    const cards = resolveAwardCards({
+      ...baseData,
+      wrapped_awards: [
+        { id: 'giant-killer', bigNumber: '0.4', statLabel: 'x', teams: ['Morocco'], insight: 'x' },
+        { id: 'fortress', bigNumber: '0.6', statLabel: 'x', teams: ['Spain'], insight: 'x' },
+        { id: 'dark-horse', bigNumber: '+2.0', statLabel: 'x', teams: ['Japan'], insight: 'x' },
+        { id: 'group-of-chaos', bigNumber: '1.3', statLabel: 'x', teams: ['A', 'B', 'C', 'D'], insight: 'x' },
+        { id: 'lethal-attack', bigNumber: '3.1', statLabel: 'x', teams: ['Spain'], insight: 'x' },
+        { id: 'group-of-death', bigNumber: '1957', statLabel: 'x', teams: ['A', 'B', 'C', 'D'], insight: 'x' },
+      ],
+    });
+
+    expect(cards.map((card) => card.id)).toEqual([
+      'group-of-death',
+      'group-of-chaos',
+      'dark-horse',
+      'lethal-attack',
+      'fortress',
+      'giant-killer',
+    ]);
+  });
+
   it('falls back when API cards are empty or unknown', () => {
     expect(
       resolveAwardCards({

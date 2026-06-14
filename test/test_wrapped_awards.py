@@ -183,14 +183,14 @@ def test_build_wrapped_awards_returns_six_cards_with_expected_ids():
     awards = build_wrapped_awards(_sample_mc_output(), _sample_team_stats(), 1000)
 
     assert len(awards) == 6
-    assert [card["id"] for card in awards] == [
-        "dark-horse",
-        "giant-killer",
-        "lethal-attack",
-        "fortress",
+    assert sorted(card["id"] for card in awards) == sorted([
         "group-of-death",
         "group-of-chaos",
-    ]
+        "dark-horse",
+        "lethal-attack",
+        "fortress",
+        "giant-killer",
+    ])
 
 
 def test_build_wrapped_awards_selects_expected_winners():
