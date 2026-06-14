@@ -1245,22 +1245,22 @@
     ],
     "D": [
       {
-        "team": "Paraguay",
+        "team": "United States",
         "rank": 1,
         "pts": 3,
         "gd": 0,
         "gf": 3,
         "played": 3,
-        "qualify_prob": 0.5391612903225806
+        "qualify_prob": 0.4570967741935484
       },
       {
-        "team": "United States",
+        "team": "Paraguay",
         "rank": 2,
         "pts": 3,
         "gd": 0,
         "gf": 3,
         "played": 3,
-        "qualify_prob": 0.4570967741935484
+        "qualify_prob": 0.5391612903225806
       },
       {
         "team": "Australia",
@@ -1368,22 +1368,22 @@
         "qualify_prob": 0.8570322580645161
       },
       {
-        "team": "Iran",
+        "team": "Egypt",
         "rank": 2,
         "pts": 4,
         "gd": 0,
         "gf": 2,
         "played": 3,
-        "qualify_prob": 0.4912258064516129
+        "qualify_prob": 0.49929032258064515
       },
       {
-        "team": "Egypt",
+        "team": "Iran",
         "rank": 3,
         "pts": 4,
         "gd": 0,
         "gf": 2,
         "played": 3,
-        "qualify_prob": 0.49929032258064515
+        "qualify_prob": 0.4912258064516129
       },
       {
         "team": "New Zealand",
@@ -1601,6 +1601,13 @@
       "Attack Strength (Avg Goals)": "1.15",
       "Defense Rating (Inverse)": "1.50",
       "Expected Conceded Goals": "0.67",
+      "Rolling Attack Rate": "1.10",
+      "Rolling Conceded Rate": "1.00",
+      "ELO-Adjusted Attack Score": "1.402",
+      "ELO-Adjusted Fortress Score": "0.940",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1819",
+      "Last 5 Goals Scored": "7",
       "Discipline Index (Expected Cards)": "1.88"
     },
     "South Africa": {
@@ -1609,6 +1616,13 @@
       "Attack Strength (Avg Goals)": "1.32",
       "Defense Rating (Inverse)": "0.77",
       "Expected Conceded Goals": "1.31",
+      "Rolling Attack Rate": "1.50",
+      "Rolling Conceded Rate": "1.10",
+      "ELO-Adjusted Attack Score": "1.378",
+      "ELO-Adjusted Fortress Score": "1.224",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1552",
+      "Last 5 Goals Scored": "6",
       "Discipline Index (Expected Cards)": "2.12"
     },
     "South Korea": {
@@ -1617,6 +1631,13 @@
       "Attack Strength (Avg Goals)": "1.25",
       "Defense Rating (Inverse)": "0.95",
       "Expected Conceded Goals": "1.05",
+      "Rolling Attack Rate": "1.50",
+      "Rolling Conceded Rate": "1.20",
+      "ELO-Adjusted Attack Score": "1.585",
+      "ELO-Adjusted Fortress Score": "1.132",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1698",
+      "Last 5 Goals Scored": "5",
       "Discipline Index (Expected Cards)": "2.44"
     },
     "Czechia": {
@@ -1625,6 +1646,13 @@
       "Attack Strength (Avg Goals)": "1.92",
       "Defense Rating (Inverse)": "1.03",
       "Expected Conceded Goals": "0.97",
+      "Rolling Attack Rate": "1.80",
+      "Rolling Conceded Rate": "1.20",
+      "ELO-Adjusted Attack Score": "1.755",
+      "ELO-Adjusted Fortress Score": "1.149",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1490",
+      "Last 5 Goals Scored": "12",
       "Discipline Index (Expected Cards)": "2.20"
     },
     "Canada": {
@@ -1633,6 +1661,13 @@
       "Attack Strength (Avg Goals)": "0.93",
       "Defense Rating (Inverse)": "2.34",
       "Expected Conceded Goals": "0.43",
+      "Rolling Attack Rate": "1.10",
+      "Rolling Conceded Rate": "0.40",
+      "ELO-Adjusted Attack Score": "1.347",
+      "ELO-Adjusted Fortress Score": "0.579",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1681",
+      "Last 5 Goals Scored": "4",
       "Discipline Index (Expected Cards)": "1.64"
     },
     "Switzerland": {
@@ -1641,6 +1676,13 @@
       "Attack Strength (Avg Goals)": "2.14",
       "Defense Rating (Inverse)": "1.08",
       "Expected Conceded Goals": "0.92",
+      "Rolling Attack Rate": "2.50",
+      "Rolling Conceded Rate": "0.80",
+      "ELO-Adjusted Attack Score": "2.415",
+      "ELO-Adjusted Fortress Score": "0.799",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1768",
+      "Last 5 Goals Scored": "8",
       "Discipline Index (Expected Cards)": "2.28"
     },
     "Qatar": {
@@ -1649,6 +1691,13 @@
       "Attack Strength (Avg Goals)": "0.84",
       "Defense Rating (Inverse)": "0.57",
       "Expected Conceded Goals": "1.74",
+      "Rolling Attack Rate": "0.90",
+      "Rolling Conceded Rate": "1.90",
+      "ELO-Adjusted Attack Score": "0.969",
+      "ELO-Adjusted Fortress Score": "1.976",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1525",
+      "Last 5 Goals Scored": "4",
       "Discipline Index (Expected Cards)": "3.08"
     },
     "Bosnia and Herzegovina": {
@@ -1657,6 +1706,13 @@
       "Attack Strength (Avg Goals)": "1.84",
       "Defense Rating (Inverse)": "1.04",
       "Expected Conceded Goals": "0.97",
+      "Rolling Attack Rate": "2.10",
+      "Rolling Conceded Rate": "1.10",
+      "ELO-Adjusted Attack Score": "1.799",
+      "ELO-Adjusted Fortress Score": "1.170",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1474",
+      "Last 5 Goals Scored": "10",
       "Discipline Index (Expected Cards)": "2.76"
     },
     "Brazil": {
@@ -1665,6 +1721,13 @@
       "Attack Strength (Avg Goals)": "1.80",
       "Defense Rating (Inverse)": "0.97",
       "Expected Conceded Goals": "1.03",
+      "Rolling Attack Rate": "1.80",
+      "Rolling Conceded Rate": "0.80",
+      "ELO-Adjusted Attack Score": "2.017",
+      "ELO-Adjusted Fortress Score": "0.760",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1830",
+      "Last 5 Goals Scored": "9",
       "Discipline Index (Expected Cards)": "2.20"
     },
     "Morocco": {
@@ -1673,6 +1736,13 @@
       "Attack Strength (Avg Goals)": "1.73",
       "Defense Rating (Inverse)": "2.35",
       "Expected Conceded Goals": "0.42",
+      "Rolling Attack Rate": "1.80",
+      "Rolling Conceded Rate": "0.50",
+      "ELO-Adjusted Attack Score": "1.851",
+      "ELO-Adjusted Fortress Score": "0.633",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1634",
+      "Last 5 Goals Scored": "8",
       "Discipline Index (Expected Cards)": "1.48"
     },
     "Scotland": {
@@ -1681,6 +1751,13 @@
       "Attack Strength (Avg Goals)": "1.66",
       "Defense Rating (Inverse)": "0.76",
       "Expected Conceded Goals": "1.32",
+      "Rolling Attack Rate": "1.80",
+      "Rolling Conceded Rate": "1.20",
+      "ELO-Adjusted Attack Score": "1.796",
+      "ELO-Adjusted Fortress Score": "1.123",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1632",
+      "Last 5 Goals Scored": "8",
       "Discipline Index (Expected Cards)": "2.28"
     },
     "Haiti": {
@@ -1689,6 +1766,13 @@
       "Attack Strength (Avg Goals)": "1.00",
       "Defense Rating (Inverse)": "0.98",
       "Expected Conceded Goals": "1.02",
+      "Rolling Attack Rate": "1.20",
+      "Rolling Conceded Rate": "1.10",
+      "ELO-Adjusted Attack Score": "1.214",
+      "ELO-Adjusted Fortress Score": "1.217",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1534",
+      "Last 5 Goals Scored": "4",
       "Discipline Index (Expected Cards)": "2.36"
     },
     "United States": {
@@ -1697,6 +1781,13 @@
       "Attack Strength (Avg Goals)": "1.88",
       "Defense Rating (Inverse)": "0.57",
       "Expected Conceded Goals": "1.75",
+      "Rolling Attack Rate": "1.70",
+      "Rolling Conceded Rate": "1.60",
+      "ELO-Adjusted Attack Score": "1.685",
+      "ELO-Adjusted Fortress Score": "1.429",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1832",
+      "Last 5 Goals Scored": "11",
       "Discipline Index (Expected Cards)": "2.84"
     },
     "Paraguay": {
@@ -1705,6 +1796,13 @@
       "Attack Strength (Avg Goals)": "1.00",
       "Defense Rating (Inverse)": "0.86",
       "Expected Conceded Goals": "1.16",
+      "Rolling Attack Rate": "1.00",
+      "Rolling Conceded Rate": "1.00",
+      "ELO-Adjusted Attack Score": "1.315",
+      "ELO-Adjusted Fortress Score": "0.953",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1831",
+      "Last 5 Goals Scored": "5",
       "Discipline Index (Expected Cards)": "2.28"
     },
     "Australia": {
@@ -1713,6 +1811,13 @@
       "Attack Strength (Avg Goals)": "1.34",
       "Defense Rating (Inverse)": "0.95",
       "Expected Conceded Goals": "1.06",
+      "Rolling Attack Rate": "1.50",
+      "Rolling Conceded Rate": "0.90",
+      "ELO-Adjusted Attack Score": "1.613",
+      "ELO-Adjusted Fortress Score": "0.913",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1690",
+      "Last 5 Goals Scored": "7",
       "Discipline Index (Expected Cards)": "2.04"
     },
     "T\u00fcrkiye": {
@@ -1721,6 +1826,13 @@
       "Attack Strength (Avg Goals)": "1.98",
       "Defense Rating (Inverse)": "1.03",
       "Expected Conceded Goals": "0.97",
+      "Rolling Attack Rate": "2.10",
+      "Rolling Conceded Rate": "1.40",
+      "ELO-Adjusted Attack Score": "2.147",
+      "ELO-Adjusted Fortress Score": "1.168",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1751",
+      "Last 5 Goals Scored": "10",
       "Discipline Index (Expected Cards)": "2.60"
     },
     "Germany": {
@@ -1729,6 +1841,13 @@
       "Attack Strength (Avg Goals)": "2.59",
       "Defense Rating (Inverse)": "1.11",
       "Expected Conceded Goals": "0.90",
+      "Rolling Attack Rate": "2.30",
+      "Rolling Conceded Rate": "1.10",
+      "ELO-Adjusted Attack Score": "2.315",
+      "ELO-Adjusted Fortress Score": "0.970",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1688",
+      "Last 5 Goals Scored": "15",
       "Discipline Index (Expected Cards)": "2.28"
     },
     "Ecuador": {
@@ -1737,6 +1856,13 @@
       "Attack Strength (Avg Goals)": "0.81",
       "Defense Rating (Inverse)": "2.15",
       "Expected Conceded Goals": "0.47",
+      "Rolling Attack Rate": "0.70",
+      "Rolling Conceded Rate": "0.40",
+      "ELO-Adjusted Attack Score": "1.170",
+      "ELO-Adjusted Fortress Score": "0.535",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1836",
+      "Last 5 Goals Scored": "5",
       "Discipline Index (Expected Cards)": "1.40"
     },
     "Ivory Coast": {
@@ -1745,6 +1871,13 @@
       "Attack Strength (Avg Goals)": "2.21",
       "Defense Rating (Inverse)": "1.20",
       "Expected Conceded Goals": "0.84",
+      "Rolling Attack Rate": "2.00",
+      "Rolling Conceded Rate": "0.70",
+      "ELO-Adjusted Attack Score": "1.829",
+      "ELO-Adjusted Fortress Score": "0.829",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1554",
+      "Last 5 Goals Scored": "13",
       "Discipline Index (Expected Cards)": "1.64"
     },
     "Cura\u00e7ao": {
@@ -1753,6 +1886,13 @@
       "Attack Strength (Avg Goals)": "1.46",
       "Defense Rating (Inverse)": "0.77",
       "Expected Conceded Goals": "1.29",
+      "Rolling Attack Rate": "1.60",
+      "Rolling Conceded Rate": "1.30",
+      "ELO-Adjusted Attack Score": "1.352",
+      "ELO-Adjusted Fortress Score": "1.464",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1465",
+      "Last 5 Goals Scored": "9",
       "Discipline Index (Expected Cards)": "2.36"
     },
     "Netherlands": {
@@ -1761,6 +1901,13 @@
       "Attack Strength (Avg Goals)": "2.57",
       "Defense Rating (Inverse)": "1.82",
       "Expected Conceded Goals": "0.55",
+      "Rolling Attack Rate": "3.00",
+      "Rolling Conceded Rate": "0.60",
+      "ELO-Adjusted Attack Score": "2.874",
+      "ELO-Adjusted Fortress Score": "0.648",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1544",
+      "Last 5 Goals Scored": "12",
       "Discipline Index (Expected Cards)": "2.04"
     },
     "Sweden": {
@@ -1769,6 +1916,13 @@
       "Attack Strength (Avg Goals)": "1.59",
       "Defense Rating (Inverse)": "0.56",
       "Expected Conceded Goals": "1.77",
+      "Rolling Attack Rate": "1.60",
+      "Rolling Conceded Rate": "1.80",
+      "ELO-Adjusted Attack Score": "1.619",
+      "ELO-Adjusted Fortress Score": "1.569",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1755",
+      "Last 5 Goals Scored": "8",
       "Discipline Index (Expected Cards)": "2.68"
     },
     "Japan": {
@@ -1777,6 +1931,13 @@
       "Attack Strength (Avg Goals)": "1.80",
       "Defense Rating (Inverse)": "1.88",
       "Expected Conceded Goals": "0.53",
+      "Rolling Attack Rate": "1.80",
+      "Rolling Conceded Rate": "0.70",
+      "ELO-Adjusted Attack Score": "1.936",
+      "ELO-Adjusted Fortress Score": "0.730",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1745",
+      "Last 5 Goals Scored": "10",
       "Discipline Index (Expected Cards)": "1.72"
     },
     "Tunisia": {
@@ -1785,6 +1946,13 @@
       "Attack Strength (Avg Goals)": "1.21",
       "Defense Rating (Inverse)": "1.02",
       "Expected Conceded Goals": "0.98",
+      "Rolling Attack Rate": "1.40",
+      "Rolling Conceded Rate": "1.00",
+      "ELO-Adjusted Attack Score": "1.418",
+      "ELO-Adjusted Fortress Score": "1.067",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1574",
+      "Last 5 Goals Scored": "5",
       "Discipline Index (Expected Cards)": "2.04"
     },
     "Belgium": {
@@ -1793,6 +1961,13 @@
       "Attack Strength (Avg Goals)": "3.23",
       "Defense Rating (Inverse)": "1.10",
       "Expected Conceded Goals": "0.91",
+      "Rolling Attack Rate": "3.50",
+      "Rolling Conceded Rate": "1.00",
+      "ELO-Adjusted Attack Score": "3.085",
+      "ELO-Adjusted Fortress Score": "0.935",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1482",
+      "Last 5 Goals Scored": "18",
       "Discipline Index (Expected Cards)": "2.36"
     },
     "Egypt": {
@@ -1801,6 +1976,13 @@
       "Attack Strength (Avg Goals)": "1.21",
       "Defense Rating (Inverse)": "1.39",
       "Expected Conceded Goals": "0.72",
+      "Rolling Attack Rate": "1.30",
+      "Rolling Conceded Rate": "0.80",
+      "ELO-Adjusted Attack Score": "1.401",
+      "ELO-Adjusted Fortress Score": "0.893",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1660",
+      "Last 5 Goals Scored": "7",
       "Discipline Index (Expected Cards)": "2.04"
     },
     "Iran": {
@@ -1809,6 +1991,13 @@
       "Attack Strength (Avg Goals)": "1.57",
       "Defense Rating (Inverse)": "1.89",
       "Expected Conceded Goals": "0.53",
+      "Rolling Attack Rate": "1.60",
+      "Rolling Conceded Rate": "0.70",
+      "ELO-Adjusted Attack Score": "1.658",
+      "ELO-Adjusted Fortress Score": "0.790",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1580",
+      "Last 5 Goals Scored": "8",
       "Discipline Index (Expected Cards)": "1.96"
     },
     "New Zealand": {
@@ -1817,6 +2006,13 @@
       "Attack Strength (Avg Goals)": "1.01",
       "Defense Rating (Inverse)": "0.65",
       "Expected Conceded Goals": "1.54",
+      "Rolling Attack Rate": "0.90",
+      "Rolling Conceded Rate": "1.50",
+      "ELO-Adjusted Attack Score": "1.078",
+      "ELO-Adjusted Fortress Score": "1.477",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1781",
+      "Last 5 Goals Scored": "6",
       "Discipline Index (Expected Cards)": "2.28"
     },
     "Spain": {
@@ -1825,6 +2021,13 @@
       "Attack Strength (Avg Goals)": "2.89",
       "Defense Rating (Inverse)": "1.78",
       "Expected Conceded Goals": "0.56",
+      "Rolling Attack Rate": "3.10",
+      "Rolling Conceded Rate": "0.80",
+      "ELO-Adjusted Attack Score": "3.254",
+      "ELO-Adjusted Fortress Score": "0.697",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1758",
+      "Last 5 Goals Scored": "13",
       "Discipline Index (Expected Cards)": "2.28"
     },
     "Uruguay": {
@@ -1833,6 +2036,13 @@
       "Attack Strength (Avg Goals)": "0.91",
       "Defense Rating (Inverse)": "0.90",
       "Expected Conceded Goals": "1.11",
+      "Rolling Attack Rate": "1.00",
+      "Rolling Conceded Rate": "0.90",
+      "ELO-Adjusted Attack Score": "1.357",
+      "ELO-Adjusted Fortress Score": "0.860",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1732",
+      "Last 5 Goals Scored": "4",
       "Discipline Index (Expected Cards)": "2.04"
     },
     "Saudi Arabia": {
@@ -1841,6 +2051,13 @@
       "Attack Strength (Avg Goals)": "0.72",
       "Defense Rating (Inverse)": "0.67",
       "Expected Conceded Goals": "1.49",
+      "Rolling Attack Rate": "0.90",
+      "Rolling Conceded Rate": "1.30",
+      "ELO-Adjusted Attack Score": "1.066",
+      "ELO-Adjusted Fortress Score": "1.341",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1632",
+      "Last 5 Goals Scored": "3",
       "Discipline Index (Expected Cards)": "2.60"
     },
     "Cape Verde": {
@@ -1849,6 +2066,13 @@
       "Attack Strength (Avg Goals)": "1.48",
       "Defense Rating (Inverse)": "1.01",
       "Expected Conceded Goals": "0.99",
+      "Rolling Attack Rate": "1.70",
+      "Rolling Conceded Rate": "1.00",
+      "ELO-Adjusted Attack Score": "1.517",
+      "ELO-Adjusted Fortress Score": "1.127",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1490",
+      "Last 5 Goals Scored": "7",
       "Discipline Index (Expected Cards)": "2.12"
     },
     "France": {
@@ -1857,6 +2081,13 @@
       "Attack Strength (Avg Goals)": "2.75",
       "Defense Rating (Inverse)": "0.98",
       "Expected Conceded Goals": "1.02",
+      "Rolling Attack Rate": "2.70",
+      "Rolling Conceded Rate": "1.10",
+      "ELO-Adjusted Attack Score": "2.816",
+      "ELO-Adjusted Fortress Score": "0.896",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1740",
+      "Last 5 Goals Scored": "14",
       "Discipline Index (Expected Cards)": "2.20"
     },
     "Senegal": {
@@ -1865,6 +2096,13 @@
       "Attack Strength (Avg Goals)": "1.98",
       "Defense Rating (Inverse)": "1.54",
       "Expected Conceded Goals": "0.65",
+      "Rolling Attack Rate": "2.50",
+      "Rolling Conceded Rate": "0.60",
+      "ELO-Adjusted Attack Score": "2.401",
+      "ELO-Adjusted Fortress Score": "0.677",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1528",
+      "Last 5 Goals Scored": "7",
       "Discipline Index (Expected Cards)": "1.80"
     },
     "Norway": {
@@ -1873,6 +2111,13 @@
       "Attack Strength (Avg Goals)": "2.52",
       "Defense Rating (Inverse)": "1.30",
       "Expected Conceded Goals": "0.77",
+      "Rolling Attack Rate": "3.10",
+      "Rolling Conceded Rate": "0.60",
+      "ELO-Adjusted Attack Score": "2.874",
+      "ELO-Adjusted Fortress Score": "0.665",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1626",
+      "Last 5 Goals Scored": "10",
       "Discipline Index (Expected Cards)": "2.12"
     },
     "Iraq": {
@@ -1881,6 +2126,13 @@
       "Attack Strength (Avg Goals)": "1.09",
       "Defense Rating (Inverse)": "1.29",
       "Expected Conceded Goals": "0.78",
+      "Rolling Attack Rate": "1.10",
+      "Rolling Conceded Rate": "0.70",
+      "ELO-Adjusted Attack Score": "1.213",
+      "ELO-Adjusted Fortress Score": "0.865",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1520",
+      "Last 5 Goals Scored": "6",
       "Discipline Index (Expected Cards)": "2.12"
     },
     "Argentina": {
@@ -1889,6 +2141,13 @@
       "Attack Strength (Avg Goals)": "2.63",
       "Defense Rating (Inverse)": "3.14",
       "Expected Conceded Goals": "0.32",
+      "Rolling Attack Rate": "2.50",
+      "Rolling Conceded Rate": "0.40",
+      "ELO-Adjusted Attack Score": "2.702",
+      "ELO-Adjusted Fortress Score": "0.489",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1642",
+      "Last 5 Goals Scored": "16",
       "Discipline Index (Expected Cards)": "1.56"
     },
     "Austria": {
@@ -1897,6 +2156,13 @@
       "Attack Strength (Avg Goals)": "2.15",
       "Defense Rating (Inverse)": "2.02",
       "Expected Conceded Goals": "0.50",
+      "Rolling Attack Rate": "2.80",
+      "Rolling Conceded Rate": "0.50",
+      "ELO-Adjusted Attack Score": "2.541",
+      "ELO-Adjusted Fortress Score": "0.631",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1397",
+      "Last 5 Goals Scored": "9",
       "Discipline Index (Expected Cards)": "1.80"
     },
     "Algeria": {
@@ -1905,6 +2171,13 @@
       "Attack Strength (Avg Goals)": "2.10",
       "Defense Rating (Inverse)": "1.84",
       "Expected Conceded Goals": "0.54",
+      "Rolling Attack Rate": "2.30",
+      "Rolling Conceded Rate": "0.50",
+      "ELO-Adjusted Attack Score": "2.098",
+      "ELO-Adjusted Fortress Score": "0.661",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1565",
+      "Last 5 Goals Scored": "11",
       "Discipline Index (Expected Cards)": "1.56"
     },
     "Jordan": {
@@ -1913,6 +2186,13 @@
       "Attack Strength (Avg Goals)": "1.85",
       "Defense Rating (Inverse)": "0.71",
       "Expected Conceded Goals": "1.41",
+      "Rolling Attack Rate": "2.00",
+      "Rolling Conceded Rate": "1.50",
+      "ELO-Adjusted Attack Score": "1.845",
+      "ELO-Adjusted Fortress Score": "1.385",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1615",
+      "Last 5 Goals Scored": "8",
       "Discipline Index (Expected Cards)": "2.68"
     },
     "Portugal": {
@@ -1921,6 +2201,13 @@
       "Attack Strength (Avg Goals)": "2.40",
       "Defense Rating (Inverse)": "1.00",
       "Expected Conceded Goals": "1.00",
+      "Rolling Attack Rate": "2.60",
+      "Rolling Conceded Rate": "1.00",
+      "ELO-Adjusted Attack Score": "2.611",
+      "ELO-Adjusted Fortress Score": "0.880",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1683",
+      "Last 5 Goals Scored": "13",
       "Discipline Index (Expected Cards)": "2.20"
     },
     "Colombia": {
@@ -1929,6 +2216,13 @@
       "Attack Strength (Avg Goals)": "1.78",
       "Defense Rating (Inverse)": "0.97",
       "Expected Conceded Goals": "1.03",
+      "Rolling Attack Rate": "2.10",
+      "Rolling Conceded Rate": "1.00",
+      "ELO-Adjusted Attack Score": "2.230",
+      "ELO-Adjusted Fortress Score": "0.884",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1820",
+      "Last 5 Goals Scored": "7",
       "Discipline Index (Expected Cards)": "2.44"
     },
     "Uzbekistan": {
@@ -1937,6 +2231,13 @@
       "Attack Strength (Avg Goals)": "1.38",
       "Defense Rating (Inverse)": "1.48",
       "Expected Conceded Goals": "0.68",
+      "Rolling Attack Rate": "1.50",
+      "Rolling Conceded Rate": "0.70",
+      "ELO-Adjusted Attack Score": "1.562",
+      "ELO-Adjusted Fortress Score": "0.805",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1594",
+      "Last 5 Goals Scored": "7",
       "Discipline Index (Expected Cards)": "1.80"
     },
     "DR Congo": {
@@ -1945,6 +2246,13 @@
       "Attack Strength (Avg Goals)": "1.18",
       "Defense Rating (Inverse)": "3.62",
       "Expected Conceded Goals": "0.28",
+      "Rolling Attack Rate": "1.20",
+      "Rolling Conceded Rate": "0.30",
+      "ELO-Adjusted Attack Score": "1.311",
+      "ELO-Adjusted Fortress Score": "0.553",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1504",
+      "Last 5 Goals Scored": "7",
       "Discipline Index (Expected Cards)": "1.64"
     },
     "England": {
@@ -1953,6 +2261,13 @@
       "Attack Strength (Avg Goals)": "2.01",
       "Defense Rating (Inverse)": "2.62",
       "Expected Conceded Goals": "0.38",
+      "Rolling Attack Rate": "2.20",
+      "Rolling Conceded Rate": "0.50",
+      "ELO-Adjusted Attack Score": "2.356",
+      "ELO-Adjusted Fortress Score": "0.570",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1601",
+      "Last 5 Goals Scored": "10",
       "Discipline Index (Expected Cards)": "1.48"
     },
     "Croatia": {
@@ -1961,6 +2276,13 @@
       "Attack Strength (Avg Goals)": "2.50",
       "Defense Rating (Inverse)": "1.12",
       "Expected Conceded Goals": "0.89",
+      "Rolling Attack Rate": "2.90",
+      "Rolling Conceded Rate": "0.80",
+      "ELO-Adjusted Attack Score": "2.756",
+      "ELO-Adjusted Fortress Score": "0.782",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1506",
+      "Last 5 Goals Scored": "12",
       "Discipline Index (Expected Cards)": "2.20"
     },
     "Ghana": {
@@ -1969,6 +2291,13 @@
       "Attack Strength (Avg Goals)": "1.10",
       "Defense Rating (Inverse)": "0.68",
       "Expected Conceded Goals": "1.47",
+      "Rolling Attack Rate": "1.50",
+      "Rolling Conceded Rate": "1.30",
+      "ELO-Adjusted Attack Score": "1.361",
+      "ELO-Adjusted Fortress Score": "1.397",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1582",
+      "Last 5 Goals Scored": "3",
       "Discipline Index (Expected Cards)": "2.44"
     },
     "Panama": {
@@ -1977,8 +2306,83 @@
       "Attack Strength (Avg Goals)": "1.27",
       "Defense Rating (Inverse)": "1.30",
       "Expected Conceded Goals": "0.77",
+      "Rolling Attack Rate": "1.30",
+      "Rolling Conceded Rate": "0.80",
+      "ELO-Adjusted Attack Score": "1.441",
+      "ELO-Adjusted Fortress Score": "0.869",
+      "Rolling Match Count": "10",
+      "Avg Opponent ELO (Rolling)": "1513",
+      "Last 5 Goals Scored": "7",
       "Discipline Index (Expected Cards)": "1.96"
     }
   },
+  "wrapped_awards": [
+    {
+      "id": "dark-horse",
+      "bigNumber": "+11.0",
+      "statLabel": "spots above their ELO rank",
+      "teams": [
+        "Mexico"
+      ],
+      "teamName": "Mexico",
+      "insight": "Model gives them 3.6% champ odds while ELO rank is #19"
+    },
+    {
+      "id": "giant-killer",
+      "bigNumber": "0.8",
+      "statLabel": "avg. upsets per simulation",
+      "teams": [
+        "Mexico"
+      ],
+      "teamName": "Mexico",
+      "insight": "Beat higher-ELO opponents in 7.0% of their simulated knockouts"
+    },
+    {
+      "id": "lethal-attack",
+      "bigNumber": "3.10",
+      "statLabel": "expected goals per game",
+      "teams": [
+        "Spain"
+      ],
+      "teamName": "Spain",
+      "insight": "Scored 13 goals in their last 5 matches (3.10 goals/game over 10 matches at ELO 2165)"
+    },
+    {
+      "id": "fortress",
+      "bigNumber": "0.40",
+      "statLabel": "goals conceded per game",
+      "teams": [
+        "Argentina"
+      ],
+      "teamName": "Argentina",
+      "insight": "Allowed 0.40 goals per match over 10 matches against avg opponent ELO 1642 (team ELO 2113)"
+    },
+    {
+      "id": "group-of-death",
+      "bigNumber": "1957",
+      "statLabel": "avg. ELO of top 3 teams",
+      "teams": [
+        "France",
+        "Senegal",
+        "Norway",
+        "Iraq"
+      ],
+      "badgeLabel": "Group I",
+      "insight": "Top 3: France, Norway, Senegal \u2014 avg ELO 1957"
+    },
+    {
+      "id": "group-of-chaos",
+      "bigNumber": "1.37",
+      "statLabel": "qualification entropy",
+      "teams": [
+        "United States",
+        "Paraguay",
+        "Australia",
+        "T\u00fcrkiye"
+      ],
+      "badgeLabel": "Group D",
+      "insight": "Even the group favorite (T\u00fcrkiye) only has 61.1% qual chance"
+    }
+  ],
   "n_simulations": 15500
 }
