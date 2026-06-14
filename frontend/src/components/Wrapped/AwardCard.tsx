@@ -66,12 +66,13 @@ function AwardCard({ card, className, variant = 'default' }: AwardCardProps) {
   );
 
   return (
-    <div
-      style={{ background: card.bgColor }}
-      className={`box-border flex h-full min-h-0 flex-col rounded-xl border border-white/10 ${
-        isLaptop ? 'px-[18px] py-5' : 'p-[18px]'
-      } ${isLaptop ? 'justify-start' : 'justify-between gap-2'} ${className ?? 'w-[280px] shrink-0'}`}
-    >
+    <div className={`box-border h-full min-h-0 ${className ?? 'w-[280px] shrink-0'}`}>
+      <div
+        style={{ background: card.bgColor }}
+        className={`award-card box-border flex h-full min-h-0 flex-col rounded-xl border border-white/10 ${
+          isLaptop ? 'px-[18px] py-5' : 'p-[18px]'
+        } ${isLaptop ? 'justify-start' : 'justify-between gap-2'}`}
+      >
       <div className={`flex flex-col ${isLaptop ? 'min-h-0 flex-1 gap-2' : 'gap-2'}`}>
         <div className="flex items-end justify-between gap-2">
           <p
@@ -120,6 +121,7 @@ function AwardCard({ card, className, variant = 'default' }: AwardCardProps) {
           {insightBlock}
         </>
       )}
+      </div>
     </div>
   );
 }

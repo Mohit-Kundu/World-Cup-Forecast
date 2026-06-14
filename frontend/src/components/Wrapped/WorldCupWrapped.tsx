@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useIsMonitorLayout } from '../../hooks/useIsMonitorLayout';
 import { PredictionsData } from '../../types';
 import { resolveAwardCards } from '../../utils/wrappedAwards';
@@ -16,6 +16,36 @@ const SCROLL_GAPS_TOTAL = `${(CARDS_PER_VIEW - 1) * SCROLL_GAP_REM}rem`;
 const WorldCupWrapped: React.FC<WorldCupWrappedProps> = ({ data, showHeading = true }) => {
   const isMonitor = useIsMonitorLayout();
   const cards = useMemo(() => resolveAwardCards(data), [data]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const onWheel = (event: WheelEvent) => {
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+      if (maxScrollLeft <= 0) return;
+
+      const { deltaX, deltaY } = event;
+      const dominantDelta =
+        Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
+      if (dominantDelta === 0) return;
+
+      const atStart = container.scrollLeft <= 0;
+      const atEnd = container.scrollLeft >= maxScrollLeft - 1;
+      const canScroll =
+        (dominantDelta > 0 && !atEnd) || (dominantDelta < 0 && !atStart);
+
+      if (!canScroll) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      container.scrollLeft += dominantDelta;
+    };
+
+    container.addEventListener('wheel', onWheel, { passive: false });
+    return () => container.removeEventListener('wheel', onWheel);
+  }, [cards.length]);
 
   return (
     <section>
@@ -29,19 +59,26 @@ const WorldCupWrapped: React.FC<WorldCupWrappedProps> = ({ data, showHeading = t
       )}
 
       <div
-        className="grid w-full grid-flow-col gap-3.5 overflow-x-auto pb-3 scrollbar-hide"
+        ref={scrollRef}
+        className="award-cards-scroll flex w-full flex-nowrap gap-3.5 overflow-x-auto pb-3 pt-2 scrollbar-hide"
         style={{
           height: isMonitor ? '260px' : '350px',
-          gridAutoColumns: `calc((100% - ${SCROLL_GAPS_TOTAL}) / ${CARDS_PER_VIEW})`,
         }}
       >
         {cards.map((card) => (
-          <AwardCard
+          <div
             key={card.id}
-            card={card}
-            variant={isMonitor ? 'default' : 'laptop'}
-            className="h-full w-full min-w-0"
-          />
+            className="h-full shrink-0"
+            style={{
+              flex: `0 0 calc((100% - ${SCROLL_GAPS_TOTAL}) / ${CARDS_PER_VIEW})`,
+            }}
+          >
+            <AwardCard
+              card={card}
+              variant={isMonitor ? 'default' : 'laptop'}
+              className="h-full w-full"
+            />
+          </div>
         ))}
       </div>
     </section>
