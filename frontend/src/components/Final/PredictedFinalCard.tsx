@@ -5,6 +5,9 @@ import FinalOutcomeBar from './FinalOutcomeBar';
 import FinalTeamStats from './FinalTeamStats';
 import { FINAL_WINNER_COLOR } from './finalColors';
 
+const FINAL_CARD_CLASS =
+  'award-card box-border rounded-xl border border-muted/20 bg-surface';
+
 interface PredictedFinalCardProps {
   predictedFinal: PredictedFinal;
   teamStats: Record<string, TeamStats>;
@@ -23,7 +26,7 @@ const PredictedFinalCard: React.FC<PredictedFinalCardProps> = ({
     return (
       <section>
         <h2 className="mb-4 text-sm font-medium text-primary">Predicted Final</h2>
-        <div className="rounded-lg border border-muted/20 bg-surface px-8 py-6 text-center text-xs text-muted">
+        <div className={`${FINAL_CARD_CLASS} px-8 py-6 text-center text-xs text-muted`}>
           No final prediction available
         </div>
       </section>
@@ -39,7 +42,7 @@ const PredictedFinalCard: React.FC<PredictedFinalCardProps> = ({
         </p>
       </div>
 
-      <div className="rounded-lg border border-muted/20 bg-surface px-4 py-5 sm:px-6 md:px-8 md:pt-6 md:pb-3">
+      <div className={`${FINAL_CARD_CLASS} px-4 py-5 sm:px-6 md:px-8 md:pt-6 md:pb-3`}>
         <div className="space-y-6">
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 text-xl leading-none sm:gap-3 sm:text-2xl md:text-3xl">
