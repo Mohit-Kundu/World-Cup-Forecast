@@ -14,7 +14,7 @@ interface GroupTableProps {
 const GroupTable: React.FC<GroupTableProps> = ({ group, standings, teamStats }) => {
   if (standings.length === 0) {
     return (
-      <div className="min-w-0 rounded-lg border border-muted/20 bg-surface px-3 py-3 sm:px-4">
+      <div className="group-stage-card min-w-0 rounded-lg border border-muted/20 bg-surface px-3 py-3 sm:px-4">
         <h3 className="mb-2 text-xs font-medium text-primary">Group {group}</h3>
         <p className="text-[10px] text-muted">No data</p>
       </div>
@@ -22,7 +22,7 @@ const GroupTable: React.FC<GroupTableProps> = ({ group, standings, teamStats }) 
   }
 
   return (
-    <div className="rounded-lg border border-muted/20 bg-surface px-5 py-3">
+    <div className="group-stage-card rounded-lg border border-muted/20 bg-surface px-5 py-3">
       <h3 className="mb-2 text-xs font-medium text-primary">Group {group}</h3>
       <table className="w-full text-[10px]">
         <thead>

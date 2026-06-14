@@ -94,6 +94,23 @@ body {
   .knockout-bar--hovered {
     transform: scale(1.06);
   }
+
+  .group-stage-card {
+    transition:
+      transform 180ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .group-stage-card:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .group-stage-card:hover::before {
+    animation: award-card-shine 550ms cubic-bezier(0.22, 1, 0.36, 1) 1;
+  }
 }
 
 .award-cards-scroll {
@@ -103,7 +120,8 @@ body {
 }
 
 .award-card::before,
-.knockout-bar::before {
+.knockout-bar::before,
+.group-stage-card::before {
   content: '';
   position: absolute;
   top: -20%;
@@ -127,7 +145,8 @@ body {
   opacity: 0;
 }
 
-.award-card > * {
+.award-card > *,
+.group-stage-card > * {
   position: relative;
   z-index: 1;
 }
@@ -138,4 +157,11 @@ body {
   isolation: isolate;
   border-radius: 0 2px 2px 0;
   transform-origin: left center;
+}
+
+.group-stage-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transform-origin: center center;
 }
