@@ -100,7 +100,7 @@ const GroupStageSection: React.FC<GroupStageSectionProps> = ({ data }) => {
         </div>
       </div>
 
-      <div ref={gridRef} className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <div ref={gridRef} className="group-stage-grid grid grid-cols-1 gap-3 sm:grid-cols-3">
         {pageGroups.map((group) => (
           <GroupTable
             key={group}

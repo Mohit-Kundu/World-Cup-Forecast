@@ -117,6 +117,11 @@ const ProbabilityTable: React.FC<ProbabilityTableProps> = ({ data, teamStats }) 
     [sortedData]
   );
 
+  const topChampionProb = useMemo(
+    () => (data.length > 0 ? Math.max(...data.map((row) => row.championProb)) : 0),
+    [data]
+  );
+
   const totalPages = Math.max(1, Math.ceil(rankedData.length / pageSize));
   const safePage = Math.min(page, totalPages);
   const pageStart = (safePage - 1) * pageSize;
@@ -257,7 +262,14 @@ const ProbabilityTable: React.FC<ProbabilityTableProps> = ({ data, teamStats }) 
               </tr>
             ) : (
               pageData.map((row) => (
-                <tr key={row.team} className="border-b border-muted/10 hover:bg-background">
+                <tr
+                  key={row.team}
+                  className={`team-overview-row border-b border-muted/10 ${
+                    row.championProb === topChampionProb && topChampionProb > 0
+                      ? 'team-overview-row--champ-favorite bg-gold/5'
+                      : ''
+                  }`}
+                >
                   <td className="px-2 py-2 font-normal tabular-nums text-primary">{row.rank}</td>
                   <td className="px-2 py-2">
                     <FlagTooltip team={row.team} stats={getTeamStats(teamStats, row.team)} />
