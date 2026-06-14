@@ -3,7 +3,7 @@ import { PredictedFinal, TeamStats } from '../../types';
 import FlagImage from '../FlagImage';
 import FinalOutcomeBar from './FinalOutcomeBar';
 import FinalTeamStats from './FinalTeamStats';
-import { FINAL_WINNER_COLOR } from './finalColors';
+import { FINAL_WINNER_COLOR, FINAL_WINNER_TEXT_GLOW } from './finalColors';
 
 const FINAL_CARD_CLASS =
   'award-card box-border rounded-xl border border-muted/20 bg-surface';
@@ -207,7 +207,7 @@ const PredictedFinalCard: React.FC<PredictedFinalCardProps> = ({
               <div className="flex items-center justify-center gap-2 text-xl leading-none sm:gap-3 sm:text-2xl md:text-3xl">
                 <p
                   className="font-black uppercase tracking-[0.25em]"
-                  style={{ color: FINAL_WINNER_COLOR }}
+                  style={{ color: FINAL_WINNER_COLOR, textShadow: FINAL_WINNER_TEXT_GLOW }}
                 >
                   Winner!
                 </p>

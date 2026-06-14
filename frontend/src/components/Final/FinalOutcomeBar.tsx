@@ -1,10 +1,8 @@
 import React from 'react';
 import FlagImage from '../FlagImage';
 import {
-  FINAL_RUNNER_BAR_COLOR,
-  FINAL_RUNNER_COLOR,
-  FINAL_WINNER_BAR_COLOR,
-  FINAL_WINNER_COLOR,
+  finalAccentTextStyle,
+  finalBarSegmentStyle,
 } from './finalColors';
 import FinalMatchupRow from './FinalMatchupRow';
 
@@ -27,10 +25,6 @@ const FinalOutcomeBar: React.FC<FinalOutcomeBarProps> = ({
 }) => {
   const leftPct = (leftProb * 100).toFixed(1);
   const rightPct = (rightProb * 100).toFixed(1);
-  const leftTextColor = leftIsWinner ? FINAL_WINNER_COLOR : FINAL_RUNNER_COLOR;
-  const rightTextColor = rightIsWinner ? FINAL_WINNER_COLOR : FINAL_RUNNER_COLOR;
-  const leftBarColor = leftIsWinner ? FINAL_WINNER_BAR_COLOR : FINAL_RUNNER_BAR_COLOR;
-  const rightBarColor = rightIsWinner ? FINAL_WINNER_BAR_COLOR : FINAL_RUNNER_BAR_COLOR;
 
   return (
     <div className="space-y-3">
@@ -42,10 +36,7 @@ const FinalOutcomeBar: React.FC<FinalOutcomeBarProps> = ({
                 team={leftTeam}
                 className="h-5 w-7 shrink-0 rounded-sm object-cover ring-1 ring-muted/40"
               />
-              <span
-                className="truncate text-sm font-medium"
-                style={{ color: leftTextColor, fontWeight: leftIsWinner ? 600 : 500 }}
-              >
+              <span className="truncate text-sm font-medium" style={finalAccentTextStyle(leftIsWinner)}>
                 {leftTeam}
               </span>
             </div>
@@ -53,10 +44,7 @@ const FinalOutcomeBar: React.FC<FinalOutcomeBarProps> = ({
               vs
             </span>
             <div className="flex min-w-0 items-center justify-end gap-2">
-              <span
-                className="truncate text-sm font-medium"
-                style={{ color: rightTextColor, fontWeight: rightIsWinner ? 600 : 500 }}
-              >
+              <span className="truncate text-sm font-medium" style={finalAccentTextStyle(rightIsWinner)}>
                 {rightTeam}
               </span>
               <FlagImage
@@ -69,25 +57,17 @@ const FinalOutcomeBar: React.FC<FinalOutcomeBarProps> = ({
       />
 
       <FinalMatchupRow
-        left={
-          <span style={{ color: leftTextColor, fontWeight: leftIsWinner ? 600 : 500 }}>
-            {leftPct}%
-          </span>
-        }
-        right={
-          <span style={{ color: rightTextColor, fontWeight: rightIsWinner ? 600 : 500 }}>
-            {rightPct}%
-          </span>
-        }
+        left={<span style={finalAccentTextStyle(leftIsWinner)}>{leftPct}%</span>}
+        right={<span style={finalAccentTextStyle(rightIsWinner)}>{rightPct}%</span>}
         center={
-          <div className="flex h-5 overflow-hidden rounded-md">
+          <div className="flex h-5 rounded-md">
             <div
-              className="h-full transition-all"
-              style={{ width: `${leftProb * 100}%`, backgroundColor: leftBarColor }}
+              className="h-full rounded-l-md transition-all"
+              style={{ width: `${leftProb * 100}%`, ...finalBarSegmentStyle(leftIsWinner) }}
             />
             <div
-              className="h-full transition-all"
-              style={{ width: `${rightProb * 100}%`, backgroundColor: rightBarColor }}
+              className="h-full rounded-r-md transition-all"
+              style={{ width: `${rightProb * 100}%`, ...finalBarSegmentStyle(rightIsWinner) }}
             />
           </div>
         }

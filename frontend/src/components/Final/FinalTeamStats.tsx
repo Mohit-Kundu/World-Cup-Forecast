@@ -3,7 +3,7 @@ import { TeamStats } from '../../types';
 import { getTeamStats } from '../../utils/safeData';
 import { TEAM_STAT_TOOLTIPS, TeamStatKey } from '../../utils/teamStatTooltips';
 import HelpTooltip from '../HelpTooltip';
-import { FINAL_RUNNER_COLOR, FINAL_WINNER_COLOR } from './finalColors';
+import { finalAccentTextStyle } from './finalColors';
 import FinalMatchupRow from './FinalMatchupRow';
 
 interface FinalTeamStatsProps {
@@ -62,8 +62,6 @@ const FinalTeamStats: React.FC<FinalTeamStatsProps> = ({
 }) => {
   const leftOverview = buildOverview(leftTeam, teamStats, qualifyProbs, championProbs);
   const rightOverview = buildOverview(rightTeam, teamStats, qualifyProbs, championProbs);
-  const leftColor = leftIsWinner ? FINAL_WINNER_COLOR : FINAL_RUNNER_COLOR;
-  const rightColor = rightIsWinner ? FINAL_WINNER_COLOR : FINAL_RUNNER_COLOR;
 
   return (
     <div className="space-y-1 border-t border-muted/20 px-3 pt-4 sm:px-4">
@@ -73,7 +71,7 @@ const FinalTeamStats: React.FC<FinalTeamStatsProps> = ({
           <FinalMatchupRow
             key={key}
             left={
-              <span className="font-medium" style={{ color: leftColor }}>
+              <span className="font-medium" style={finalAccentTextStyle(leftIsWinner)}>
                 {leftOverview[key]}
               </span>
             }
@@ -86,7 +84,7 @@ const FinalTeamStats: React.FC<FinalTeamStatsProps> = ({
               </div>
             }
             right={
-              <span className="font-medium" style={{ color: rightColor }}>
+              <span className="font-medium" style={finalAccentTextStyle(rightIsWinner)}>
                 {rightOverview[key]}
               </span>
             }
