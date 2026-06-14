@@ -219,7 +219,7 @@ def _build_group_of_death(team_stats: Dict[str, Dict[str, str]]) -> Dict[str, An
         "statLabel": "avg. ELO of top 3 teams",
         "teams": teams,
         "badgeLabel": f"Group {best_group}",
-        "insight": f"Top 3: {', '.join(top_three)} — avg ELO {top3_avg:.0f}",
+        "insight": f"Top 3: {', '.join(top_three)} with an average ELO of {top3_avg:.0f}.",
     }
 
 

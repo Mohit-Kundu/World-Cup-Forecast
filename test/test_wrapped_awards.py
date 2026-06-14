@@ -249,6 +249,7 @@ def test_group_of_death_uses_top3_average_elo():
     assert card["bigNumber"] == "1957"
     assert card["statLabel"] == "avg. ELO of top 3 teams"
     assert card["teams"] == ["France", "Senegal", "Norway", "Iraq"]
+    assert card["insight"] == "Top 3: France, Norway, Senegal with an average ELO of 1957."
 
 
 def test_build_wrapped_awards_card_shape():
