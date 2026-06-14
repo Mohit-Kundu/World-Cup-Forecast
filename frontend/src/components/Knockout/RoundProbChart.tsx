@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -141,6 +141,44 @@ function YAxisTick({ x = 0, y = 0, payload }: YAxisTickProps): React.ReactElemen
   );
 }
 
+interface ShineBarProps {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  fill?: string;
+}
+
+function ShineBar({ x = 0, y = 0, width = 0, height = 0, fill = '#BFA046' }: ShineBarProps) {
+  const [hovered, setHovered] = useState(false);
+
+  if (width <= 0 || height <= 0) return null;
+
+  const padY = 4;
+  const extraW = Math.max(16, width * 0.08);
+
+  return (
+    <foreignObject
+      x={x}
+      y={y - padY}
+      width={width + extraW}
+      height={height + padY * 2}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div
+        className={`knockout-bar${hovered ? ' knockout-bar--hovered' : ''}`}
+        style={{
+          backgroundColor: fill,
+          width: `${width}px`,
+          height: `${height}px`,
+          marginTop: `${padY}px`,
+        }}
+      />
+    </foreignObject>
+  );
+}
+
 const RoundProbChart: React.FC<RoundProbChartProps> = ({
   title,
   subtitle,
@@ -198,7 +236,7 @@ const RoundProbChart: React.FC<RoundProbChartProps> = ({
                 />
               )}
             />
-            <Bar dataKey="probability" fill="#BFA046" radius={[0, 2, 2, 0]}>
+            <Bar dataKey="probability" fill="#BFA046" shape={ShineBar}>
               <LabelList
                 dataKey="probability"
                 position="right"
