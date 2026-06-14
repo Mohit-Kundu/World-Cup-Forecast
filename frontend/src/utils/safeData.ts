@@ -46,6 +46,7 @@ export function normalizePredictions(data: Partial<PredictionsData>): Prediction
     group_standings: data.group_standings ?? {},
     predicted_final: data.predicted_final ?? EMPTY_PREDICTED_FINAL,
     team_stats: data.team_stats ?? {},
+    wrapped_awards: data.wrapped_awards ?? [],
     n_simulations: data.n_simulations ?? 0,
     source: data.source,
   };

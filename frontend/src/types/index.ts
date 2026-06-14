@@ -15,6 +15,15 @@ export interface TeamStats {
   "Attack Strength (Avg Goals)": string;
   "Defense Rating (Inverse)": string;
   "Expected Conceded Goals": string;
+  "Smoothed Attack (Avg Goals)"?: string;
+  "Smoothed Expected Conceded"?: string;
+  "Rolling Attack Rate"?: string;
+  "Rolling Conceded Rate"?: string;
+  "ELO-Adjusted Attack Score"?: string;
+  "ELO-Adjusted Fortress Score"?: string;
+  "Rolling Match Count"?: string;
+  "Avg Opponent ELO (Rolling)"?: string;
+  "Last 5 Goals Scored"?: string;
   "Discipline Index (Expected Cards)": string;
 }
 
@@ -37,6 +46,16 @@ export interface PredictedFinal {
   winner_prob: number;
 }
 
+export interface WrappedAwardCard {
+  id: string;
+  bigNumber: string;
+  statLabel: string;
+  teams: string[];
+  teamName?: string;
+  badgeLabel?: string;
+  insight: string;
+}
+
 export interface PredictionsData {
   match_results: Record<string, MatchResult>;
   champion_probs: Record<string, number>;
@@ -49,6 +68,7 @@ export interface PredictionsData {
   group_standings: Record<string, GroupStandingRow[]>;
   predicted_final: PredictedFinal;
   team_stats: Record<string, TeamStats>;
+  wrapped_awards?: WrappedAwardCard[];
   n_simulations: number;
   source?: 'pipeline' | 'live';
 }

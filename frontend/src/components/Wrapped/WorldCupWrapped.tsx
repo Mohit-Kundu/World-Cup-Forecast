@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useIsMonitorLayout } from '../../hooks/useIsMonitorLayout';
 import { PredictionsData } from '../../types';
+import { resolveAwardCards } from '../../utils/wrappedAwards';
 import AwardCard from './AwardCard';
-import { AWARD_CARDS } from './awardCards';
 
 interface WorldCupWrappedProps {
   data?: PredictionsData;
@@ -13,8 +13,9 @@ const CARDS_PER_VIEW = 4;
 const SCROLL_GAP_REM = 0.875;
 const SCROLL_GAPS_TOTAL = `${(CARDS_PER_VIEW - 1) * SCROLL_GAP_REM}rem`;
 
-const WorldCupWrapped: React.FC<WorldCupWrappedProps> = ({ showHeading = true }) => {
+const WorldCupWrapped: React.FC<WorldCupWrappedProps> = ({ data, showHeading = true }) => {
   const isMonitor = useIsMonitorLayout();
+  const cards = useMemo(() => resolveAwardCards(data), [data]);
 
   return (
     <section>
@@ -34,7 +35,7 @@ const WorldCupWrapped: React.FC<WorldCupWrappedProps> = ({ showHeading = true })
           gridAutoColumns: `calc((100% - ${SCROLL_GAPS_TOTAL}) / ${CARDS_PER_VIEW})`,
         }}
       >
-        {AWARD_CARDS.map((card) => (
+        {cards.map((card) => (
           <AwardCard
             key={card.id}
             card={card}

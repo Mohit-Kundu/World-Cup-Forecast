@@ -1,3 +1,5 @@
+import { AWARD_CARD_LABELS, AWARD_CARD_STYLES } from './awardCardStyles';
+
 export type AwardCard = {
   id: string;
   label: string;
@@ -13,12 +15,13 @@ export type AwardCard = {
   insight: string;
 };
 
-export const AWARD_CARDS: AwardCard[] = [
+export type WrappedAwardPayload = Omit<AwardCard, 'label' | 'bgColor' | 'accentColor' | 'badgeColor' | 'badgeTextColor'>;
+
+export const FALLBACK_AWARD_CARDS: AwardCard[] = [
   {
     id: 'dark-horse',
-    label: 'Dark horse',
-    bgColor: '#26215C',
-    accentColor: '#AFA9EC',
+    label: AWARD_CARD_LABELS['dark-horse'],
+    ...AWARD_CARD_STYLES['dark-horse'],
     bigNumber: '+8.2',
     statLabel: 'spots above their ELO rank',
     teams: ['Japan'],
@@ -27,9 +30,8 @@ export const AWARD_CARDS: AwardCard[] = [
   },
   {
     id: 'giant-killer',
-    label: 'Giant killer',
-    bgColor: '#501313',
-    accentColor: '#F09595',
+    label: AWARD_CARD_LABELS['giant-killer'],
+    ...AWARD_CARD_STYLES['giant-killer'],
     bigNumber: '4.1',
     statLabel: 'avg. upsets per simulation',
     teams: ['Morocco'],
@@ -38,9 +40,8 @@ export const AWARD_CARDS: AwardCard[] = [
   },
   {
     id: 'lethal-attack',
-    label: 'Most lethal attack',
-    bgColor: '#412402',
-    accentColor: '#FAC775',
+    label: AWARD_CARD_LABELS['lethal-attack'],
+    ...AWARD_CARD_STYLES['lethal-attack'],
     bigNumber: '2.89',
     statLabel: 'expected goals per game',
     teams: ['Spain'],
@@ -49,9 +50,8 @@ export const AWARD_CARDS: AwardCard[] = [
   },
   {
     id: 'fortress',
-    label: 'Fortress defense',
-    bgColor: '#04342C',
-    accentColor: '#5DCAA5',
+    label: AWARD_CARD_LABELS.fortress,
+    ...AWARD_CARD_STYLES.fortress,
     bigNumber: '0.64',
     statLabel: 'goals conceded per game',
     teams: ['France'],
@@ -60,12 +60,9 @@ export const AWARD_CARDS: AwardCard[] = [
   },
   {
     id: 'group-of-death',
-    label: 'Group of death',
-    bgColor: '#042C53',
-    accentColor: '#85B7EB',
+    label: AWARD_CARD_LABELS['group-of-death'],
+    ...AWARD_CARD_STYLES['group-of-death'],
     badgeLabel: 'Group F',
-    badgeColor: '#185FA5',
-    badgeTextColor: '#B5D4F4',
     bigNumber: '2018',
     statLabel: 'avg. ELO across all 4 teams',
     teams: ['Netherlands', 'Japan', 'Sweden', 'Tunisia'],
@@ -73,15 +70,15 @@ export const AWARD_CARDS: AwardCard[] = [
   },
   {
     id: 'group-of-chaos',
-    label: 'Group of chaos',
-    bgColor: '#4B1528',
-    accentColor: '#ED93B1',
+    label: AWARD_CARD_LABELS['group-of-chaos'],
+    ...AWARD_CARD_STYLES['group-of-chaos'],
     badgeLabel: 'Group D',
-    badgeColor: '#993556',
-    badgeTextColor: '#F4C0D1',
     bigNumber: '31%',
     statLabel: 'variance in final standings',
     teams: ['Paraguay', 'United States', 'Australia', 'Türkiye'],
     insight: '3rd place Türkiye (61.1%) has higher qual% than 1st place Paraguay',
   },
 ];
+
+/** @deprecated Use resolveAwardCards() instead. Kept for backward compatibility. */
+export const AWARD_CARDS = FALLBACK_AWARD_CARDS;
