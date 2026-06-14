@@ -11,12 +11,12 @@ export const AWARD_CARD_STYLES: Record<string, AwardCardStyle> = {
     accentColor: '#AFA9EC',
   },
   'giant-killer': {
-    bgColor: '#501313',
-    accentColor: '#F09595',
-  },
-  'lethal-attack': {
     bgColor: '#412402',
     accentColor: '#FAC775',
+  },
+  'lethal-attack': {
+    bgColor: '#501313',
+    accentColor: '#F09595',
   },
   fortress: {
     bgColor: '#04342C',
