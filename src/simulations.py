@@ -1074,6 +1074,8 @@ class MonteCarloAccumulator:
 
     )
 
+    team_upset_counter: Counter = field(default_factory=Counter)
+
 
 
     @property
@@ -1389,6 +1391,8 @@ def _finalize_monte_carlo_from_accumulator(
         "group_standings": group_standings,
 
         "predicted_final": predicted_final,
+
+        "team_upset_counts": dict(acc.team_upset_counter),
 
     }
 

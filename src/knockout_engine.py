@@ -20,6 +20,46 @@ from src.models import ModelBundle, PredictionBundle
 FeatureCache = Dict[Tuple[str, str], Any]
 LambdaCache = Dict[Tuple[str, str], PredictionBundle]
 
+KNOCKOUT_STAGES = {
+    "Round of 32",
+    "Round of 16",
+    "Quarter-Final",
+    "Semi-Final",
+    "Final",
+}
+
+
+def _is_knockout_upset(
+    winner: str,
+    home_team: str,
+    away_team: str,
+    elo_dict: Dict[str, float],
+) -> bool:
+    winner_elo = elo_dict.get(winner, 1500.0)
+    opponent = away_team if winner == home_team else home_team
+    opponent_elo = elo_dict.get(opponent, 1500.0)
+    return winner_elo < opponent_elo
+
+
+def _count_knockout_upsets(
+    knockout_results: List[Dict[str, Any]],
+    elo_dict: Dict[str, float],
+) -> Counter:
+    upsets: Counter = Counter()
+    for result in knockout_results:
+        stage = result.get("stage")
+        if stage not in KNOCKOUT_STAGES:
+            continue
+        winner = result.get("winner")
+        home_team = result.get("home_team")
+        away_team = result.get("away_team")
+        if not winner or not home_team or not away_team:
+            continue
+        if _is_knockout_upset(winner, home_team, away_team, elo_dict):
+            upsets[winner] += 1
+    return upsets
+
+
 @dataclass
 class SingleKnockoutSimResult:
     """Counters and knockout match rows from one MC iteration."""
@@ -32,6 +72,7 @@ class SingleKnockoutSimResult:
     final_winner: Optional[str] = None
     final_pairing: Optional[Tuple[str, str]] = None
     knockout_results: List[Dict[str, Any]] = field(default_factory=list)
+    upset_wins: Counter = field(default_factory=Counter)
 
 
 def _draw_match_outcomes(
@@ -245,6 +286,7 @@ def _simulate_knockout_path(
         if final_winners:
             out.final_winner = final_winners[0]
 
+    out.upset_wins = _count_knockout_upsets(out.knockout_results, elo_df)
     return out
 
 
@@ -310,6 +352,8 @@ def merge_knockout_results(
             acc.match_away_wins,
             acc.match_metadata,
         )
+        for team, count in sim.upset_wins.items():
+            acc.team_upset_counter[team] += count
 
 
 def run_knockout_loop_parallel(

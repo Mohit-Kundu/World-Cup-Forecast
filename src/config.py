@@ -84,6 +84,12 @@ PENALTY_ELO_SCALE = 400.0
 PENALTY_PROB_MIN = 0.35
 PENALTY_PROB_MAX = 0.65
 
+# Bayesian smoothing for wrapped award attack/defense rates
+ROLLING_RATE_WINDOW = 10
+BAYESIAN_SMOOTHING_WEIGHT = 5
+BAYESIAN_DEFAULT_AVG_GOALS = 1.25
+BAYESIAN_DEFAULT_AVG_CONCEDED = 1.10
+
 # Monte Carlo iteration counts
 N_SIMULATIONS_DEFAULT = 15_500  # main.py CLI + run_monte_carlo() fallback
 N_SIMULATIONS_API = 200         # backend GET /api/predictions

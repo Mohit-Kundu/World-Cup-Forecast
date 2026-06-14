@@ -14,12 +14,23 @@ from typing import Any, Dict, Optional
 
 import numpy as np
 
-from src.config import PREDICTIONS_JSON, TOURNAMENT_DATE, WC2026_GROUPS
+from src.config import (
+    BAYESIAN_SMOOTHING_WEIGHT,
+    PREDICTIONS_JSON,
+    ROLLING_RATE_WINDOW,
+    TOURNAMENT_DATE,
+    WC2026_GROUPS,
+)
+from src.wrapped_awards import build_wrapped_awards
 from src.feature_engineering import (
     _get_rolling_rates,
+    bayesian_smoothed_raw_rate,
     build_team_history_dfs,
     compute_dynamic_discipline,
+    elo_adjusted_attack_score,
+    elo_adjusted_fortress_score,
     get_team_form,
+    get_team_rolling_profile,
 )
 
 logger = logging.getLogger(__name__)
@@ -45,6 +56,35 @@ def build_team_stats(team_hist: dict, elo_dict: dict) -> Dict[str, Dict[str, str
     """Calculate team base statistics for all WC 2026 participants."""
     team_dfs = build_team_history_dfs(team_hist)
     stats: Dict[str, Dict[str, str]] = {}
+    all_teams = [team for teams in WC2026_GROUPS.values() for team in teams]
+    smooth_weight = BAYESIAN_SMOOTHING_WEIGHT
+    rolling_profiles: Dict[str, Dict[str, float | int]] = {}
+
+    for team in all_teams:
+        profile = get_team_rolling_profile(
+            team_dfs.get(team), TOURNAMENT_DATE, window=ROLLING_RATE_WINDOW
+        )
+        games = int(profile["match_count"])
+        goals_scored = float(profile["goals_scored"])
+        goals_conceded = float(profile["goals_conceded"])
+        rolling_profiles[team] = {
+            "games": games,
+            "rolling_attack": goals_scored / games if games else 0.0,
+            "rolling_conceded": goals_conceded / games if games else 0.0,
+            "avg_opponent_elo": float(profile["avg_opponent_elo"]),
+            "last5_goals_scored": int(profile["last5_goals_scored"]),
+            "elo": float(elo_dict.get(team, 1500.0)),
+        }
+
+    global_avg_attack = sum(
+        float(item["rolling_attack"]) for item in rolling_profiles.values()
+    ) / max(len(rolling_profiles), 1)
+    global_avg_conceded = sum(
+        float(item["rolling_conceded"]) for item in rolling_profiles.values()
+    ) / max(len(rolling_profiles), 1)
+    mean_elo = sum(float(item["elo"]) for item in rolling_profiles.values()) / max(
+        len(rolling_profiles), 1
+    )
 
     for _group, teams in WC2026_GROUPS.items():
         for team in teams:
@@ -60,6 +100,22 @@ def build_team_stats(team_hist: dict, elo_dict: dict) -> Dict[str, Dict[str, str
             discipline = compute_dynamic_discipline(
                 team_hist, team, TOURNAMENT_DATE, team_dfs=team_dfs
             )
+            profile = rolling_profiles[team]
+            games = int(profile["games"])
+            rolling_attack = float(profile["rolling_attack"])
+            rolling_conceded = float(profile["rolling_conceded"])
+            smoothed_attack = bayesian_smoothed_raw_rate(
+                rolling_attack, games, global_avg_attack, smooth_weight
+            )
+            smoothed_conceded = bayesian_smoothed_raw_rate(
+                rolling_conceded, games, global_avg_conceded, smooth_weight
+            )
+            adjusted_attack = elo_adjusted_attack_score(
+                smoothed_attack, float(elo), mean_elo
+            )
+            adjusted_fortress = elo_adjusted_fortress_score(
+                smoothed_conceded, float(elo), mean_elo
+            )
 
             stats[team] = {
                 "FIFA ELO Rating": f"{int(round(elo))}",
@@ -67,6 +123,13 @@ def build_team_stats(team_hist: dict, elo_dict: dict) -> Dict[str, Dict[str, str
                 "Attack Strength (Avg Goals)": f"{attack:.2f}",
                 "Defense Rating (Inverse)": f"{defense:.2f}",
                 "Expected Conceded Goals": f"{1.0 / max(defense, 0.1):.2f}",
+                "Rolling Attack Rate": f"{rolling_attack:.2f}",
+                "Rolling Conceded Rate": f"{rolling_conceded:.2f}",
+                "ELO-Adjusted Attack Score": f"{adjusted_attack:.3f}",
+                "ELO-Adjusted Fortress Score": f"{adjusted_fortress:.3f}",
+                "Rolling Match Count": str(games),
+                "Avg Opponent ELO (Rolling)": f"{float(profile['avg_opponent_elo']):.0f}",
+                "Last 5 Goals Scored": str(int(profile["last5_goals_scored"])),
                 "Discipline Index (Expected Cards)": f"{discipline:.2f}",
             }
 
@@ -115,6 +178,7 @@ def format_predictions_response(
                 },
             ),
             "team_stats": team_stats,
+            "wrapped_awards": build_wrapped_awards(mc_output, team_stats, n_simulations),
             "n_simulations": n_simulations,
         }
     )

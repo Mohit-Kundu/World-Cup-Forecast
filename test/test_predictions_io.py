@@ -13,6 +13,7 @@ from src.predictions_io import (
     predictions_json_path,
     save_predictions_json,
 )
+from src.wrapped_awards import build_wrapped_awards
 
 
 def _minimal_mc_output() -> dict:
@@ -57,6 +58,7 @@ def _minimal_mc_output() -> dict:
             "pairing_prob": 0.08,
             "winner_prob": 0.62,
         },
+        "team_upset_counts": {"Morocco": 41},
     }
 
 
@@ -68,6 +70,13 @@ def _minimal_team_stats() -> dict:
             "Attack Strength (Avg Goals)": "1.50",
             "Defense Rating (Inverse)": "1.20",
             "Expected Conceded Goals": "0.83",
+            "Rolling Attack Rate": "1.45",
+            "Rolling Conceded Rate": "0.83",
+            "ELO-Adjusted Attack Score": "1.200",
+            "ELO-Adjusted Fortress Score": "0.900",
+            "Rolling Match Count": "8",
+            "Avg Opponent ELO (Rolling)": "1700",
+            "Last 5 Goals Scored": "6",
             "Discipline Index (Expected Cards)": "1.10",
         }
     }
@@ -114,6 +123,18 @@ def test_save_and_load_predictions_json_roundtrip(tmp_path: Path):
     assert loaded["n_simulations"] == 500
     assert loaded["match_results"]["1"]["away_team"] == "South Africa"
     assert loaded["group_standings"]["A"][0]["team"] == "Mexico"
+
+
+def test_format_predictions_response_includes_wrapped_awards():
+    payload = format_predictions_response(
+        _minimal_mc_output(), _minimal_team_stats(), n_simulations=100
+    )
+
+    assert "wrapped_awards" in payload
+    assert isinstance(payload["wrapped_awards"], list)
+    assert payload["wrapped_awards"] == build_wrapped_awards(
+        _minimal_mc_output(), _minimal_team_stats(), 100
+    )
 
 
 def test_load_predictions_json_missing_file(tmp_path: Path):

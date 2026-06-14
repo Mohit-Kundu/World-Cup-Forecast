@@ -216,6 +216,104 @@ def _rolling_rates_from_scored_conceded(
     return float(attack), float(defense_rate)
 
 
+def get_team_rolling_profile(
+    team_df: Optional[pd.DataFrame],
+    current_date: pd.Timestamp,
+    window: int = 10,
+) -> Dict[str, float | int]:
+    """Raw rolling totals used for Bayesian-smoothed attack/defense awards."""
+    empty: Dict[str, float | int] = {
+        "goals_scored": 0,
+        "goals_conceded": 0,
+        "match_count": 0,
+        "avg_opponent_elo": 1500.0,
+        "last5_goals_scored": 0,
+    }
+    if team_df is None or team_df.empty:
+        return empty
+
+    recent = _slice_team_history_df(team_df, current_date, window)
+    if recent is None or recent.empty:
+        return empty
+
+    last_five = recent.tail(5)
+    return {
+        "goals_scored": int(recent["goals_scored"].sum()),
+        "goals_conceded": int(recent["goals_conceded"].sum()),
+        "match_count": int(len(recent)),
+        "avg_opponent_elo": float(recent["opponent_elo"].mean()),
+        "last5_goals_scored": int(last_five["goals_scored"].sum()),
+    }
+
+
+def compute_global_rolling_averages(
+    team_dfs: Dict[str, pd.DataFrame],
+    teams: List[str],
+    current_date: pd.Timestamp,
+    window: int = 10,
+) -> Tuple[float, float]:
+    """Pool per-match goals/conceded across teams to estimate global priors."""
+    from src.config import BAYESIAN_DEFAULT_AVG_CONCEDED, BAYESIAN_DEFAULT_AVG_GOALS
+
+    scored: List[float] = []
+    conceded: List[float] = []
+    for team in teams:
+        team_df = team_dfs.get(team)
+        if team_df is None:
+            continue
+        recent = _slice_team_history_df(team_df, current_date, window)
+        if recent is None or recent.empty:
+            continue
+        scored.extend(recent["goals_scored"].to_numpy(dtype=float))
+        conceded.extend(recent["goals_conceded"].to_numpy(dtype=float))
+
+    avg_goals = float(np.mean(scored)) if scored else BAYESIAN_DEFAULT_AVG_GOALS
+    avg_conceded = float(np.mean(conceded)) if conceded else BAYESIAN_DEFAULT_AVG_CONCEDED
+    return avg_goals, avg_conceded
+
+
+def bayesian_smoothed_rate(
+    total: float,
+    games: int,
+    global_avg: float,
+    weight: int,
+) -> float:
+    if games <= 0:
+        return float(global_avg)
+    return (total + (global_avg * weight)) / (games + weight)
+
+
+def bayesian_smoothed_raw_rate(
+    raw_rate: float,
+    games: int,
+    global_avg: float,
+    weight: int,
+) -> float:
+    if games <= 0:
+        return float(global_avg)
+    return (raw_rate * games + (global_avg * weight)) / (games + weight)
+
+
+def elo_adjusted_attack_score(
+    smoothed_attack: float,
+    team_elo: float,
+    mean_elo: float,
+) -> float:
+    if mean_elo <= 0:
+        return smoothed_attack
+    return smoothed_attack * (team_elo / mean_elo)
+
+
+def elo_adjusted_fortress_score(
+    smoothed_conceded: float,
+    team_elo: float,
+    mean_elo: float,
+) -> float:
+    if team_elo <= 0 or mean_elo <= 0:
+        return smoothed_conceded
+    return smoothed_conceded * (mean_elo / team_elo)
+
+
 # ---------------------------------------------------------------------------
 # Rolling Attack / Defence Rates
 # ---------------------------------------------------------------------------
