@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import GroupTable from './GroupTable';
+import { useIsMonitorLayout } from '../../hooks/useIsMonitorLayout';
 import { PredictionsData } from '../../types';
 
 interface GroupStageSectionProps {
@@ -37,21 +38,6 @@ function useGridColumnCount(gridRef: React.RefObject<HTMLDivElement | null>) {
   }, []);
 
   return columnCount;
-}
-
-function useIsMonitorLayout() {
-  const [isMonitor, setIsMonitor] = useState(
-    () => window.matchMedia('(min-width: 1536px)').matches
-  );
-
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1536px)');
-    const onChange = (event: MediaQueryListEvent) => setIsMonitor(event.matches);
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
-
-  return isMonitor;
 }
 
 const btnClass =

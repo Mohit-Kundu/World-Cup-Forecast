@@ -1,25 +1,45 @@
-import React, { RefObject } from 'react';
+import React, { RefObject, useMemo } from 'react';
 import SnapPageIndicator from './SnapPageIndicator';
 
-export const PAGE_SECTIONS = [
+const MONITOR_SECTIONS = [
   { id: 'final', label: 'Final' },
   { id: 'knockout', label: 'Knockout' },
   { id: 'groups', label: 'Groups' },
   { id: 'teams', label: 'Teams' },
 ] as const;
 
+const LAPTOP_SECTIONS = [
+  { id: 'final', label: 'Final' },
+  { id: 'wrapped', label: 'Wrapped' },
+  { id: 'knockout', label: 'Knockout' },
+  { id: 'groups', label: 'Groups' },
+  { id: 'teams', label: 'Teams' },
+] as const;
+
+export const PAGE_SECTIONS = MONITOR_SECTIONS;
+
 interface SectionNavbarProps {
   containerRef: RefObject<HTMLElement | null>;
   activeIndex: number;
+  isMonitor: boolean;
 }
 
-const SectionNavbar: React.FC<SectionNavbarProps> = ({ containerRef, activeIndex }) => {
+const SectionNavbar: React.FC<SectionNavbarProps> = ({
+  containerRef,
+  activeIndex,
+  isMonitor,
+}) => {
+  const sections = useMemo(
+    () => (isMonitor ? MONITOR_SECTIONS : LAPTOP_SECTIONS),
+    [isMonitor]
+  );
+
   const scrollToSection = (index: number) => {
     const container = containerRef.current;
     if (!container) return;
 
-    const sections = container.querySelectorAll<HTMLElement>('[data-snap-section]');
-    const section = sections[index];
+    const snapSections = container.querySelectorAll<HTMLElement>('[data-snap-section]');
+    const section = snapSections[index];
     if (!section) return;
 
     container.scrollTo({ top: section.offsetTop, behavior: 'smooth' });
@@ -31,7 +51,7 @@ const SectionNavbar: React.FC<SectionNavbarProps> = ({ containerRef, activeIndex
       aria-label="Page sections"
     >
       <div className="flex min-w-0 flex-nowrap gap-1 overflow-x-auto scrollbar-hide">
-        {PAGE_SECTIONS.map((section, index) => {
+        {sections.map((section, index) => {
           const isActive = activeIndex === index + 1;
 
           return (
@@ -51,7 +71,7 @@ const SectionNavbar: React.FC<SectionNavbarProps> = ({ containerRef, activeIndex
           );
         })}
       </div>
-      <SnapPageIndicator current={activeIndex} total={PAGE_SECTIONS.length} />
+      <SnapPageIndicator current={activeIndex} total={sections.length} />
     </nav>
   );
 };

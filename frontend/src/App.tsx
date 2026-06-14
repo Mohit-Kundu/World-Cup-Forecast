@@ -3,8 +3,10 @@ import GroupStageSection from './components/Groups/GroupStageSection';
 import KnockoutProbabilitiesSection from './components/Knockout/KnockoutProbabilitiesSection';
 import PredictedFinalCard from './components/Final/PredictedFinalCard';
 import StatsSection from './components/Stats/StatsSection';
+import WorldCupWrapped from './components/Wrapped/WorldCupWrapped';
 import SectionNavbar from './components/SectionNavbar';
 import { SimulationControl } from './components/SimulationControl';
+import { useIsMonitorLayout } from './hooks/useIsMonitorLayout';
 import { useSnapPageIndex } from './hooks/useSnapPageIndex';
 import { PredictionsData } from './types';
 
@@ -15,6 +17,7 @@ const SNAP_INNER_CLASS = 'flex min-h-0 w-full flex-1 flex-col';
 const App: React.FC = () => {
   const [data, setData] = useState<PredictionsData | null>(null);
   const mainRef = useRef<HTMLElement>(null);
+  const isMonitor = useIsMonitorLayout();
   const pageIndex = useSnapPageIndex(mainRef, !!data);
 
   return (
@@ -37,7 +40,7 @@ const App: React.FC = () => {
 
         {data && (
           <>
-            <SectionNavbar containerRef={mainRef} activeIndex={pageIndex} />
+            <SectionNavbar containerRef={mainRef} activeIndex={pageIndex} isMonitor={isMonitor} />
             <main
               ref={mainRef}
               className="min-h-0 flex-1 snap-y snap-mandatory overflow-y-auto scrollbar-hide"
@@ -50,8 +53,20 @@ const App: React.FC = () => {
                     qualifyProbs={data.qualify_probs ?? {}}
                     championProbs={data.champion_probs ?? {}}
                   />
+                  {isMonitor && (
+                    <div className="mt-8 2xl:mt-10">
+                      <WorldCupWrapped data={data} showHeading />
+                    </div>
+                  )}
                 </div>
               </div>
+              {!isMonitor && (
+                <div data-snap-section className={SNAP_SECTION_CLASS}>
+                  <div className={SNAP_INNER_CLASS}>
+                    <WorldCupWrapped data={data} showHeading />
+                  </div>
+                </div>
+              )}
               <div data-snap-section className={SNAP_SECTION_CLASS}>
                 <div className={SNAP_INNER_CLASS}>
                   <KnockoutProbabilitiesSection data={data} />

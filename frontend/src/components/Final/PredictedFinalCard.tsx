@@ -39,7 +39,7 @@ const PredictedFinalCard: React.FC<PredictedFinalCardProps> = ({
         </p>
       </div>
 
-      <div className="rounded-lg border border-muted/20 bg-surface px-4 py-5 sm:px-6 md:px-8 md:py-6">
+      <div className="rounded-lg border border-muted/20 bg-surface px-4 py-5 sm:px-6 md:px-8 md:pt-6 md:pb-3">
         <div className="space-y-6">
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 text-xl leading-none sm:gap-3 sm:text-2xl md:text-3xl">
