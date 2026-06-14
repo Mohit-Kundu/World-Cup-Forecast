@@ -198,6 +198,27 @@ body {
   z-index: 1;
 }
 
+.award-card--gold-shine::before {
+  background: linear-gradient(
+    105deg,
+    rgba(250, 199, 117, 0) 0%,
+    rgba(250, 199, 117, 0.14) 28%,
+    rgba(250, 199, 117, 0.68) 48%,
+    rgba(250, 199, 117, 0.9) 50%,
+    rgba(250, 199, 117, 0.68) 52%,
+    rgba(250, 199, 117, 0.14) 72%,
+    rgba(250, 199, 117, 0) 100%
+  );
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .award-card--gold-shine:hover {
+    box-shadow:
+      0 14px 30px rgba(0, 0, 0, 0.28),
+      0 0 0 1px rgba(191, 160, 70, 0.2);
+  }
+}
+
 .knockout-bar {
   position: relative;
   overflow: visible;

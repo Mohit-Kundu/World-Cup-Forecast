@@ -6,7 +6,7 @@ import FinalTeamStats from './FinalTeamStats';
 import { FINAL_WINNER_COLOR, FINAL_WINNER_TEXT_GLOW } from './finalColors';
 
 const FINAL_CARD_CLASS =
-  'award-card box-border rounded-xl border border-muted/20 bg-surface';
+  'award-card award-card--gold-shine box-border rounded-xl border border-muted/20 bg-surface';
 
 interface PredictedFinalCardProps {
   predictedFinal: PredictedFinal;
